@@ -1,6 +1,7 @@
 package ca.rmen.android.palidamuerte;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
@@ -30,13 +31,25 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_poem_detail);
         mViewPager = (ViewPager) findViewById(R.id.pager);
-        findViewById(R.id.activity_loading).setVisibility(View.GONE);
-        long categoryId = getIntent().getLongExtra(PoemListActivity.EXTRA_CATEGORY_ID, -1);
-        long poemId = getIntent().getLongExtra(PoemDetailFragment.ARG_ITEM_ID, -1);
-        mPoemPagerAdapter = new PoemPagerAdapter(this, categoryId, getSupportFragmentManager());
-        mViewPager.setAdapter(mPoemPagerAdapter);
-        int position = mPoemPagerAdapter.getPositionForPoem(poemId);
-        mViewPager.setCurrentItem(position);
+        final long categoryId = getIntent().getLongExtra(PoemListActivity.EXTRA_CATEGORY_ID, -1);
+        final long poemId = getIntent().getLongExtra(PoemDetailFragment.ARG_ITEM_ID, -1);
+
+        new AsyncTask<Void, Void, PoemPagerAdapter>() {
+
+            @Override
+            protected PoemPagerAdapter doInBackground(Void... params) {
+                return new PoemPagerAdapter(PoemDetailActivity.this, categoryId, getSupportFragmentManager());
+            }
+
+            @Override
+            protected void onPostExecute(PoemPagerAdapter result) {
+                mPoemPagerAdapter = result;
+                mViewPager.setAdapter(mPoemPagerAdapter);
+                findViewById(R.id.activity_loading).setVisibility(View.GONE);
+                int position = mPoemPagerAdapter.getPositionForPoem(poemId);
+                mViewPager.setCurrentItem(position);
+            }
+        }.execute();
 
         // Show the Up button in the action bar.
         getActionBar().setDisplayHomeAsUpEnabled(true);
