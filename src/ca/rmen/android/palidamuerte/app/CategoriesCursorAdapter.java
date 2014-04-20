@@ -20,7 +20,7 @@ public class CategoriesCursorAdapter extends CursorAdapter {
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        View view = new TextView(context);
+        View view = View.inflate(context, R.layout.category_title, null);
         fillView(view, cursor);
         return view;
     }
@@ -32,7 +32,7 @@ public class CategoriesCursorAdapter extends CursorAdapter {
 
     private void fillView(View view, Cursor cursor) {
         CategoryCursor cursorWrapper = (CategoryCursor) cursor;
-        TextView title = (TextView) view;
+        TextView title = (TextView) view.findViewById(R.id.title);
         String categoryName = cursorWrapper.getCategoryName();
         int categoryResId = mContext.getResources().getIdentifier(categoryName, "string", R.class.getPackage().getName());
         title.setText(mContext.getString(categoryResId));
