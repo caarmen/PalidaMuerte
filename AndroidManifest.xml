@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ca.rmen.android.palidamuerte"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="19" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" 
+        android:name="ca.rmen.android.palidamuerte.app.PalidaMuerteApplication">
+        <activity
+            android:name="ca.rmen.android.palidamuerte.PoemListActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="ca.rmen.android.palidamuerte.PoemDetailActivity"
+            android:label="@string/title_poem_detail"
+            android:parentActivityName="ca.rmen.android.palidamuerte.PoemListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ca.rmen.android.palidamuerte.poemListActivity" />
+        </activity>
+
+        <provider
+            android:name="ca.rmen.android.palidamuerte.provider.PalidaMuerteProvider"
+            android:authorities="ca.rmen.android.palidamuerte.provider"
+            android:exported="false" />
+    </application>
+
+</manifest>

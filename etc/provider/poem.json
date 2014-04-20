@@ -1,0 +1,74 @@
+{
+    "fields": [
+        {
+            "name": "poem_type_id",
+            "type": "Long",
+            "nullable": false,
+        },
+        {
+            "name": "poem_number",
+            "type": "Integer",
+            "nullable": true,
+        },
+        {
+            "name": "series_id",
+            "type": "Long",
+            "nullable": false,
+        },
+        {
+            "name": "category_id",
+            "type": "Long",
+            "nullable": false,
+        },
+        {
+            "name": "location",
+            "type": "String",
+            "nullable": false,
+        },
+        {
+            "name": "year",
+            "type": "Integer",
+            "nullable": false,
+        },
+        {
+            "name": "month",
+            "type": "Integer",
+            "nullable": false,
+        },
+        {
+            "name": "day",
+            "type": "Integer",
+            "nullable": false,
+        },
+        {
+            "name": "title",
+            "type": "String",
+            "nullable": false,
+        },
+        {
+            "name": "pre_content",
+            "type": "String",
+            "nullable": true,
+        },
+        {
+            "name": "content",
+            "type": "String",
+            "nullable": false,
+        },
+    ],
+
+    "constraints": [
+        {
+            "name": "fk_poem_type_id",
+            "definition": "foreign key (poem_type_id) references poem_type (_id) on delete cascade",
+        },
+        {
+            "name": "fk_series_id",
+            "definition": "foreign key (series_id) references series (_id) on delete cascade",
+        },
+        {
+            "name": "fk_category_id",
+            "definition": "foreign key (category_id) references category (_id) on delete cascade",
+        },
+    ]
+}

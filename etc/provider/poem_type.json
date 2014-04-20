@@ -1,0 +1,16 @@
+{
+    "fields": [
+        {
+            "name": "poem_type_name",
+            "type": "String",
+            "nullable": false,
+        },
+    ],
+
+    "constraints": [
+        {
+            "name": "unique_poem_type_name",
+            "definition": "unique (poem_type_name) on conflict replace"
+        }
+    ]
+}

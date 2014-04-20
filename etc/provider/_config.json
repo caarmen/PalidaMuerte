@@ -1,0 +1,12 @@
+{
+    "toolVersion": "1.6",
+    "projectPackageId": "ca.rmen.android.palidamuerte",
+    "authority": "ca.rmen.android.palidamuerte.provider",
+    "providerJavaPackage": "ca.rmen.android.palidamuerte.provider",
+    "providerClassName": "PalidaMuerteProvider",
+    "sqliteOpenHelperClassName": "PalidaMuerteSQLiteOpenHelper",
+    "sqliteUpgradeHelperClassName": "PalidaMuerteSQLiteUpgradeHelper",
+    "databaseFileName": "palida_muerte.db",
+    "databaseVersion": 1,
+    "enableForeignKeys": true,
+}

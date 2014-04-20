@@ -1,0 +1,16 @@
+{
+    "fields": [
+        {
+            "name": "series_name",
+            "type": "String",
+            "nullable": false,
+        },
+    ],
+
+    "constraints": [
+        {
+            "name": "unique_series_name",
+            "definition": "unique (series_name) on conflict replace"
+        }
+    ]
+}

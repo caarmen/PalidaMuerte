@@ -1,0 +1,16 @@
+{
+    "fields": [
+        {
+            "name": "category_name",
+            "type": "String",
+            "nullable": false,
+        },
+    ],
+
+    "constraints": [
+        {
+            "name": "unique_category_name",
+            "definition": "unique (category_name) on conflict replace"
+        }
+    ]
+}
