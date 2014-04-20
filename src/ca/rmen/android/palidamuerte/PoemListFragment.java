@@ -2,6 +2,7 @@ package ca.rmen.android.palidamuerte;
 
 import android.app.Activity;
 import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
@@ -11,6 +12,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import ca.rmen.android.palidamuerte.app.PoemListCursorAdapter;
+import ca.rmen.android.palidamuerte.provider.category.CategoryColumns;
+import ca.rmen.android.palidamuerte.provider.category.CategoryCursor;
+import ca.rmen.android.palidamuerte.provider.category.CategorySelection;
 import ca.rmen.android.palidamuerte.provider.poem.PoemColumns;
 import ca.rmen.android.palidamuerte.provider.poem.PoemCursor;
 
@@ -76,10 +80,30 @@ public class PoemListFragment extends ListFragment { // NO_UCD (use default)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        final long categoryId = getActivity().getIntent().getLongExtra(PoemListActivity.EXTRA_CATEGORY_ID, -1);
+        final Activity activity = getActivity();
+        new AsyncTask<Void, Void, String>() {
 
-        // TODO: replace with a real list adapter.
-        //setListAdapter(new ArrayAdapter<DummyContent.DummyItem>(getActivity(), android.R.layout.simple_list_item_activated_1, android.R.id.text1,
-        //       DummyContent.ITEMS));
+            @Override
+            protected String doInBackground(Void... params) {
+                CategoryCursor cursor = new CategorySelection().id(categoryId).query(activity.getContentResolver(),
+                        new String[] { CategoryColumns.CATEGORY_NAME });
+                try {
+                    if (cursor.moveToFirst()) return cursor.getCategoryName();
+                } finally {
+                    cursor.close();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(String categoryResName) {
+                int categoryResId = activity.getResources().getIdentifier(categoryResName, "string", R.class.getPackage().getName());
+                activity.getActionBar().setTitle(categoryResId);
+            }
+
+        }.execute();
+
     }
 
     @Override
@@ -158,7 +182,6 @@ public class PoemListFragment extends ListFragment { // NO_UCD (use default)
             Log.v(TAG, "onCreateLoader, loaderId = " + loaderId + ", bundle = " + bundle);
             long categoryId = getActivity().getIntent().getLongExtra(PoemListActivity.EXTRA_CATEGORY_ID, -1);
             String selection = PoemColumns.SERIES_ID + " =? AND " + PoemColumns.CATEGORY_ID + "=?";
-            // TODO hardcoded category and series
             String[] selectionArgs = new String[] { String.valueOf(1), String.valueOf(categoryId) };
             CursorLoader loader = new CursorLoader(getActivity(), PoemColumns.CONTENT_URI, null, selection, selectionArgs, null);
             return loader;
