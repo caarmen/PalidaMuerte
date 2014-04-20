@@ -6,12 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
+import ca.rmen.android.palidamuerte.R;
 import ca.rmen.android.palidamuerte.provider.category.CategoryCursor;
 
 public class CategoriesCursorAdapter extends CursorAdapter {
 
+    private final Context mContext;
+
     public CategoriesCursorAdapter(Context context) {
         super(context, null, false);
+        mContext = context;
     }
 
     @Override
@@ -29,7 +33,8 @@ public class CategoriesCursorAdapter extends CursorAdapter {
     private void fillView(View view, Cursor cursor) {
         CategoryCursor cursorWrapper = (CategoryCursor) cursor;
         TextView title = (TextView) view;
-        title.setText(cursorWrapper.getCategoryName());
+        String categoryName = cursorWrapper.getCategoryName();
+        int categoryResId = mContext.getResources().getIdentifier(categoryName, "string", R.class.getPackage().getName());
+        title.setText(mContext.getString(categoryResId));
     }
-
 }

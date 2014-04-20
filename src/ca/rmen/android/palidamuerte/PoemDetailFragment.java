@@ -1,7 +1,11 @@
 package ca.rmen.android.palidamuerte;
 
+import java.util.Calendar;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +46,22 @@ public class PoemDetailFragment extends Fragment { // NO_UCD (use default)
             // to load content from a content provider.
             long poemId = getArguments().getLong(ARG_ITEM_ID);
             PoemCursor poemCursor = new PoemSelection().id(poemId).query(getActivity().getContentResolver());
-            if (poemCursor.moveToFirst()) ((TextView) rootView.findViewById(R.id.poem_detail)).setText(poemCursor.getContent());
+            if (poemCursor.moveToFirst()) {
+                ((TextView) rootView.findViewById(R.id.title)).setText(poemCursor.getTitle());
+                String preContent = poemCursor.getPreContent();
+                TextView preContentView = (TextView) rootView.findViewById(R.id.pre_content);
+                preContentView.setVisibility(TextUtils.isEmpty(preContent) ? View.GONE : View.VISIBLE);
+                preContentView.setText(preContent);
+                ((TextView) rootView.findViewById(R.id.content)).setText(poemCursor.getContent());
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(Calendar.YEAR, poemCursor.getYear());
+                calendar.set(Calendar.MONTH, poemCursor.getMonth());
+                calendar.set(Calendar.DAY_OF_MONTH, poemCursor.getDay());
+                String dateString = DateUtils.formatDateTime(getActivity(), calendar.getTimeInMillis(), DateUtils.FORMAT_SHOW_DATE);
+                String locationDateString = String.format("%s, %s", poemCursor.getLocation(), dateString);
+                ((TextView) rootView.findViewById(R.id.location_and_date)).setText(locationDateString);
+
+            }
             poemCursor.close();
         }
 

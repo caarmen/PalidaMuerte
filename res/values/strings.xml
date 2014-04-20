@@ -2,7 +2,6 @@
 <resources>
 
     <string name="app_name">Pálida Muerte</string>
-    <string name="title_poem_detail">poem Detail</string>
     <string name="title_activity_categories">CategoriesActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
