@@ -4,7 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import ca.rmen.android.palidamuerte.app.PoemPagerAdapter;
 
 /**
  * An activity representing a single poem detail screen. This
@@ -17,10 +21,22 @@ import android.view.MenuItem;
  */
 public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use default)
 
+    private static final String TAG = Constants.TAG + PoemDetailActivity.class.getSimpleName();
+    private PoemPagerAdapter mPoemPagerAdapter;
+    private ViewPager mViewPager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_poem_detail);
+        mViewPager = (ViewPager) findViewById(R.id.pager);
+        findViewById(R.id.activity_loading).setVisibility(View.GONE);
+        long categoryId = getIntent().getLongExtra(PoemListActivity.EXTRA_CATEGORY_ID, -1);
+        long poemId = getIntent().getLongExtra(PoemDetailFragment.ARG_ITEM_ID, -1);
+        mPoemPagerAdapter = new PoemPagerAdapter(this, categoryId, getSupportFragmentManager());
+        mViewPager.setAdapter(mPoemPagerAdapter);
+        int position = mPoemPagerAdapter.getPositionForPoem(poemId);
+        mViewPager.setCurrentItem(position);
 
         // Show the Up button in the action bar.
         getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -34,6 +50,7 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
         //
         // http://developer.android.com/guide/components/fragments.html
         //
+        /*
         if (savedInstanceState == null) {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
@@ -43,6 +60,7 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction().add(R.id.poem_detail_container, fragment).commit();
         }
+        */
     }
 
     @Override
@@ -60,5 +78,12 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        Log.v(TAG, "onDestroy");
+        super.onDestroy();
+        if (mPoemPagerAdapter != null) mPoemPagerAdapter.destroy();
     }
 }

@@ -70,6 +70,7 @@ public class PoemListActivity extends FragmentActivity implements PoemListFragme
             // for the selected item ID.
             Intent detailIntent = new Intent(this, PoemDetailActivity.class);
             detailIntent.putExtra(PoemDetailFragment.ARG_ITEM_ID, id);
+            detailIntent.putExtra(EXTRA_CATEGORY_ID, getIntent().getLongExtra(EXTRA_CATEGORY_ID, -1));
             startActivity(detailIntent);
         }
     }
