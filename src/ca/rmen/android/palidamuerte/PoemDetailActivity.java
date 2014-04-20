@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import ca.rmen.android.palidamuerte.app.Categories;
 import ca.rmen.android.palidamuerte.app.PoemPagerAdapter;
 
 /**
@@ -38,8 +39,11 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
 
         new AsyncTask<Void, Void, PoemPagerAdapter>() {
 
+            private String mCategoryName;
+
             @Override
             protected PoemPagerAdapter doInBackground(Void... params) {
+                mCategoryName = Categories.getCategoryName(PoemDetailActivity.this, categoryId);
                 return new PoemPagerAdapter(PoemDetailActivity.this, categoryId, getSupportFragmentManager());
             }
 
@@ -51,6 +55,7 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
                 findViewById(R.id.activity_loading).setVisibility(View.GONE);
                 int position = mPoemPagerAdapter.getPositionForPoem(poemId);
                 mViewPager.setCurrentItem(position);
+                getActionBar().setTitle(mCategoryName);
             }
         }.execute();
 
@@ -90,7 +95,9 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
             //
             // http://developer.android.com/design/patterns/navigation.html#up-vs-back
             //
-            NavUtils.navigateUpTo(this, new Intent(this, PoemListActivity.class));
+            Intent intent = new Intent(this, PoemListActivity.class);
+            intent.putExtra(PoemListActivity.EXTRA_CATEGORY_ID, getIntent().getLongExtra(PoemListActivity.EXTRA_CATEGORY_ID, -1));
+            NavUtils.navigateUpTo(this, intent);
             return true;
         }
         return super.onOptionsItemSelected(item);

@@ -31,6 +31,7 @@ public class PoemListActivity extends FragmentActivity implements PoemListFragme
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.v(TAG, "onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_poem_list);
 

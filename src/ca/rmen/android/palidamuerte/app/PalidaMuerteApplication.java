@@ -4,16 +4,18 @@ import java.io.IOException;
 
 import jxl.read.biff.BiffException;
 import android.app.Application;
-import android.database.Cursor;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 import ca.rmen.android.palidamuerte.Constants;
 import ca.rmen.android.palidamuerte.provider.DBImport;
-import ca.rmen.android.palidamuerte.provider.poem.PoemColumns;
 
 public class PalidaMuerteApplication extends Application { // NO_UCD (use default)
     private static final String TAG = Constants.TAG + PalidaMuerteApplication.class.getSimpleName();
+
+    private static final String PREF_DB_IMPORTED = "db_imported";
 
     @Override
     public void onCreate() {
@@ -23,18 +25,15 @@ public class PalidaMuerteApplication extends Application { // NO_UCD (use defaul
 
             @Override
             protected Boolean doInBackground(Void... params) {
-                Cursor cursor = getContentResolver().query(PoemColumns.CONTENT_URI, new String[] { "count(*)" }, null, null, null);
-                try {
-                    if (cursor.moveToFirst() && cursor.getInt(0) > 0) {
-                        Log.v(TAG, "No need to import");
-                        //          return true;
-                    }
-                } finally {
-                    cursor.close();
+                SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(PalidaMuerteApplication.this);
+                if (sharedPrefs.getBoolean(PREF_DB_IMPORTED, false)) {
+                    Log.v(TAG, "No need to import");
+                    return true;
                 }
                 DBImport dbImport = new DBImport(PalidaMuerteApplication.this);
                 try {
                     dbImport.doImport();
+                    sharedPrefs.edit().putBoolean(PREF_DB_IMPORTED, true).commit();
                     return true;
                 } catch (BiffException e) {
                     Log.e(TAG, e.getMessage(), e);

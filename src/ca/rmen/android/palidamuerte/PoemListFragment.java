@@ -11,10 +11,8 @@ import android.support.v4.content.Loader;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
+import ca.rmen.android.palidamuerte.app.Categories;
 import ca.rmen.android.palidamuerte.app.PoemListCursorAdapter;
-import ca.rmen.android.palidamuerte.provider.category.CategoryColumns;
-import ca.rmen.android.palidamuerte.provider.category.CategoryCursor;
-import ca.rmen.android.palidamuerte.provider.category.CategorySelection;
 import ca.rmen.android.palidamuerte.provider.poem.PoemColumns;
 import ca.rmen.android.palidamuerte.provider.poem.PoemCursor;
 
@@ -86,20 +84,12 @@ public class PoemListFragment extends ListFragment { // NO_UCD (use default)
 
             @Override
             protected String doInBackground(Void... params) {
-                CategoryCursor cursor = new CategorySelection().id(categoryId).query(activity.getContentResolver(),
-                        new String[] { CategoryColumns.CATEGORY_NAME });
-                try {
-                    if (cursor.moveToFirst()) return cursor.getCategoryName();
-                } finally {
-                    cursor.close();
-                }
-                return null;
+                return Categories.getCategoryName(activity, categoryId);
             }
 
             @Override
-            protected void onPostExecute(String categoryResName) {
-                int categoryResId = activity.getResources().getIdentifier(categoryResName, "string", R.class.getPackage().getName());
-                activity.getActionBar().setTitle(categoryResId);
+            protected void onPostExecute(String categoryName) {
+                activity.getActionBar().setTitle(categoryName);
             }
 
         }.execute();
