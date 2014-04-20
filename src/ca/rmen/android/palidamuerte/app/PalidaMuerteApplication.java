@@ -12,7 +12,7 @@ import ca.rmen.android.palidamuerte.Constants;
 import ca.rmen.android.palidamuerte.provider.DBImport;
 import ca.rmen.android.palidamuerte.provider.poem.PoemColumns;
 
-public class PalidaMuerteApplication extends Application {
+public class PalidaMuerteApplication extends Application { // NO_UCD (use default)
     private static final String TAG = Constants.TAG + PalidaMuerteApplication.class.getSimpleName();
 
     @Override

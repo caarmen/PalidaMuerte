@@ -22,7 +22,7 @@ import ca.rmen.android.palidamuerte.provider.poem.PoemCursor;
  * <p>
  * Activities containing this fragment MUST implement the {@link Callbacks} interface.
  */
-public class PoemListFragment extends ListFragment {
+public class PoemListFragment extends ListFragment { // NO_UCD (use default)
 
     private static final String TAG = Constants.TAG + PoemListFragment.class.getSimpleName();
     private static final int URL_LOADER = 0;
@@ -49,7 +49,7 @@ public class PoemListFragment extends ListFragment {
      * implement. This mechanism allows activities to be notified of item
      * selections.
      */
-    public interface Callbacks {
+    interface Callbacks {
         /**
          * Callback for when an item has been selected.
          */

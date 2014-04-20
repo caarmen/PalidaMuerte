@@ -19,7 +19,7 @@ import android.util.Log;
  * This activity also implements the required {@link PoemListFragment.Callbacks} interface
  * to listen for item selections.
  */
-public class PoemListActivity extends FragmentActivity implements PoemListFragment.Callbacks {
+public class PoemListActivity extends FragmentActivity implements PoemListFragment.Callbacks { // NO_UCD (use default)
 
     private static final String TAG = Constants.TAG + PoemListActivity.class.getSimpleName();
     /**

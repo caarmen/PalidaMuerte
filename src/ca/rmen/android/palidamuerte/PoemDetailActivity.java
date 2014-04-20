@@ -15,7 +15,7 @@ import android.view.MenuItem;
  * This activity is mostly just a 'shell' activity containing nothing
  * more than a {@link PoemDetailFragment}.
  */
-public class PoemDetailActivity extends FragmentActivity {
+public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use default)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

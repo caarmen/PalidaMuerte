@@ -13,7 +13,7 @@ import ca.rmen.android.palidamuerte.provider.poem.PoemSelection;
  * A fragment representing a single poem detail screen.
  * This fragment is either contained in a {@link PoemListActivity} in two-pane mode (on tablets) or a {@link PoemDetailActivity} on handsets.
  */
-public class PoemDetailFragment extends Fragment {
+public class PoemDetailFragment extends Fragment { // NO_UCD (use default)
     /**
      * The fragment argument representing the item ID that this fragment
      * represents.
