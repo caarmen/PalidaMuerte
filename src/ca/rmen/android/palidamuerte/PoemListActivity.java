@@ -21,6 +21,7 @@ import android.util.Log;
  */
 public class PoemListActivity extends FragmentActivity implements PoemListFragment.Callbacks { // NO_UCD (use default)
 
+    public static final String EXTRA_CATEGORY_ID = "poem_category_id";
     private static final String TAG = Constants.TAG + PoemListActivity.class.getSimpleName();
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet

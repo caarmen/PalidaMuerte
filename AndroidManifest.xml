@@ -9,19 +9,18 @@
         android:targetSdkVersion="19" />
 
     <application
+        android:name="ca.rmen.android.palidamuerte.app.PalidaMuerteApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" 
-        android:name="ca.rmen.android.palidamuerte.app.PalidaMuerteApplication">
+        android:theme="@style/AppTheme" >
         <activity
             android:name="ca.rmen.android.palidamuerte.PoemListActivity"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:label="@string/app_name"
+            android:parentActivityName="ca.rmen.android.palidamuerte.CategoriesActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ca.rmen.android.palidamuerte.CategoriesActivity" />
         </activity>
         <activity
             android:name="ca.rmen.android.palidamuerte.PoemDetailActivity"
@@ -29,13 +28,24 @@
             android:parentActivityName="ca.rmen.android.palidamuerte.PoemListActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="ca.rmen.android.palidamuerte.poemListActivity" />
+                android:value="ca.rmen.android.palidamuerte.PoemListActivity" />
         </activity>
 
         <provider
             android:name="ca.rmen.android.palidamuerte.provider.PalidaMuerteProvider"
             android:authorities="ca.rmen.android.palidamuerte.provider"
             android:exported="false" />
+
+        <activity
+            android:name="ca.rmen.android.palidamuerte.CategoriesActivity"
+            android:theme="@android:style/Theme.Holo.NoActionBar"
+            android:label="@string/title_activity_categories" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
