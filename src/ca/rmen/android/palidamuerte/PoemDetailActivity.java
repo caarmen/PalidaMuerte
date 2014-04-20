@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import ca.rmen.android.palidamuerte.app.PoemPagerAdapter;
 
 /**
@@ -45,6 +47,7 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
             protected void onPostExecute(PoemPagerAdapter result) {
                 mPoemPagerAdapter = result;
                 mViewPager.setAdapter(mPoemPagerAdapter);
+                mViewPager.setOnPageChangeListener(mOnPageChangeListener);
                 findViewById(R.id.activity_loading).setVisibility(View.GONE);
                 int position = mPoemPagerAdapter.getPositionForPoem(poemId);
                 mViewPager.setCurrentItem(position);
@@ -99,4 +102,20 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
         super.onDestroy();
         if (mPoemPagerAdapter != null) mPoemPagerAdapter.destroy();
     }
+
+    private OnPageChangeListener mOnPageChangeListener = new OnPageChangeListener() {
+
+        @Override
+        public void onPageSelected(int position) {
+            Log.v(TAG, "onPageSelected, position = " + position);
+            String pageNumber = getString(R.string.page_number, position + 1, mPoemPagerAdapter.getCount());
+            ((TextView) findViewById(R.id.page_number)).setText(pageNumber);
+        }
+
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
+
+        @Override
+        public void onPageScrollStateChanged(int state) {}
+    };
 }
