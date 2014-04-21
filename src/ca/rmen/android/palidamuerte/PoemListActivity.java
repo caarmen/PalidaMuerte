@@ -21,7 +21,11 @@ package ca.rmen.android.palidamuerte;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.NavUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import ca.rmen.android.palidamuerte.app.Poems;
 
 /**
  * An activity representing a list of poems. This activity
@@ -46,6 +50,7 @@ public class PoemListActivity extends FragmentActivity implements PoemListFragme
      * device.
      */
     private boolean mTwoPane;
+    private long mPoemId = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +88,9 @@ public class PoemListActivity extends FragmentActivity implements PoemListFragme
             PoemDetailFragment fragment = new PoemDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction().replace(R.id.poem_detail_container, fragment).commit();
+            boolean refreshMenu = mPoemId < 0;
+            mPoemId = id;
+            if (refreshMenu) invalidateOptionsMenu();
 
         } else {
             // In single-pane mode, simply start the detail activity
@@ -93,4 +101,32 @@ public class PoemListActivity extends FragmentActivity implements PoemListFragme
             startActivity(detailIntent);
         }
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        if (mTwoPane && mPoemId >= 0) getMenuInflater().inflate(R.menu.poem, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            // This ID represents the Home or Up button. In the case of this
+            // activity, the Up button is shown. Use NavUtils to allow users
+            // to navigate up one level in the application structure. For
+            // more details, see the Navigation pattern on Android Design:
+            //
+            // http://developer.android.com/design/patterns/navigation.html#up-vs-back
+            //
+            Intent intent = new Intent(this, CategoriesActivity.class);
+            NavUtils.navigateUpTo(this, intent);
+            return true;
+        } else if (id == R.id.action_share) {
+            Poems.share(this, mPoemId);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }
