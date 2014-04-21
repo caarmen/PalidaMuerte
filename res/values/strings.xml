@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 
+<!--
   Copyright 2014 Carmen Alvarez
  
   This file is part of Pálida Muerte.
@@ -25,9 +25,19 @@
     <string name="poem_type_and_number">%1$s N° %2$d</string>
     <string name="action_prev">Anterior</string>
     <string name="action_next">Siguiente</string>
+    <string name="action_about">A cerca de</string>
     <string name="action_share">Compartir</string>
     <string name="copyright">Copyright &#169; Francisco Alvarez Hidalgo</string>
     <string name="author">Francisco Alvarez Hidalgo</string>
     <string name="subtitle">Poemas de Francisco Alvarez Hidalgo</string>
+    <string name="about">A cerca de</string>
+    <string name="author_date">1935 &#8211; 2014</string>
+    <string name="author_description">Nacido en Cantabria, España, poeta de estilo clásico, autor de más de 8000 poemas, entre ellos 3600 sonetos.\n\nhttp://poesiadelmomento.com</string>
+    <string name="credits_app">Aplicación programada por Carmen Alvarez (hija de Francisco).</string>
+    <string name="credits_clipart">Imágenes clipart de openclipart.org:
+\n\nhttp://openclipart.org/detail/181598/celtic-frame-by-liftarn-181598 (liftarn)
+\n\nhttp://openclipart.org/detail/171579/stylized-border-flowers-by-cyberscooty-171579 (cyberscooty)
+\n\nhttp://openclipart.org/detail/21390/used-quill-by-solar_granulation (Solar_Granulation)</string>
+    <string name="credits_font">Fuente: http://openfontlibrary.org/fr/font/dancing</string>
 
 </resources>

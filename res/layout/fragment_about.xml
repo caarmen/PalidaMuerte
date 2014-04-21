@@ -1,0 +1,156 @@
+<!--
+  Copyright 2014 Carmen Alvarez
+ 
+  This file is part of Pálida Muerte.
+ 
+  Pálida Muerte is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 2 of the License, or
+  (at your option) any later version.
+ 
+  Pálida Muerte is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  GNU General Public License for more details.
+ 
+  You should have received a copy of the GNU General Public License
+  along with Pálida Muerte. If not, see <http://www.gnu.org/licenses/>.
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/gray_gradient"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context="ca.rmen.android.palidamuerte.AboutActivity$PlaceholderFragment" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:scaleType="fitStart"
+            android:src="@drawable/cyberscooty_stylized_floral_border_top_left" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:scaleType="fitStart"
+            android:src="@drawable/cyberscooty_stylized_floral_border_top_right" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:scaleType="fitStart"
+            android:src="@drawable/cyberscooty_stylized_floral_border_bottom_left" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:scaleType="fitStart"
+            android:src="@drawable/cyberscooty_stylized_floral_border_bottom_right" />
+
+        <TextView
+            android:id="@+id/author_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:paddingTop="32dp"
+            android:text="@string/author"
+            android:textAppearance="@style/TextAppearancePoemDetailTitle" />
+
+        <ImageView
+            android:id="@+id/photo_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/author_name"
+            android:layout_centerHorizontal="true"
+            android:padding="16dp"
+            android:src="@drawable/paco697a" />
+
+        <TextView
+            android:id="@+id/author_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/photo_author"
+            android:layout_centerHorizontal="true"
+            android:autoLink="web"
+            android:paddingLeft="32dp"
+            android:paddingRight="32dp"
+            android:paddingBottom="16dp"
+            android:text="@string/author_date"
+            android:textAppearance="@style/TextAppearancePoemTypeAndNumber"/>
+
+        <TextView
+            android:id="@+id/author_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/author_date"
+            android:layout_centerHorizontal="true"
+            android:autoLink="web"
+            android:paddingLeft="32dp"
+            android:paddingRight="32dp"
+            android:text="@string/author_description"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/author_description"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="32dp"
+            android:background="@drawable/selector_checked" />
+
+        <TextView
+            android:id="@+id/credits_app"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/divider"
+            android:paddingBottom="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="@string/credits_app"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/credits_clipart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/credits_app"
+            android:autoLink="web"
+            android:paddingBottom="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="@string/credits_clipart"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/credits_font"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/credits_clipart"
+            android:autoLink="web"
+            android:paddingBottom="48dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="@string/credits_font"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+    </RelativeLayout>
+
+</ScrollView>

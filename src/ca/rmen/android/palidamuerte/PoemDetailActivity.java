@@ -171,6 +171,9 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
             mViewPager.setCurrentItem(mViewPager.getCurrentItem() - 1);
         } else if (id == R.id.action_next) {
             mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
+        } else if (id == R.id.action_about) {
+            Intent intent = new Intent(this, AboutActivity.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

@@ -125,6 +125,9 @@ public class PoemListActivity extends FragmentActivity implements PoemListFragme
             return true;
         } else if (id == R.id.action_share) {
             Poems.share(this, mPoemId);
+        } else if (id == R.id.action_about) {
+            Intent intent = new Intent(this, AboutActivity.class);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
