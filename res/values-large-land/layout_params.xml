@@ -19,5 +19,6 @@
 <resources>
 
     <item name="grid_view_column_count" format="integer" type="integer">3</item>
+    <dimen name="category_title_text_size">42sp</dimen>
 
 </resources>

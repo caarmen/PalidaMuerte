@@ -24,9 +24,9 @@
     android:layout_gravity="center"
     android:background="@drawable/gray_gradient"
     android:gravity="center"
-    android:horizontalSpacing="8dp"
+    android:horizontalSpacing="20dp"
     android:numColumns="@integer/grid_view_column_count"
-    android:paddingLeft="8dp"
-    android:paddingRight="8dp"
+    android:paddingLeft="48dp"
+    android:paddingRight="48dp"
     android:stretchMode="columnWidth"
     android:verticalSpacing="20dp" />
