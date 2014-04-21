@@ -20,14 +20,12 @@
 <resources>
 
     <string name="app_name">Pálida Muerte</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-    <string name="loading">Loading&#8230;</string>
-    <string name="page_number">Poem %1$d of %2$d</string>
+    <string name="loading">Cargando&#8230;</string>
+    <string name="page_number">Poema %1$d de %2$d</string>
     <string name="poem_type_and_number">%1$s N° %2$d</string>
-    <string name="action_share">Share</string>
+    <string name="action_share">Compartir</string>
     <string name="copyright">Copyright &#169; Francisco Alvarez Hidalgo</string>
     <string name="author">Francisco Alvarez Hidalgo</string>
-    <string name="subtitle">Poems by Francisco Alvarez Hidalgo</string>
+    <string name="subtitle">Poemas de Francisco Alvarez Hidalgo</string>
 
 </resources>
