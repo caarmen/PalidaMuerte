@@ -27,5 +27,6 @@
     <string name="poem_type_and_number">%1$s N° %2$d</string>
     <string name="action_share">Share</string>
     <string name="copyright">Copyright &#169; Francisco Alvarez Hidalgo</string>
+    <string name="author">Francisco Alvarez Hidalgo</string>
 
 </resources>

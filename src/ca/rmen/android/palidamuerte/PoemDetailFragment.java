@@ -73,13 +73,15 @@ public class PoemDetailFragment extends Fragment { // NO_UCD (use default)
                 preContentView.setVisibility(TextUtils.isEmpty(preContent) ? View.GONE : View.VISIBLE);
                 preContentView.setText(preContent);
                 ((TextView) rootView.findViewById(R.id.content)).setText(poemCursor.getContent());
-                String locationDateString = Poems.getLocationDateString(getActivity(), poemCursor);
-                ((TextView) rootView.findViewById(R.id.location_and_date)).setText(locationDateString);
 
                 String poemTypeAndNumber = Poems.getPoemNumberString(getActivity(), poemCursor);
                 TextView tvPoemTypeAndNumber = (TextView) rootView.findViewById(R.id.poem_type_and_number);
                 tvPoemTypeAndNumber.setVisibility(TextUtils.isEmpty(poemTypeAndNumber) ? View.GONE : View.VISIBLE);
                 tvPoemTypeAndNumber.setText(poemTypeAndNumber);
+
+                ((TextView) rootView.findViewById(R.id.author)).setText(R.string.author);
+                String locationDateString = Poems.getLocationDateString(getActivity(), poemCursor);
+                ((TextView) rootView.findViewById(R.id.location_and_date)).setText(locationDateString);
 
             }
             poemCursor.close();

@@ -117,16 +117,27 @@
             android:textStyle="italic" />
 
         <TextView
-            android:id="@+id/location_and_date"
+            android:id="@+id/author"
             style="?android:attr/textAppearanceSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/poem_type_and_number"
             android:layout_centerHorizontal="true"
-            android:paddingBottom="48dp"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:paddingTop="16dp"
+            android:textIsSelectable="true" />
+
+        <TextView
+            android:id="@+id/location_and_date"
+            style="?android:attr/textAppearanceSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/author"
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="48dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
             android:textIsSelectable="true" />
     </RelativeLayout>
 
