@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import ca.rmen.android.palidamuerte.app.PoemTypes;
 import ca.rmen.android.palidamuerte.provider.poem.PoemCursor;
 import ca.rmen.android.palidamuerte.provider.poem.PoemSelection;
 
@@ -60,6 +61,16 @@ public class PoemDetailFragment extends Fragment { // NO_UCD (use default)
                 String dateString = DateUtils.formatDateTime(getActivity(), calendar.getTimeInMillis(), DateUtils.FORMAT_SHOW_DATE);
                 String locationDateString = String.format("%s, %s", poemCursor.getLocation(), dateString);
                 ((TextView) rootView.findViewById(R.id.location_and_date)).setText(locationDateString);
+
+                Integer poemNumber = poemCursor.getPoemNumber();
+                String poemTypeAndNumber = "";
+                if (poemNumber != null) {
+                    String poemTypeName = PoemTypes.getPoemTypeName(getActivity(), poemCursor.getPoemTypeId());
+                    poemTypeAndNumber = getActivity().getString(R.string.poem_type_and_number, poemTypeName, poemNumber);
+                }
+                TextView tvPoemTypeAndNumber = (TextView) rootView.findViewById(R.id.poem_type_and_number);
+                tvPoemTypeAndNumber.setVisibility(TextUtils.isEmpty(poemTypeAndNumber) ? View.GONE : View.VISIBLE);
+                tvPoemTypeAndNumber.setText(poemTypeAndNumber);
 
             }
             poemCursor.close();
