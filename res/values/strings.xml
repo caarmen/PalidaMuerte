@@ -28,5 +28,6 @@
     <string name="action_share">Share</string>
     <string name="copyright">Copyright &#169; Francisco Alvarez Hidalgo</string>
     <string name="author">Francisco Alvarez Hidalgo</string>
+    <string name="subtitle">Poems by Francisco Alvarez Hidalgo</string>
 
 </resources>
