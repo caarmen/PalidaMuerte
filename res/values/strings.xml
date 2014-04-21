@@ -25,12 +25,12 @@
     <string name="poem_type_and_number">%1$s N° %2$d</string>
     <string name="action_prev">Anterior</string>
     <string name="action_next">Siguiente</string>
-    <string name="action_about">A cerca de</string>
+    <string name="action_about">Acerca de</string>
     <string name="action_share">Compartir</string>
     <string name="copyright">Copyright &#169; Francisco Alvarez Hidalgo</string>
     <string name="author">Francisco Alvarez Hidalgo</string>
     <string name="subtitle">Poemas de Francisco Alvarez Hidalgo</string>
-    <string name="about">A cerca de</string>
+    <string name="about">Acerca de</string>
     <string name="author_date">1935 &#8211; 2014</string>
     <string name="author_description">Nacido en Cantabria, España, poeta de estilo clásico, autor de más de 8000 poemas, entre ellos 3600 sonetos.\n\nhttp://poesiadelmomento.com</string>
     <string name="credits_app">Aplicación programada por Carmen Alvarez (hija de Francisco).</string>
