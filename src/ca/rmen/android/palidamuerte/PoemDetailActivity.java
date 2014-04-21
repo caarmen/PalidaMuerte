@@ -86,6 +86,7 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
                 getActionBar().setTitle(mCategoryName);
                 String pageNumber = getString(R.string.page_number, position + 1, mPoemPagerAdapter.getCount());
                 ((TextView) findViewById(R.id.page_number)).setText(pageNumber);
+                invalidateOptionsMenu();
             }
         }.execute();
 
@@ -126,6 +127,7 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        Log.v(TAG, "onCreateOptionsMenu");
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.poem, menu);
         return true;
@@ -133,6 +135,7 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
+        Log.v(TAG, "onPrepareOptionsMenu");
         super.onPrepareOptionsMenu(menu);
         MenuItem prev = menu.findItem(R.id.action_prev);
         MenuItem next = menu.findItem(R.id.action_next);
