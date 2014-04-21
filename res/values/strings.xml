@@ -25,5 +25,7 @@
     <string name="loading">Loading&#8230;</string>
     <string name="page_number">Poem %1$d of %2$d</string>
     <string name="poem_type_and_number">%1$s N° %2$d</string>
+    <string name="action_share">Share</string>
+    <string name="copyright">Copyright &#169; Francisco Alvarez Hidalgo</string>
 
 </resources>

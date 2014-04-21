@@ -26,11 +26,13 @@ import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import ca.rmen.android.palidamuerte.app.Categories;
 import ca.rmen.android.palidamuerte.app.PoemPagerAdapter;
+import ca.rmen.android.palidamuerte.app.Poems;
 
 /**
  * An activity representing a single poem detail screen. This
@@ -122,6 +124,13 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.poem, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
@@ -136,6 +145,9 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
             intent.putExtra(PoemListActivity.EXTRA_CATEGORY_ID, getIntent().getLongExtra(PoemListActivity.EXTRA_CATEGORY_ID, -1));
             NavUtils.navigateUpTo(this, intent);
             return true;
+        } else if (id == R.id.action_share) {
+            long poemId = mPoemPagerAdapter.getPoemIdAt(mViewPager.getCurrentItem());
+            Poems.share(this, poemId);
         }
         return super.onOptionsItemSelected(item);
     }

@@ -18,18 +18,15 @@
  */
 package ca.rmen.android.palidamuerte;
 
-import java.util.Calendar;
-
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
-import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import ca.rmen.android.palidamuerte.app.PoemTypes;
+import ca.rmen.android.palidamuerte.app.Poems;
 import ca.rmen.android.palidamuerte.provider.poem.PoemCursor;
 import ca.rmen.android.palidamuerte.provider.poem.PoemSelection;
 
@@ -76,20 +73,10 @@ public class PoemDetailFragment extends Fragment { // NO_UCD (use default)
                 preContentView.setVisibility(TextUtils.isEmpty(preContent) ? View.GONE : View.VISIBLE);
                 preContentView.setText(preContent);
                 ((TextView) rootView.findViewById(R.id.content)).setText(poemCursor.getContent());
-                Calendar calendar = Calendar.getInstance();
-                calendar.set(Calendar.YEAR, poemCursor.getYear());
-                calendar.set(Calendar.MONTH, poemCursor.getMonth());
-                calendar.set(Calendar.DAY_OF_MONTH, poemCursor.getDay());
-                String dateString = DateUtils.formatDateTime(getActivity(), calendar.getTimeInMillis(), DateUtils.FORMAT_SHOW_DATE);
-                String locationDateString = String.format("%s, %s", poemCursor.getLocation(), dateString);
+                String locationDateString = Poems.getLocationDateString(getActivity(), poemCursor);
                 ((TextView) rootView.findViewById(R.id.location_and_date)).setText(locationDateString);
 
-                Integer poemNumber = poemCursor.getPoemNumber();
-                String poemTypeAndNumber = "";
-                if (poemNumber != null) {
-                    String poemTypeName = PoemTypes.getPoemTypeName(getActivity(), poemCursor.getPoemTypeId());
-                    poemTypeAndNumber = getActivity().getString(R.string.poem_type_and_number, poemTypeName, poemNumber);
-                }
+                String poemTypeAndNumber = Poems.getPoemNumberString(getActivity(), poemCursor);
                 TextView tvPoemTypeAndNumber = (TextView) rootView.findViewById(R.id.poem_type_and_number);
                 tvPoemTypeAndNumber.setVisibility(TextUtils.isEmpty(poemTypeAndNumber) ? View.GONE : View.VISIBLE);
                 tvPoemTypeAndNumber.setText(poemTypeAndNumber);
