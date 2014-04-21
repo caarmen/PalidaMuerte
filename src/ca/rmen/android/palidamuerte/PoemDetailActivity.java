@@ -130,6 +130,7 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
         Log.v(TAG, "onCreateOptionsMenu");
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.poem, menu);
+        menu.findItem(R.id.action_about).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         return true;
     }
 
