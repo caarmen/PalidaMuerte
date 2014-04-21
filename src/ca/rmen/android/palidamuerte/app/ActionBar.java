@@ -20,6 +20,7 @@ package ca.rmen.android.palidamuerte.app;
 
 import android.app.Activity;
 import android.graphics.Typeface;
+import android.util.TypedValue;
 import android.widget.TextView;
 
 public class ActionBar {
@@ -31,7 +32,7 @@ public class ActionBar {
         if (tvActionBarTitle != null) {
             Typeface typeface = Typeface.createFromAsset(activity.getAssets(), "dancing_script.ttf");
             tvActionBarTitle.setTypeface(typeface);
-            tvActionBarTitle.setTextSize(tvActionBarTitle.getTextSize() * 1.3f);
+            tvActionBarTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, tvActionBarTitle.getTextSize() * 1.5f);
         }
     }
 
