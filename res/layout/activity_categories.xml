@@ -45,12 +45,19 @@
         android:text="@string/subtitle"
         android:textColor="#ffffdd" />
 
-    <fragment
-        android:id="@+id/poem_list"
-        android:name="ca.rmen.android.palidamuerte.CategoriesFragment"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        tools:layout="@android:layout/list_content" />
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <fragment
+            android:id="@+id/poem_list"
+            android:name="ca.rmen.android.palidamuerte.CategoriesFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout="@android:layout/list_content" />
+    </LinearLayout>
 
 </LinearLayout>
