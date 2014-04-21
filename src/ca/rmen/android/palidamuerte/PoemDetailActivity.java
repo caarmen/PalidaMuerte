@@ -35,7 +35,14 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
         setContentView(R.layout.activity_poem_detail);
         mViewPager = (ViewPager) findViewById(R.id.pager);
         final long categoryId = getIntent().getLongExtra(PoemListActivity.EXTRA_CATEGORY_ID, -1);
-        final long poemId = getIntent().getLongExtra(PoemDetailFragment.ARG_ITEM_ID, -1);
+
+        // If this is the first time we open the activity, we will use the meeting id provided in the intent.
+        // If we are recreating the activity (because of a device rotation, for example), we will display the meeting that the user 
+        // had previously swiped to, using the ViewPager.
+        final long poemId;
+        if (savedInstanceState != null) poemId = savedInstanceState.getLong(PoemDetailFragment.ARG_ITEM_ID);
+        else
+            poemId = getIntent().getLongExtra(PoemDetailFragment.ARG_ITEM_ID, -1);
 
         new AsyncTask<Void, Void, PoemPagerAdapter>() {
 
@@ -56,6 +63,8 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
                 int position = mPoemPagerAdapter.getPositionForPoem(poemId);
                 mViewPager.setCurrentItem(position);
                 getActionBar().setTitle(mCategoryName);
+                String pageNumber = getString(R.string.page_number, position + 1, mPoemPagerAdapter.getCount());
+                ((TextView) findViewById(R.id.page_number)).setText(pageNumber);
             }
         }.execute();
 
@@ -82,6 +91,16 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
             getSupportFragmentManager().beginTransaction().add(R.id.poem_detail_container, fragment).commit();
         }
         */
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.v(TAG, "onSaveInstanceState: outState = " + outState);
+        if (mPoemPagerAdapter != null) {
+            long poemId = mPoemPagerAdapter.getPoemIdAt(mViewPager.getCurrentItem());
+            outState.putLong(PoemDetailFragment.ARG_ITEM_ID, poemId);
+        }
     }
 
     @Override
@@ -114,7 +133,7 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
 
         @Override
         public void onPageSelected(int position) {
-            Log.v(TAG, "onPageSelected, position = " + position);
+            Log.v(TAG, "onPageSelected, position = " + position + ", item =" + mViewPager.getCurrentItem());
             String pageNumber = getString(R.string.page_number, position + 1, mPoemPagerAdapter.getCount());
             ((TextView) findViewById(R.id.page_number)).setText(pageNumber);
         }

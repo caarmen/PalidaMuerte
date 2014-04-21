@@ -48,6 +48,11 @@ public class PoemPagerAdapter extends FragmentStatePagerAdapter {
         return -1;
     }
 
+    public long getPoemIdAt(int position) {
+        mCursor.moveToPosition(position);
+        return mCursor.getId();
+    }
+
     @Override
     public int getCount() {
         return mCursor.getCount();

@@ -36,6 +36,7 @@ public class CategoriesFragment extends Fragment {
 
     @Override
     public void onAttach(Activity activity) {
+        Log.v(TAG, "onAttach");
         super.onAttach(activity);
 
         getLoaderManager().initLoader(URL_LOADER, null, mLoaderCallbacks);
