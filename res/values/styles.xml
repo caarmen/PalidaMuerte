@@ -20,7 +20,7 @@
     <style name="TextAppearancePoemDetailTitle" parent="@android:style/TextAppearance.Large">
         <item name="android:textSize">32sp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">#FFF</item>
+        <item name="android:textColor">#CDCCFF</item>
     </style>
 
     <style name="TextAppearanceCategoryTitle" parent="@android:style/TextAppearance.Large">
@@ -33,6 +33,11 @@
         <item name="android:textSize">24sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">#FFF</item>
+    </style>
+
+    <style name="TextAppearancePoemTypeAndNumber" parent="@android:style/TextAppearance.Small">
+        <item name="android:textStyle">italic</item>
+        <item name="android:textColor">#DDDDCC</item>
     </style>
 
 </resources>

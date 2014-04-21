@@ -9,38 +9,47 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal" >
-        <ImageView 
-            android:src="@drawable/cyberscooty_stylized_floral_border_top_left"
+
+        <ImageView
             android:layout_width="wrap_content"
-            android:scaleType="fitStart"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"/>
-        <ImageView 
-            android:src="@drawable/cyberscooty_stylized_floral_border_top_right"
-            android:layout_width="wrap_content"
             android:scaleType="fitStart"
+            android:src="@drawable/cyberscooty_stylized_floral_border_top_left" />
+
+        <ImageView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"/>
-        <ImageView 
-            android:src="@drawable/cyberscooty_stylized_floral_border_bottom_left"
-            android:layout_width="wrap_content"
             android:scaleType="fitStart"
+            android:src="@drawable/cyberscooty_stylized_floral_border_top_right" />
+
+        <ImageView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"/>
-        <ImageView 
-            android:src="@drawable/cyberscooty_stylized_floral_border_bottom_right"
-            android:layout_width="wrap_content"
+            android:layout_alignParentLeft="true"
             android:scaleType="fitStart"
+            android:src="@drawable/cyberscooty_stylized_floral_border_bottom_left" />
+
+        <ImageView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"/>
-        <!-- The following Opx high view is needed to make sure he above border
-             images are completely aligned to the left or right -->
-		<View
-		    android:layout_width="match_parent" android:layout_height="0dp"/>
+            android:layout_alignParentRight="true"
+            android:scaleType="fitStart"
+            android:src="@drawable/cyberscooty_stylized_floral_border_bottom_right" />
+        <!--
+             The following Opx high view is needed to make sure he above border
+             images are completely aligned to the left or right
+        -->
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
+
         <TextView
             android:id="@+id/title"
             style="@style/TextAppearancePoemDetailTitle"
@@ -49,9 +58,9 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:gravity="center_horizontal"
+            android:paddingBottom="16dp"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:paddingBottom="16dp"
             android:paddingTop="32dp"
             android:textIsSelectable="true" />
 
@@ -62,10 +71,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/title"
             android:layout_centerHorizontal="true"
-            android:paddingTop="16dp"
             android:paddingBottom="16dp"
             android:paddingLeft="32dp"
             android:paddingRight="32dp"
+            android:paddingTop="16dp"
             android:textIsSelectable="true" />
 
         <TextView
@@ -80,7 +89,7 @@
 
         <TextView
             android:id="@+id/poem_type_and_number"
-            style="?android:attr/textAppearanceSmall"
+            style="@style/TextAppearancePoemTypeAndNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/content"
@@ -96,10 +105,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/poem_type_and_number"
             android:layout_centerHorizontal="true"
+            android:paddingBottom="48dp"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:paddingTop="16dp"
-            android:paddingBottom="48dp"
             android:textIsSelectable="true" />
     </RelativeLayout>
 
