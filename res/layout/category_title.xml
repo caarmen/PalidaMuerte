@@ -5,6 +5,6 @@
     android:layout_gravity="center"
     android:singleLine="false"
     android:padding="40dp"
-    android:background="@drawable/nicubunu_graphite_border"
+    android:background="@drawable/knotborder"
     android:gravity="center"
     android:textAppearance="@style/TextAppearanceCategoryTitle"/>
