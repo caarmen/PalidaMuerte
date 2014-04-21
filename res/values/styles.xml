@@ -24,7 +24,7 @@
     </style>
 
     <style name="TextAppearanceCategoryTitle" parent="@android:style/TextAppearance.Large">
-        <item name="android:textSize">48sp</item>
+        <item name="android:textSize">42sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">#FFF</item>
     </style>
