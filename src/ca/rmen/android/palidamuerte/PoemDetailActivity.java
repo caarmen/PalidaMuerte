@@ -131,6 +131,21 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
     }
 
     @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        MenuItem prev = menu.findItem(R.id.action_prev);
+        MenuItem next = menu.findItem(R.id.action_next);
+        if (mPoemPagerAdapter == null) {
+            prev.setVisible(false);
+            next.setVisible(false);
+            return true;
+        }
+        prev.setVisible(mViewPager.getCurrentItem() > 0);
+        next.setVisible(mViewPager.getCurrentItem() < mPoemPagerAdapter.getCount() - 1);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
@@ -148,6 +163,10 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
         } else if (id == R.id.action_share) {
             long poemId = mPoemPagerAdapter.getPoemIdAt(mViewPager.getCurrentItem());
             Poems.share(this, poemId);
+        } else if (id == R.id.action_prev) {
+            mViewPager.setCurrentItem(mViewPager.getCurrentItem() - 1);
+        } else if (id == R.id.action_next) {
+            mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -166,6 +185,7 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
             Log.v(TAG, "onPageSelected, position = " + position + ", item =" + mViewPager.getCurrentItem());
             String pageNumber = getString(R.string.page_number, position + 1, mPoemPagerAdapter.getCount());
             ((TextView) findViewById(R.id.page_number)).setText(pageNumber);
+            invalidateOptionsMenu();
         }
 
         @Override

@@ -3,8 +3,20 @@
     tools:context="ca.rmen.android.palidamuerte.CategoriesActivity" >
 
     <item
-        android:icon="@drawable/ic_action_share"
+        android:id="@+id/action_prev"
+        android:icon="@drawable/ic_action_prev"
+        android:showAsAction="ifRoom"
+        android:title="@string/action_prev"
+        android:visible="false"/>
+    <item
+        android:id="@+id/action_next"
+        android:icon="@drawable/ic_action_next"
+        android:showAsAction="ifRoom"
+        android:title="@string/action_next"
+        android:visible="false"/>
+    <item
         android:id="@+id/action_share"
+        android:icon="@drawable/ic_action_share"
         android:showAsAction="ifRoom"
         android:title="@string/action_share"/>
 
