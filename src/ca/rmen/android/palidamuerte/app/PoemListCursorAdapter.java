@@ -15,7 +15,7 @@ import ca.rmen.android.palidamuerte.provider.poem.PoemCursor;
 public class PoemListCursorAdapter extends CursorAdapter {
 
     private static final String TAG = Constants.TAG + PoemListCursorAdapter.class.getSimpleName();
-    private Typeface mFont;
+    private final Typeface mFont;
 
     public PoemListCursorAdapter(Context context) {
         super(context, null, false);

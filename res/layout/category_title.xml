@@ -7,4 +7,4 @@
     android:padding="40dp"
     android:background="@drawable/nicubunu_graphite_border"
     android:gravity="center"
-    android:textAppearance="?android:attr/textAppearanceLarge" />
+    android:textAppearance="@style/TextAppearanceCategoryTitle"/>

@@ -2,6 +2,7 @@ package ca.rmen.android.palidamuerte.app;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +16,13 @@ public class CategoriesCursorAdapter extends CursorAdapter {
     private static final String TAG = Constants.TAG + CategoriesCursorAdapter.class.getSimpleName();
 
     private final Context mContext;
+    private final Typeface mFont;
 
     public CategoriesCursorAdapter(Context context) {
         super(context, null, false);
         Log.v(TAG, "Constructor");
         mContext = context;
+        mFont = Typeface.createFromAsset(context.getAssets(), "dancing_script.ttf");
     }
 
     @Override
@@ -40,5 +43,6 @@ public class CategoriesCursorAdapter extends CursorAdapter {
         String categoryName = cursorWrapper.getCategoryName();
         int categoryResId = mContext.getResources().getIdentifier(categoryName, "string", R.class.getPackage().getName());
         title.setText(mContext.getString(categoryResId));
+        title.setTypeface(mFont);
     }
 }
