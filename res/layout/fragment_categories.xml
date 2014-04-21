@@ -24,10 +24,10 @@
     android:layout_gravity="center"
     android:background="@null"
     android:gravity="center"
-    android:horizontalSpacing="8dp"
+    android:horizontalSpacing="@dimen/grid_view_horizontal_spacing"
     android:listSelector="@drawable/selector"
     android:numColumns="@integer/grid_view_column_count"
-    android:paddingLeft="8dp"
-    android:paddingRight="8dp"
+    android:paddingLeft="@dimen/grid_view_horizontal_padding"
+    android:paddingRight="@dimen/grid_view_horizontal_padding"
     android:stretchMode="columnWidth"
     android:verticalSpacing="20dp" />

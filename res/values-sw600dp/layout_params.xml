@@ -1,4 +1,4 @@
-<!-- 
+<!--
   Copyright 2014 Carmen Alvarez
  
   This file is part of Pálida Muerte.
@@ -19,6 +19,9 @@
 <resources>
 
     <item name="grid_view_column_count" format="integer" type="integer">2</item>
+
+    <dimen name="grid_view_horizontal_spacing" format="integer" type="integer">20dp</dimen>
+    <dimen name="grid_view_horizontal_padding" format="integer" type="integer">48dp</dimen>
     <dimen name="category_title_text_size">42sp</dimen>
 
 </resources>
