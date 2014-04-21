@@ -43,11 +43,12 @@
 		    android:layout_width="match_parent" android:layout_height="0dp"/>
         <TextView
             android:id="@+id/title"
-            style="?android:attr/textAppearanceLarge"
+            style="@style/TextAppearancePoemDetailTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:paddingBottom="16dp"

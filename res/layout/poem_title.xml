@@ -5,4 +5,4 @@
     android:padding ="8dp"
     android:layout_gravity="center_horizontal"
     android:gravity="center"
-    android:textAppearance="?android:attr/textAppearanceListItem" />
+    android:textAppearance="@style/TextAppearancePoemListTitle"/>

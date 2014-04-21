@@ -2,6 +2,7 @@ package ca.rmen.android.palidamuerte;
 
 import java.util.Calendar;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -48,7 +49,10 @@ public class PoemDetailFragment extends Fragment { // NO_UCD (use default)
             long poemId = getArguments().getLong(ARG_ITEM_ID);
             PoemCursor poemCursor = new PoemSelection().id(poemId).query(getActivity().getContentResolver());
             if (poemCursor.moveToFirst()) {
-                ((TextView) rootView.findViewById(R.id.title)).setText(poemCursor.getTitle());
+                TextView tvTitleView = (TextView) rootView.findViewById(R.id.title);
+                Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "dancing_script.ttf");
+                tvTitleView.setTypeface(font);
+                tvTitleView.setText(poemCursor.getTitle());
                 String preContent = poemCursor.getPreContent();
                 TextView preContentView = (TextView) rootView.findViewById(R.id.pre_content);
                 preContentView.setVisibility(TextUtils.isEmpty(preContent) ? View.GONE : View.VISIBLE);
