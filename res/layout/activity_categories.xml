@@ -1,4 +1,4 @@
-<!-- 
+<!--
   Copyright 2014 Carmen Alvarez
  
   This file is part of Pálida Muerte.
@@ -32,14 +32,18 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:contentDescription="@string/app_name"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp"
         android:src="@drawable/logo" />
+
     <TextView
         android:id="@+id/subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:textColor="#ffffdd"
-        android:text="@string/subtitle"/>
+        android:text="@string/subtitle"
+        android:textColor="#ffffdd" />
 
     <fragment
         android:id="@+id/poem_list"
