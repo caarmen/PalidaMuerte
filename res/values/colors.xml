@@ -3,5 +3,9 @@
 
     <color name="light_gray">#545A6A</color>
     <color name="dark_gray">#24253A</color>
-
+    <drawable name="selector_focused">#888799</drawable>
+    <drawable name="selector_selected">#888799</drawable>
+    <drawable name="selector_checked">#666577</drawable>
+    <drawable name="selector_normal">@android:color/transparent</drawable>
+    
 </resources>
