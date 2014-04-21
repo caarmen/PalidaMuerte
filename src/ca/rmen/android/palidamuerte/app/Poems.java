@@ -75,7 +75,7 @@ public class Poems {
     public static String getLocationDateString(Context context, PoemCursor poemCursor) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, poemCursor.getYear());
-        calendar.set(Calendar.MONTH, poemCursor.getMonth());
+        calendar.set(Calendar.MONTH, poemCursor.getMonth() - 1);
         calendar.set(Calendar.DAY_OF_MONTH, poemCursor.getDay());
         String dateString = DateUtils.formatDateTime(context, calendar.getTimeInMillis(), DateUtils.FORMAT_SHOW_DATE);
         String locationDateString = String.format("%s, %s", poemCursor.getLocation(), dateString);
