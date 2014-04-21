@@ -1,4 +1,4 @@
-<!-- 
+<!--
   Copyright 2014 Carmen Alvarez
  
   This file is part of Pálida Muerte.
@@ -23,9 +23,10 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:background="@drawable/gray_gradient"
-    android:columnWidth="200dp"
     android:gravity="center"
     android:horizontalSpacing="20dp"
     android:numColumns="@integer/grid_view_column_count"
+    android:paddingLeft="48dp"
+    android:paddingRight="48dp"
     android:stretchMode="columnWidth"
     android:verticalSpacing="20dp" />
