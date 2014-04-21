@@ -2,16 +2,21 @@ package ca.rmen.android.palidamuerte.app;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
+import ca.rmen.android.palidamuerte.Constants;
 import ca.rmen.android.palidamuerte.provider.poem.PoemCursor;
 
 public class PoemListCursorAdapter extends CursorAdapter {
 
+    private static final String TAG = Constants.TAG + PoemListCursorAdapter.class.getSimpleName();
+
     public PoemListCursorAdapter(Context context) {
         super(context, null, false);
+        Log.v(TAG, "Constructor");
     }
 
     @Override

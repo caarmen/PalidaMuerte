@@ -39,7 +39,7 @@ public class CategoriesFragment extends Fragment {
         Log.v(TAG, "onAttach");
         super.onAttach(activity);
 
-        getLoaderManager().initLoader(URL_LOADER, null, mLoaderCallbacks);
+        getLoaderManager().restartLoader(URL_LOADER, null, mLoaderCallbacks);
     }
 
     private LoaderCallbacks<Cursor> mLoaderCallbacks = new LoaderCallbacks<Cursor>() {

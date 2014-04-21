@@ -115,7 +115,7 @@ public class PoemListFragment extends ListFragment { // NO_UCD (use default)
             throw new IllegalStateException("Activity must implement fragment's callbacks.");
         }
 
-        getLoaderManager().initLoader(URL_LOADER, null, mLoaderCallbacks);
+        getLoaderManager().restartLoader(URL_LOADER, null, mLoaderCallbacks);
         mCallbacks = (Callbacks) activity;
     }
 
