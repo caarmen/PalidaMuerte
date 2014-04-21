@@ -36,6 +36,7 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
         <item name="android:selectableItemBackground">@drawable/selector</item>
         <item name="android:actionBarItemBackground">@drawable/selector</item>
+        <item name="android:actionBarStyle">@android:style/Widget.Holo.ActionBar.Solid</item>
     </style>
 
     <style name="TextAppearancePoemDetailTitle" parent="@android:style/TextAppearance.Large">
