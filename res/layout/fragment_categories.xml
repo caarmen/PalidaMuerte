@@ -1,23 +1,13 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<GridView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:id="@+id/gridview"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
     android:background="@drawable/gray_gradient"
-    android:orientation="vertical"
-    tools:context="ca.rmen.android.palidamuerte.CategoriesActivity"
-    tools:ignore="MergeRootFrame" >
-
-    <GridView
-        android:id="@+id/gridview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@drawable/gray_gradient"
-        android:columnWidth="200dp"
-        android:gravity="center"
-        android:horizontalSpacing="20dp"
-        android:numColumns="auto_fit"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="20dp" />
-
-</LinearLayout>
+    android:columnWidth="200dp"
+    android:gravity="center"
+    android:horizontalSpacing="20dp"
+    android:numColumns="@integer/grid_view_column_count"
+    android:stretchMode="columnWidth"
+    android:verticalSpacing="20dp" />
