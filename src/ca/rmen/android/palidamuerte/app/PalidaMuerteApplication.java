@@ -33,8 +33,6 @@ import ca.rmen.android.palidamuerte.provider.DBImport;
 public class PalidaMuerteApplication extends Application { // NO_UCD (use default)
     private static final String TAG = Constants.TAG + PalidaMuerteApplication.class.getSimpleName();
 
-    private static final String PREF_DB_IMPORTED = "db_imported";
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -44,14 +42,13 @@ public class PalidaMuerteApplication extends Application { // NO_UCD (use defaul
             @Override
             protected Boolean doInBackground(Void... params) {
                 SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(PalidaMuerteApplication.this);
-                if (sharedPrefs.getBoolean(PREF_DB_IMPORTED, false)) {
+                if (sharedPrefs.getBoolean(DBImport.PREF_DB_IMPORTED, false)) {
                     Log.v(TAG, "No need to import");
                     return true;
                 }
                 DBImport dbImport = new DBImport(PalidaMuerteApplication.this);
                 try {
                     dbImport.doImport();
-                    sharedPrefs.edit().putBoolean(PREF_DB_IMPORTED, true).commit();
                     return true;
                 } catch (BiffException e) {
                     Log.e(TAG, e.getMessage(), e);

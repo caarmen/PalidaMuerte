@@ -30,7 +30,9 @@ import jxl.WorkbookSettings;
 import jxl.read.biff.BiffException;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 import ca.rmen.android.palidamuerte.Constants;
@@ -41,6 +43,7 @@ import ca.rmen.android.palidamuerte.provider.series.SeriesColumns;
 
 public class DBImport {
     private static final String TAG = Constants.TAG + DBImport.class.getSimpleName();
+    public static final String PREF_DB_IMPORTED = "db_imported";
 
     private final Context mContext;
 
@@ -58,6 +61,8 @@ public class DBImport {
         importSheet(wb, CategoryColumns.TABLE_NAME, CategoryColumns.CONTENT_URI);
         importSheet(wb, SeriesColumns.TABLE_NAME, SeriesColumns.CONTENT_URI);
         importSheet(wb, PoemColumns.TABLE_NAME, PoemColumns.CONTENT_URI);
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(mContext);
+        sharedPrefs.edit().putBoolean(PREF_DB_IMPORTED, true).commit();
         Log.v(TAG, "doImport: done");
     }
 

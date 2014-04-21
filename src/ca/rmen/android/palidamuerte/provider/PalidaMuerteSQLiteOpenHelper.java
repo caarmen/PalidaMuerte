@@ -12,7 +12,6 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
 import android.util.Log;
-
 import ca.rmen.android.palidamuerte.BuildConfig;
 import ca.rmen.android.palidamuerte.provider.category.CategoryColumns;
 import ca.rmen.android.palidamuerte.provider.poem.PoemColumns;
@@ -22,8 +21,9 @@ import ca.rmen.android.palidamuerte.provider.series.SeriesColumns;
 public class PalidaMuerteSQLiteOpenHelper extends SQLiteOpenHelper {
     private static final String TAG = PalidaMuerteSQLiteOpenHelper.class.getSimpleName();
 
+    private final Context mContext;
     public static final String DATABASE_FILE_NAME = "palida_muerte.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     // @formatter:off
     private static final String SQL_CREATE_TABLE_CATEGORY = "CREATE TABLE IF NOT EXISTS "
@@ -75,7 +75,6 @@ public class PalidaMuerteSQLiteOpenHelper extends SQLiteOpenHelper {
         return newInstancePostHoneycomb(context);
     }
 
-
     /*
      * Pre Honeycomb.
      */
@@ -86,8 +85,8 @@ public class PalidaMuerteSQLiteOpenHelper extends SQLiteOpenHelper {
 
     private PalidaMuerteSQLiteOpenHelper(Context context, String name, CursorFactory factory, int version) {
         super(context, name, factory, version);
+        mContext = context;
     }
-
 
     /*
      * Post Honeycomb.
@@ -101,8 +100,8 @@ public class PalidaMuerteSQLiteOpenHelper extends SQLiteOpenHelper {
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     private PalidaMuerteSQLiteOpenHelper(Context context, String name, CursorFactory factory, int version, DatabaseErrorHandler errorHandler) {
         super(context, name, factory, version, errorHandler);
+        mContext = context;
     }
-
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -123,6 +122,6 @@ public class PalidaMuerteSQLiteOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        new PalidaMuerteSQLiteUpgradeHelper().onUpgrade(db, oldVersion, newVersion);
+        new PalidaMuerteSQLiteUpgradeHelper().onUpgrade(mContext, db, oldVersion, newVersion);
     }
 }
