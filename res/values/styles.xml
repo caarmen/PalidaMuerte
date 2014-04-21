@@ -1,4 +1,4 @@
-<!-- 
+<!--
   Copyright 2014 Carmen Alvarez
  
   This file is part of Pálida Muerte.
@@ -32,9 +32,12 @@
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
+
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        <item name="android:selectableItemBackground">@drawable/selector</item>
+        <item name="android:actionBarItemBackground">@drawable/selector</item>
     </style>
-    
+
     <style name="TextAppearancePoemDetailTitle" parent="@android:style/TextAppearance.Large">
         <item name="android:textSize">32sp</item>
         <item name="android:textStyle">bold</item>
