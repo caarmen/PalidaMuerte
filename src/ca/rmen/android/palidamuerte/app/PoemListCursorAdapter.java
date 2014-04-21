@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
 import ca.rmen.android.palidamuerte.Constants;
+import ca.rmen.android.palidamuerte.R;
 import ca.rmen.android.palidamuerte.provider.poem.PoemCursor;
 
 public class PoemListCursorAdapter extends CursorAdapter {
@@ -21,7 +22,7 @@ public class PoemListCursorAdapter extends CursorAdapter {
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        View view = new TextView(context);
+        View view = View.inflate(context, R.layout.poem_title, null);
         fillView(view, cursor);
         return view;
     }
@@ -33,7 +34,7 @@ public class PoemListCursorAdapter extends CursorAdapter {
 
     private void fillView(View view, Cursor cursor) {
         PoemCursor cursorWrapper = (PoemCursor) cursor;
-        TextView title = (TextView) view;
+        TextView title = (TextView) view.findViewById(R.id.title);
         title.setText(cursorWrapper.getTitle());
     }
 
