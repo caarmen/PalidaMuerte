@@ -1,10 +1,16 @@
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/poem_list"
-    android:name="ca.rmen.android.palidamuerte.PoemListFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    tools:context="ca.rmen.android.palidamuerte.poemListActivity"
-    tools:layout="@android:layout/list_content" />
+    android:background="@drawable/gray_gradient"
+    android:orientation="vertical" >
+
+    <fragment
+        android:id="@+id/poem_list"
+        android:name="ca.rmen.android.palidamuerte.PoemListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="ca.rmen.android.palidamuerte.poemListActivity"
+        tools:layout="@android:layout/list_content" />
+
+</LinearLayout>
