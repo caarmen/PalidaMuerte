@@ -69,8 +69,8 @@ public class PoemListActivity extends FragmentActivity implements PoemListFragme
             // 'activated' state when touched.
             ((PoemListFragment) getSupportFragmentManager().findFragmentById(R.id.poem_list)).setActivateOnItemClick(true);
         }
+        ca.rmen.android.palidamuerte.app.ActionBar.setCustomFont(this);
 
-        // TODO: If exposing deep links into your app, handle intents here.
     }
 
     /**

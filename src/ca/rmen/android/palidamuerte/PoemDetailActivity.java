@@ -53,6 +53,7 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_poem_detail);
+        ca.rmen.android.palidamuerte.app.ActionBar.setCustomFont(this);
         mViewPager = (ViewPager) findViewById(R.id.pager);
         final long categoryId = getIntent().getLongExtra(PoemListActivity.EXTRA_CATEGORY_ID, -1);
 
