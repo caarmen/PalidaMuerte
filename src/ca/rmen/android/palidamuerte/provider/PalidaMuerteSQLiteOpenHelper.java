@@ -21,9 +21,10 @@ import ca.rmen.android.palidamuerte.provider.series.SeriesColumns;
 public class PalidaMuerteSQLiteOpenHelper extends SQLiteOpenHelper {
     private static final String TAG = PalidaMuerteSQLiteOpenHelper.class.getSimpleName();
 
-    private final Context mContext;
     public static final String DATABASE_FILE_NAME = "palida_muerte.db";
     private static final int DATABASE_VERSION = 2;
+    private final Context mContext;
+    private final PalidaMuerteSQLiteOpenHelperCallbacks mOpenHelperCallbacks;
 
     // @formatter:off
     private static final String SQL_CREATE_TABLE_CATEGORY = "CREATE TABLE IF NOT EXISTS "
@@ -86,6 +87,7 @@ public class PalidaMuerteSQLiteOpenHelper extends SQLiteOpenHelper {
     private PalidaMuerteSQLiteOpenHelper(Context context, String name, CursorFactory factory, int version) {
         super(context, name, factory, version);
         mContext = context;
+        mOpenHelperCallbacks = new PalidaMuerteSQLiteOpenHelperCallbacks();
     }
 
     /*
@@ -101,15 +103,18 @@ public class PalidaMuerteSQLiteOpenHelper extends SQLiteOpenHelper {
     private PalidaMuerteSQLiteOpenHelper(Context context, String name, CursorFactory factory, int version, DatabaseErrorHandler errorHandler) {
         super(context, name, factory, version, errorHandler);
         mContext = context;
+        mOpenHelperCallbacks = new PalidaMuerteSQLiteOpenHelperCallbacks();
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         if (BuildConfig.DEBUG) Log.d(TAG, "onCreate");
+        mOpenHelperCallbacks.onPreCreate(mContext, db);
         db.execSQL(SQL_CREATE_TABLE_CATEGORY);
         db.execSQL(SQL_CREATE_TABLE_POEM);
         db.execSQL(SQL_CREATE_TABLE_POEM_TYPE);
         db.execSQL(SQL_CREATE_TABLE_SERIES);
+        mOpenHelperCallbacks.onPostCreate(mContext, db);
     }
 
     @Override
@@ -118,10 +123,11 @@ public class PalidaMuerteSQLiteOpenHelper extends SQLiteOpenHelper {
         if (!db.isReadOnly()) {
             db.execSQL("PRAGMA foreign_keys=ON;");
         }
+        mOpenHelperCallbacks.onOpen(mContext, db);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        new PalidaMuerteSQLiteUpgradeHelper().onUpgrade(mContext, db, oldVersion, newVersion);
+        mOpenHelperCallbacks.onUpgrade(mContext, db, oldVersion, newVersion);
     }
 }

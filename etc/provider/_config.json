@@ -5,7 +5,7 @@
     "providerJavaPackage": "ca.rmen.android.palidamuerte.provider",
     "providerClassName": "PalidaMuerteProvider",
     "sqliteOpenHelperClassName": "PalidaMuerteSQLiteOpenHelper",
-    "sqliteUpgradeHelperClassName": "PalidaMuerteSQLiteUpgradeHelper",
+    "sqliteOpenHelperCallbacksClassName": "PalidaMuerteSQLiteOpenHelperCallbacks",
     "databaseFileName": "palida_muerte.db",
     "databaseVersion": 1,
     "enableForeignKeys": true,

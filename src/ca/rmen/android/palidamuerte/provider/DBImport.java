@@ -30,9 +30,7 @@ import jxl.WorkbookSettings;
 import jxl.read.biff.BiffException;
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.net.Uri;
-import android.preference.PreferenceManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
 import android.util.Log;
 import ca.rmen.android.palidamuerte.Constants;
@@ -43,7 +41,6 @@ import ca.rmen.android.palidamuerte.provider.series.SeriesColumns;
 
 public class DBImport {
     private static final String TAG = Constants.TAG + DBImport.class.getSimpleName();
-    public static final String PREF_DB_IMPORTED = "db_imported";
 
     private final Context mContext;
 
@@ -51,26 +48,34 @@ public class DBImport {
         mContext = context;
     }
 
-    public void doImport() throws IOException, BiffException {
+    public void doImport(SQLiteDatabase db) {
         Log.v(TAG, "doImport");
-        InputStream is = mContext.getAssets().open("data.xls");
-        WorkbookSettings wbSettings = new WorkbookSettings();
-        wbSettings.setEncoding("iso-8859-1");
-        Workbook wb = Workbook.getWorkbook(is, wbSettings);
-        importSheet(wb, PoemTypeColumns.TABLE_NAME, PoemTypeColumns.CONTENT_URI);
-        importSheet(wb, CategoryColumns.TABLE_NAME, CategoryColumns.CONTENT_URI);
-        importSheet(wb, SeriesColumns.TABLE_NAME, SeriesColumns.CONTENT_URI);
-        importSheet(wb, PoemColumns.TABLE_NAME, PoemColumns.CONTENT_URI);
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(mContext);
-        sharedPrefs.edit().putBoolean(PREF_DB_IMPORTED, true).commit();
+        try {
+            InputStream is = mContext.getAssets().open("data.xls");
+            WorkbookSettings wbSettings = new WorkbookSettings();
+            wbSettings.setEncoding("iso-8859-1");
+            Workbook wb = Workbook.getWorkbook(is, wbSettings);
+            db.beginTransaction();
+            importSheet(db, wb, PoemTypeColumns.TABLE_NAME);
+            importSheet(db, wb, CategoryColumns.TABLE_NAME);
+            importSheet(db, wb, SeriesColumns.TABLE_NAME);
+            importSheet(db, wb, PoemColumns.TABLE_NAME);
+            db.setTransactionSuccessful();
+        } catch (IOException e) {
+            Log.e(TAG, e.getMessage(), e);
+        } catch (BiffException e) {
+            Log.e(TAG, e.getMessage(), e);
+        } finally {
+            db.endTransaction();
+        }
         Log.v(TAG, "doImport: done");
     }
 
-    private void importSheet(Workbook wb, String sheetName, Uri uri) {
-        Log.v(TAG, "importSheet: sheetName= " + sheetName + ", uri = " + uri);
+    private void importSheet(SQLiteDatabase db, Workbook wb, String sheetName) {
+        Log.v(TAG, "importSheet: sheetName= " + sheetName);
         ContentValues[] values = readSheet(wb, sheetName);
-        int result = insert(uri, values);
-        Log.v(TAG, "importSheet: imported " + result + " rows");
+        insert(db, sheetName, values);
+        Log.v(TAG, "importSheet: imported " + values.length + " rows");
     }
 
     private ContentValues[] readSheet(Workbook wb, String name) {
@@ -105,11 +110,11 @@ public class DBImport {
         return data;
     }
 
-    private int insert(Uri uri, ContentValues[] values) {
-        Log.v(TAG, "insert: uri = " + uri + ", " + values.length + " values");
-        int deleted = mContext.getContentResolver().delete(uri, null, null);
+    private void insert(SQLiteDatabase db, String table, ContentValues[] values) {
+        Log.v(TAG, "insert: table = " + table + ", " + values.length + " values");
+        int deleted = db.delete(table, null, null);
         Log.v(TAG, "deleted " + deleted + " rows before inserting");
-        int result = mContext.getContentResolver().bulkInsert(uri, values);
-        return result;
+        for (ContentValues cv : values)
+            db.insert(table, null, cv);
     }
 }
