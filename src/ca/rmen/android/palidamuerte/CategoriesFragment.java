@@ -41,12 +41,14 @@ public class CategoriesFragment extends Fragment {
 
     private static final String TAG = Constants.TAG + CategoriesFragment.class.getSimpleName();
     private static final int URL_LOADER = 0;
+    private View mProgressBar;
 
     public CategoriesFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_categories, null);
+        mProgressBar = view.findViewById(R.id.progress_container);
         GridView gridview = (GridView) view.findViewById(R.id.gridview);
         gridview.setOnItemClickListener(mOnItemClickListener);
         return view;
@@ -84,12 +86,14 @@ public class CategoriesFragment extends Fragment {
                 }
             }
             mAdapter.changeCursor(new CategoryCursor(cursor));
+            mProgressBar.setVisibility(View.GONE);
         }
 
         @Override
         public void onLoaderReset(Loader<Cursor> loader) {
             Log.v(TAG, "onLoaderReset " + loader);
             if (mAdapter != null) mAdapter.changeCursor(null);
+            mProgressBar.setVisibility(View.GONE);
         }
     };
 

@@ -16,18 +16,46 @@
   You should have received a copy of the GNU General Public License
   along with Pálida Muerte. If not, see <http://www.gnu.org/licenses/>.
 -->
-<GridView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/gridview"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:background="@null"
-    android:gravity="center"
-    android:horizontalSpacing="@dimen/grid_view_horizontal_spacing"
-    android:listSelector="@drawable/selector"
-    android:numColumns="@integer/grid_view_column_count"
-    android:paddingLeft="@dimen/grid_view_horizontal_padding"
-    android:paddingRight="@dimen/grid_view_horizontal_padding"
-    android:stretchMode="columnWidth"
-    android:verticalSpacing="20dp" />
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:id="@+id/progress_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="visible" >
+
+        <ProgressBar
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="4dip"
+            android:singleLine="true"
+            android:text="@string/loading"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+    </LinearLayout>
+
+    <GridView
+        android:id="@+id/gridview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@null"
+        android:gravity="center"
+        android:horizontalSpacing="@dimen/grid_view_horizontal_spacing"
+        android:listSelector="@drawable/selector"
+        android:numColumns="@integer/grid_view_column_count"
+        android:paddingLeft="@dimen/grid_view_horizontal_padding"
+        android:paddingRight="@dimen/grid_view_horizontal_padding"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="20dp" />
+
+</FrameLayout>
