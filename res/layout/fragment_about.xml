@@ -20,7 +20,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/gray_gradient">
+    android:background="@drawable/gray_gradient" >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -59,7 +59,6 @@
             android:scaleType="fitStart"
             android:src="@drawable/cyberscooty_stylized_floral_border_bottom_right" />
 
-
         <TextView
             android:id="@+id/author_name"
             android:layout_width="wrap_content"
@@ -87,11 +86,11 @@
             android:layout_below="@id/photo_author"
             android:layout_centerHorizontal="true"
             android:autoLink="web"
+            android:paddingBottom="16dp"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingBottom="16dp"
             android:text="@string/author_date"
-            android:textAppearance="@style/TextAppearancePoemTypeAndNumber"/>
+            android:textAppearance="@style/TextAppearancePoemTypeAndNumber" />
 
         <TextView
             android:id="@+id/author_description"
@@ -105,20 +104,22 @@
             android:text="@string/author_description"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <View
+        <ImageView
             android:id="@+id/divider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@id/author_description"
             android:layout_centerHorizontal="true"
             android:layout_margin="@dimen/activity_horizontal_margin"
-            android:background="@drawable/selector_checked" />
+            android:background="@drawable/cyberscooty_stylized_plant_separation"
+            android:scaleType="center" />
 
         <TextView
             android:id="@+id/credits_app"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/divider"
+            android:autoLink="email"
             android:paddingBottom="16dp"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
@@ -126,10 +127,24 @@
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
-            android:id="@+id/credits_clipart"
+            android:id="@+id/credits_thanks"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/credits_app"
+            android:paddingBottom="16dp"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:text="@string/credits_thanks"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/credits_clipart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/credits_thanks"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             android:autoLink="web"
             android:paddingBottom="16dp"
             android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -142,6 +157,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/credits_clipart"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             android:autoLink="web"
             android:paddingBottom="48dp"
             android:paddingLeft="@dimen/activity_horizontal_margin"
