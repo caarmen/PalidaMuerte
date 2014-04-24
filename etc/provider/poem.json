@@ -55,6 +55,12 @@
             "type": "String",
             "nullable": false,
         },
+        {
+            "name": "is_favorite",
+            "type": "Boolean",
+            "nullable": false,
+            "default_value": false,
+        },
     ],
 
     "constraints": [

@@ -7,6 +7,6 @@
     "sqliteOpenHelperClassName": "PalidaMuerteSQLiteOpenHelper",
     "sqliteOpenHelperCallbacksClassName": "PalidaMuerteSQLiteOpenHelperCallbacks",
     "databaseFileName": "palida_muerte.db",
-    "databaseVersion": 1,
+    "databaseVersion": 3,
     "enableForeignKeys": true,
 }

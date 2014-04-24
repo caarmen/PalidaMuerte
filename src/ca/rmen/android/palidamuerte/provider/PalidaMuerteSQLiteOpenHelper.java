@@ -12,6 +12,7 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
 import android.util.Log;
+
 import ca.rmen.android.palidamuerte.BuildConfig;
 import ca.rmen.android.palidamuerte.provider.category.CategoryColumns;
 import ca.rmen.android.palidamuerte.provider.poem.PoemColumns;
@@ -47,7 +48,8 @@ public class PalidaMuerteSQLiteOpenHelper extends SQLiteOpenHelper {
             + PoemColumns.DAY + " INTEGER NOT NULL, "
             + PoemColumns.TITLE + " TEXT NOT NULL, "
             + PoemColumns.PRE_CONTENT + " TEXT, "
-            + PoemColumns.CONTENT + " TEXT NOT NULL "
+            + PoemColumns.CONTENT + " TEXT NOT NULL, "
+            + PoemColumns.IS_FAVORITE + " INTEGER NOT NULL "
             + ", CONSTRAINT FK_POEM_TYPE_ID FOREIGN KEY (POEM_TYPE_ID) REFERENCES POEM_TYPE (_ID) ON DELETE CASCADE"
             + ", CONSTRAINT FK_SERIES_ID FOREIGN KEY (SERIES_ID) REFERENCES SERIES (_ID) ON DELETE CASCADE"
             + ", CONSTRAINT FK_CATEGORY_ID FOREIGN KEY (CATEGORY_ID) REFERENCES CATEGORY (_ID) ON DELETE CASCADE"
@@ -76,6 +78,7 @@ public class PalidaMuerteSQLiteOpenHelper extends SQLiteOpenHelper {
         return newInstancePostHoneycomb(context);
     }
 
+
     /*
      * Pre Honeycomb.
      */
@@ -89,6 +92,7 @@ public class PalidaMuerteSQLiteOpenHelper extends SQLiteOpenHelper {
         mContext = context;
         mOpenHelperCallbacks = new PalidaMuerteSQLiteOpenHelperCallbacks();
     }
+
 
     /*
      * Post Honeycomb.
@@ -105,6 +109,7 @@ public class PalidaMuerteSQLiteOpenHelper extends SQLiteOpenHelper {
         mContext = context;
         mOpenHelperCallbacks = new PalidaMuerteSQLiteOpenHelperCallbacks();
     }
+
 
     @Override
     public void onCreate(SQLiteDatabase db) {

@@ -27,6 +27,7 @@ public interface PoemColumns extends BaseColumns {
     String TITLE = "title";
     String PRE_CONTENT = "pre_content";
     String CONTENT = "content";
+    String IS_FAVORITE = "is_favorite";
 
     String DEFAULT_ORDER = _ID;
 
@@ -43,7 +44,8 @@ public interface PoemColumns extends BaseColumns {
             DAY,
             TITLE,
             PRE_CONTENT,
-            CONTENT
+            CONTENT,
+            IS_FAVORITE
     };
     // @formatter:on
 }

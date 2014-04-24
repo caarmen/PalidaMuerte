@@ -3,12 +3,9 @@
  */
 package ca.rmen.android.palidamuerte.provider.poem;
 
-import java.util.Date;
-
 import android.content.ContentResolver;
 import android.database.Cursor;
 import android.net.Uri;
-
 import ca.rmen.android.palidamuerte.provider.base.AbstractSelection;
 
 /**
@@ -19,7 +16,7 @@ public class PoemSelection extends AbstractSelection<PoemSelection> {
     public Uri uri() {
         return PoemColumns.CONTENT_URI;
     }
-    
+
     /**
      * Query the given content resolver using this selection.
      * 
@@ -48,8 +45,7 @@ public class PoemSelection extends AbstractSelection<PoemSelection> {
     public PoemCursor query(ContentResolver contentResolver) {
         return query(contentResolver, null, null);
     }
-    
-    
+
     public PoemSelection id(long... value) {
         addEquals(PoemColumns._ID, toObjectArray(value));
         return this;
@@ -59,7 +55,7 @@ public class PoemSelection extends AbstractSelection<PoemSelection> {
         addEquals(PoemColumns.POEM_TYPE_ID, toObjectArray(value));
         return this;
     }
-    
+
     public PoemSelection poemTypeIdNot(long... value) {
         addNotEquals(PoemColumns.POEM_TYPE_ID, toObjectArray(value));
         return this;
@@ -89,7 +85,7 @@ public class PoemSelection extends AbstractSelection<PoemSelection> {
         addEquals(PoemColumns.POEM_NUMBER, value);
         return this;
     }
-    
+
     public PoemSelection poemNumberNot(Integer... value) {
         addNotEquals(PoemColumns.POEM_NUMBER, value);
         return this;
@@ -119,7 +115,7 @@ public class PoemSelection extends AbstractSelection<PoemSelection> {
         addEquals(PoemColumns.SERIES_ID, toObjectArray(value));
         return this;
     }
-    
+
     public PoemSelection seriesIdNot(long... value) {
         addNotEquals(PoemColumns.SERIES_ID, toObjectArray(value));
         return this;
@@ -149,7 +145,7 @@ public class PoemSelection extends AbstractSelection<PoemSelection> {
         addEquals(PoemColumns.CATEGORY_ID, toObjectArray(value));
         return this;
     }
-    
+
     public PoemSelection categoryIdNot(long... value) {
         addNotEquals(PoemColumns.CATEGORY_ID, toObjectArray(value));
         return this;
@@ -179,18 +175,17 @@ public class PoemSelection extends AbstractSelection<PoemSelection> {
         addEquals(PoemColumns.LOCATION, value);
         return this;
     }
-    
+
     public PoemSelection locationNot(String... value) {
         addNotEquals(PoemColumns.LOCATION, value);
         return this;
     }
 
-
     public PoemSelection year(int... value) {
         addEquals(PoemColumns.YEAR, toObjectArray(value));
         return this;
     }
-    
+
     public PoemSelection yearNot(int... value) {
         addNotEquals(PoemColumns.YEAR, toObjectArray(value));
         return this;
@@ -220,7 +215,7 @@ public class PoemSelection extends AbstractSelection<PoemSelection> {
         addEquals(PoemColumns.MONTH, toObjectArray(value));
         return this;
     }
-    
+
     public PoemSelection monthNot(int... value) {
         addNotEquals(PoemColumns.MONTH, toObjectArray(value));
         return this;
@@ -250,7 +245,7 @@ public class PoemSelection extends AbstractSelection<PoemSelection> {
         addEquals(PoemColumns.DAY, toObjectArray(value));
         return this;
     }
-    
+
     public PoemSelection dayNot(int... value) {
         addNotEquals(PoemColumns.DAY, toObjectArray(value));
         return this;
@@ -280,31 +275,34 @@ public class PoemSelection extends AbstractSelection<PoemSelection> {
         addEquals(PoemColumns.TITLE, value);
         return this;
     }
-    
+
     public PoemSelection titleNot(String... value) {
         addNotEquals(PoemColumns.TITLE, value);
         return this;
     }
 
-
     public PoemSelection preContent(String... value) {
         addEquals(PoemColumns.PRE_CONTENT, value);
         return this;
     }
-    
+
     public PoemSelection preContentNot(String... value) {
         addNotEquals(PoemColumns.PRE_CONTENT, value);
         return this;
     }
 
-
     public PoemSelection content(String... value) {
         addEquals(PoemColumns.CONTENT, value);
         return this;
     }
-    
+
     public PoemSelection contentNot(String... value) {
         addNotEquals(PoemColumns.CONTENT, value);
+        return this;
+    }
+
+    public PoemSelection isFavorite(boolean value) {
+        addEquals(PoemColumns.IS_FAVORITE, value ? new Object[] { "1" } : new Object[] { "0" });
         return this;
     }
 

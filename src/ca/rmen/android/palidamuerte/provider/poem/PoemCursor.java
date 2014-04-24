@@ -102,4 +102,11 @@ public class PoemCursor extends AbstractCursor {
         Integer index = getCachedColumnIndexOrThrow(PoemColumns.CONTENT);
         return getString(index);
     }
+
+    /**
+     * Get the {@code is_favorite} value.
+     */
+    public boolean getIsFavorite() {
+        return getBoolean(PoemColumns.IS_FAVORITE);
+    }
 }

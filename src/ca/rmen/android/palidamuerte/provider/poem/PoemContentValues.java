@@ -116,4 +116,11 @@ public class PoemContentValues extends AbstractContentValues {
     }
 
 
+
+    public PoemContentValues putIsFavorite(boolean value) {
+        mContentValues.put(PoemColumns.IS_FAVORITE, value);
+        return this;
+    }
+
+
 }
