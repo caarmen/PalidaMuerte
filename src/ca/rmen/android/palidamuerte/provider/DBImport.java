@@ -56,6 +56,10 @@ public class DBImport {
             wbSettings.setEncoding("iso-8859-1");
             Workbook wb = Workbook.getWorkbook(is, wbSettings);
             db.beginTransaction();
+            delete(db, PoemColumns.TABLE_NAME);
+            delete(db, SeriesColumns.TABLE_NAME);
+            delete(db, CategoryColumns.TABLE_NAME);
+            delete(db, PoemTypeColumns.TABLE_NAME);
             importSheet(db, wb, PoemTypeColumns.TABLE_NAME);
             importSheet(db, wb, CategoryColumns.TABLE_NAME);
             importSheet(db, wb, SeriesColumns.TABLE_NAME);
@@ -110,10 +114,13 @@ public class DBImport {
         return data;
     }
 
+    private void delete(SQLiteDatabase db, String table) {
+        int deleted = db.delete(table, null, null);
+        Log.v(TAG, "deleted " + deleted + " rows from " + table);
+    }
+
     private void insert(SQLiteDatabase db, String table, ContentValues[] values) {
         Log.v(TAG, "insert: table = " + table + ", " + values.length + " values");
-        int deleted = db.delete(table, null, null);
-        Log.v(TAG, "deleted " + deleted + " rows before inserting");
         for (ContentValues cv : values)
             db.insert(table, null, cv);
     }

@@ -22,7 +22,7 @@ public class PalidaMuerteSQLiteOpenHelper extends SQLiteOpenHelper {
     private static final String TAG = PalidaMuerteSQLiteOpenHelper.class.getSimpleName();
 
     public static final String DATABASE_FILE_NAME = "palida_muerte.db";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
     private final Context mContext;
     private final PalidaMuerteSQLiteOpenHelperCallbacks mOpenHelperCallbacks;
 

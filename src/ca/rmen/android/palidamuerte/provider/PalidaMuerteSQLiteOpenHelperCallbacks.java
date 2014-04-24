@@ -35,9 +35,7 @@ public class PalidaMuerteSQLiteOpenHelperCallbacks {
     public void onUpgrade(final Context context, final SQLiteDatabase db, final int oldVersion, final int newVersion) {
         if (BuildConfig.DEBUG) Log.d(TAG, "Upgrading database from version " + oldVersion + " to " + newVersion);
         // Insert your upgrading code here.
-        if (oldVersion < 2) {
-            new DBImport(context).doImport(db);
-        }
+        if (oldVersion < 3) new DBImport(context).doImport(db);
     }
 
 }
