@@ -7,6 +7,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import ca.rmen.android.palidamuerte.BuildConfig;
+import ca.rmen.android.palidamuerte.Constants;
 
 /**
  * Implement your custom database creation or upgrade code here.
@@ -14,7 +15,7 @@ import ca.rmen.android.palidamuerte.BuildConfig;
  * This file will not be overwritten if you re-run the content provider generator.
  */
 public class PalidaMuerteSQLiteOpenHelperCallbacks {
-    private static final String TAG = PalidaMuerteSQLiteOpenHelperCallbacks.class.getSimpleName();
+    private static final String TAG = Constants.TAG + PalidaMuerteSQLiteOpenHelperCallbacks.class.getSimpleName();
 
     public void onOpen(final Context context, final SQLiteDatabase db) {
         if (BuildConfig.DEBUG) Log.d(TAG, "onOpen");
