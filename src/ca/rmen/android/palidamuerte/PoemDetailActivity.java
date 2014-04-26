@@ -1,20 +1,20 @@
 /**
  * Copyright 2014 Carmen Alvarez
  *
- * This file is part of P‡lida Muerte.
+ * This file is part of Pï¿½lida Muerte.
  *
- * P‡lida Muerte is free software: you can redistribute it and/or modify
+ * Pï¿½lida Muerte is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 2 of the License, or
  * (at your option) any later version.
  *
- * P‡lida Muerte is distributed in the hope that it will be useful,
+ * Pï¿½lida Muerte is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with P‡lida Muerte. If not, see <http://www.gnu.org/licenses/>.
+ * along with Pï¿½lida Muerte. If not, see <http://www.gnu.org/licenses/>.
  */
 package ca.rmen.android.palidamuerte;
 
@@ -30,6 +30,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
 import ca.rmen.android.palidamuerte.app.Categories;
 import ca.rmen.android.palidamuerte.app.PoemPagerAdapter;
 import ca.rmen.android.palidamuerte.app.Poems;
@@ -140,13 +141,12 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
         super.onPrepareOptionsMenu(menu);
         MenuItem prev = menu.findItem(R.id.action_prev);
         MenuItem next = menu.findItem(R.id.action_next);
-        if (mPoemPagerAdapter == null) {
-            prev.setVisible(false);
-            next.setVisible(false);
-            return true;
+        prev.setVisible(true);
+        next.setVisible(true);
+        if (mPoemPagerAdapter != null) {
+            prev.setEnabled(mViewPager.getCurrentItem() > 0);
+            next.setEnabled(mViewPager.getCurrentItem() < mPoemPagerAdapter.getCount() - 1);
         }
-        prev.setVisible(mViewPager.getCurrentItem() > 0);
-        next.setVisible(mViewPager.getCurrentItem() < mPoemPagerAdapter.getCount() - 1);
         return true;
     }
 
