@@ -39,16 +39,16 @@ import ca.rmen.android.palidamuerte.provider.poem.PoemColumns;
 import ca.rmen.android.palidamuerte.provider.poem_type.PoemTypeColumns;
 import ca.rmen.android.palidamuerte.provider.series.SeriesColumns;
 
-public class DBImport {
+class DBImport {
     private static final String TAG = Constants.TAG + DBImport.class.getSimpleName();
 
     private final Context mContext;
 
-    public DBImport(Context context) {
+    DBImport(Context context) {
         mContext = context;
     }
 
-    public void doImport(SQLiteDatabase db) {
+    void doImport(SQLiteDatabase db) {
         Log.v(TAG, "doImport");
         try {
             InputStream is = mContext.getAssets().open("data.xls");

@@ -29,7 +29,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import ca.rmen.android.palidamuerte.app.ActionBar;
 
-public class AboutActivity extends Activity {
+public class AboutActivity extends Activity { // NO_UCD (use default)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class AboutActivity extends Activity {
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment {
+    public static class PlaceholderFragment extends Fragment { // NO_UCD (use private)
 
         public PlaceholderFragment() {}
 

@@ -23,9 +23,9 @@ import ca.rmen.android.palidamuerte.R;
 import ca.rmen.android.palidamuerte.provider.poem_type.PoemTypeCursor;
 import ca.rmen.android.palidamuerte.provider.poem_type.PoemTypeSelection;
 
-public class PoemTypes {
+class PoemTypes {
 
-    public static String getPoemTypeName(Context context, long poemTypeId) {
+    static String getPoemTypeName(Context context, long poemTypeId) {
         PoemTypeCursor cursor = new PoemTypeSelection().id(poemTypeId).query(context.getContentResolver());
         try {
             if (!cursor.moveToFirst()) return null;
