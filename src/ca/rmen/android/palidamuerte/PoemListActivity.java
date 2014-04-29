@@ -25,6 +25,7 @@ import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ShareActionProvider;
 import ca.rmen.android.palidamuerte.app.Poems;
 
 /**
@@ -51,6 +52,7 @@ public class PoemListActivity extends FragmentActivity implements PoemListFragme
      */
     private boolean mTwoPane;
     private long mPoemId = -1;
+    private ShareActionProvider mShareActionProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +94,7 @@ public class PoemListActivity extends FragmentActivity implements PoemListFragme
             getSupportFragmentManager().beginTransaction().replace(R.id.poem_detail_container, fragment).commit();
             boolean refreshMenu = mPoemId < 0;
             mPoemId = id;
+            if (mShareActionProvider != null) Poems.updateShareIntent(mShareActionProvider, this, mPoemId);
             if (refreshMenu) invalidateOptionsMenu();
 
         } else {
@@ -107,7 +110,11 @@ public class PoemListActivity extends FragmentActivity implements PoemListFragme
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-        if (mTwoPane && mPoemId >= 0) getMenuInflater().inflate(R.menu.poem, menu);
+        if (mTwoPane && mPoemId >= 0) {
+            getMenuInflater().inflate(R.menu.poem, menu);
+            mShareActionProvider = (ShareActionProvider) menu.findItem(R.id.action_share).getActionProvider();
+            Poems.updateShareIntent(mShareActionProvider, this, mPoemId);
+        }
         return true;
     }
 
@@ -125,8 +132,6 @@ public class PoemListActivity extends FragmentActivity implements PoemListFragme
             Intent intent = new Intent(this, CategoriesActivity.class);
             NavUtils.navigateUpTo(this, intent);
             return true;
-        } else if (id == R.id.action_share) {
-            Poems.share(this, mPoemId);
         } else if (id == R.id.action_about) {
             Intent intent = new Intent(this, AboutActivity.class);
             startActivity(intent);

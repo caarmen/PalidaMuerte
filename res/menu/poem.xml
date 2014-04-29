@@ -18,6 +18,7 @@
         android:visible="false"/>
     <item
         android:id="@+id/action_share"
+        android:actionProviderClass="android.widget.ShareActionProvider"
         android:icon="@drawable/ic_action_share"
         android:showAsAction="ifRoom"
         android:title="@string/action_share"/>

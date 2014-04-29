@@ -25,23 +25,22 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
+import android.widget.ShareActionProvider;
 import ca.rmen.android.palidamuerte.R;
 import ca.rmen.android.palidamuerte.provider.poem.PoemCursor;
 import ca.rmen.android.palidamuerte.provider.poem.PoemSelection;
 
 public class Poems {
 
-    public static void share(final Context context, final long poemId) {
-        new AsyncTask<Void, Void, Void>() {
-
-            private String mBody, mSubject;
+    public static void updateShareIntent(final ShareActionProvider shareActionProvider, final Context context, final long poemId) {
+        new AsyncTask<Void, Void, Intent>() {
 
             @Override
-            protected Void doInBackground(Void... params) {
+            protected Intent doInBackground(Void... params) {
                 PoemCursor cursor = new PoemSelection().id(poemId).query(context.getContentResolver());
                 try {
                     if (!cursor.moveToFirst()) return null;
-                    mSubject = cursor.getTitle();
+                    String subject = cursor.getTitle();
                     StringBuilder bodyBuilder = new StringBuilder();
                     bodyBuilder.append(cursor.getTitle()).append("\n\n");
                     String preContent = cursor.getPreContent();
@@ -51,22 +50,22 @@ public class Poems {
                     if (!TextUtils.isEmpty(poemNumberString)) bodyBuilder.append(poemNumberString).append("\n\n");
                     bodyBuilder.append(context.getString(R.string.copyright)).append("\n\n");
                     bodyBuilder.append(getLocationDateString(context, cursor));
-                    mBody = bodyBuilder.toString();
+                    String body = bodyBuilder.toString();
+                    Intent sendIntent = new Intent();
+                    sendIntent.setAction(Intent.ACTION_SEND);
+                    sendIntent.setType("text/plain");
+                    sendIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, body);
+                    return sendIntent;
 
                 } finally {
                     cursor.close();
                 }
-                return null;
             }
 
             @Override
-            protected void onPostExecute(Void result) {
-                Intent sendIntent = new Intent();
-                sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.setType("text/plain");
-                sendIntent.putExtra(Intent.EXTRA_SUBJECT, mSubject);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, mBody);
-                context.startActivity(Intent.createChooser(sendIntent, context.getResources().getText(R.string.action_share)));
+            protected void onPostExecute(Intent result) {
+                shareActionProvider.setShareIntent(result);
             }
 
         }.execute();

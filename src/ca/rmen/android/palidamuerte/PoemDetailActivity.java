@@ -29,8 +29,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ShareActionProvider;
 import android.widget.TextView;
-
 import ca.rmen.android.palidamuerte.app.Categories;
 import ca.rmen.android.palidamuerte.app.PoemPagerAdapter;
 import ca.rmen.android.palidamuerte.app.Poems;
@@ -49,6 +49,7 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
     private static final String TAG = Constants.TAG + PoemDetailActivity.class.getSimpleName();
     private PoemPagerAdapter mPoemPagerAdapter;
     private ViewPager mViewPager;
+    private ShareActionProvider mShareActionProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,6 +133,11 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.poem, menu);
         menu.findItem(R.id.action_about).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+        mShareActionProvider = (ShareActionProvider) menu.findItem(R.id.action_share).getActionProvider();
+        if (mPoemPagerAdapter != null) {
+            long poemId = mPoemPagerAdapter.getPoemIdAt(mViewPager.getCurrentItem());
+            Poems.updateShareIntent(mShareActionProvider, PoemDetailActivity.this, poemId);
+        }
         return true;
     }
 
@@ -165,9 +171,6 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
             intent.putExtra(PoemListActivity.EXTRA_CATEGORY_ID, getIntent().getLongExtra(PoemListActivity.EXTRA_CATEGORY_ID, -1));
             NavUtils.navigateUpTo(this, intent);
             return true;
-        } else if (id == R.id.action_share) {
-            long poemId = mPoemPagerAdapter.getPoemIdAt(mViewPager.getCurrentItem());
-            Poems.share(this, poemId);
         } else if (id == R.id.action_prev) {
             mViewPager.setCurrentItem(mViewPager.getCurrentItem() - 1);
         } else if (id == R.id.action_next) {
@@ -193,6 +196,8 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
             Log.v(TAG, "onPageSelected, position = " + position + ", item =" + mViewPager.getCurrentItem());
             String pageNumber = getString(R.string.page_number, position + 1, mPoemPagerAdapter.getCount());
             ((TextView) findViewById(R.id.page_number)).setText(pageNumber);
+            long poemId = mPoemPagerAdapter.getPoemIdAt(position);
+            if (mShareActionProvider != null) Poems.updateShareIntent(mShareActionProvider, PoemDetailActivity.this, poemId);
             invalidateOptionsMenu();
         }
 
