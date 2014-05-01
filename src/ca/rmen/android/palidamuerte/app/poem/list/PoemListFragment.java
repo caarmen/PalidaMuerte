@@ -28,6 +28,7 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.util.Log;
 import android.view.View;
+import android.widget.CursorAdapter;
 import android.widget.ListView;
 import ca.rmen.android.palidamuerte.Constants;
 import ca.rmen.android.palidamuerte.app.category.Categories;
@@ -47,7 +48,7 @@ public class PoemListFragment extends ListFragment { // NO_UCD (use default)
 
     private static final String TAG = Constants.TAG + PoemListFragment.class.getSimpleName();
     private static final int URL_LOADER = 0;
-    private PoemListCursorAdapter mAdapter;
+    private CursorAdapter mAdapter;
     /**
      * The serialization (saved instance state) Bundle key representing the
      * activated item position. Only used on tablets.
@@ -209,7 +210,10 @@ public class PoemListFragment extends ListFragment { // NO_UCD (use default)
             Log.v(TAG, "onLoadFinished, loader = " + loader + ", cursor = " + cursor);
             if (mAdapter == null) {
                 long categoryId = getActivity().getIntent().getLongExtra(PoemListActivity.EXTRA_CATEGORY_ID, -1);
-                mAdapter = new PoemListCursorAdapter(getActivity(), categoryId == Categories.FAVORITE_CATEGORY_ID);
+                if (categoryId == Categories.FAVORITE_CATEGORY_ID) mAdapter = new FavoritePoemListCursorAdapter(getActivity());
+                else
+
+                    mAdapter = new PoemListCursorAdapter(getActivity());
                 setListAdapter(mAdapter);
             }
             mAdapter.changeCursor(new PoemCursor(cursor));

@@ -27,16 +27,17 @@ import android.widget.CursorAdapter;
 import android.widget.TextView;
 import ca.rmen.android.palidamuerte.Constants;
 import ca.rmen.android.palidamuerte.R;
+import ca.rmen.android.palidamuerte.app.category.Categories;
 import ca.rmen.android.palidamuerte.provider.poem.PoemCursor;
 import ca.rmen.android.palidamuerte.ui.Font;
 
-class PoemListCursorAdapter extends CursorAdapter {
+class FavoritePoemListCursorAdapter extends CursorAdapter {
 
-    private static final String TAG = Constants.TAG + PoemListCursorAdapter.class.getSimpleName();
+    private static final String TAG = Constants.TAG + FavoritePoemListCursorAdapter.class.getSimpleName();
 
     private final Context mContext;
 
-    PoemListCursorAdapter(Context context) {
+    FavoritePoemListCursorAdapter(Context context) {
         super(context, null, false);
         Log.v(TAG, "Constructor");
         mContext = context;
@@ -44,7 +45,7 @@ class PoemListCursorAdapter extends CursorAdapter {
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        View view = View.inflate(context, R.layout.poem_title, null);
+        View view = View.inflate(context, R.layout.favorite_poem_title, null);
         fillView(view, cursor);
         return view;
     }
@@ -58,6 +59,9 @@ class PoemListCursorAdapter extends CursorAdapter {
         PoemCursor cursorWrapper = (PoemCursor) cursor;
         TextView tvTitle = (TextView) view.findViewById(R.id.title);
         tvTitle.setText(cursorWrapper.getTitle());
+        TextView tvCategory = (TextView) view.findViewById(R.id.category);
+        String category = Categories.getCategoryName(mContext, cursorWrapper.getCategoryId());
+        tvCategory.setText(category);
         tvTitle.setTypeface(Font.getTypeface(mContext));
     }
 
