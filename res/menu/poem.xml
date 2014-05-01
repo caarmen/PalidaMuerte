@@ -17,6 +17,11 @@
         android:title="@string/action_next"
         android:visible="false"/>
     <item
+        android:id="@+id/action_favorite"
+        android:icon="@drawable/ic_action_favorite_normal"
+        android:showAsAction="ifRoom"
+        android:title="@string/action_favorite_normal"/>
+    <item
         android:id="@+id/action_share"
         android:actionProviderClass="android.widget.ShareActionProvider"
         android:icon="@drawable/ic_action_share"

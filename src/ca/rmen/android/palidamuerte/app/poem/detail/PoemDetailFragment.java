@@ -18,16 +18,23 @@
  */
 package ca.rmen.android.palidamuerte.app.poem.detail;
 
+import android.app.Activity;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import ca.rmen.android.palidamuerte.Constants;
 import ca.rmen.android.palidamuerte.R;
 import ca.rmen.android.palidamuerte.app.poem.list.PoemListActivity;
+import ca.rmen.android.palidamuerte.provider.poem.PoemContentValues;
 import ca.rmen.android.palidamuerte.provider.poem.PoemCursor;
 import ca.rmen.android.palidamuerte.provider.poem.PoemSelection;
 import ca.rmen.android.palidamuerte.ui.Font;
@@ -37,6 +44,8 @@ import ca.rmen.android.palidamuerte.ui.Font;
  * This fragment is either contained in a {@link PoemListActivity} in two-pane mode (on tablets) or a {@link PoemDetailActivity} on handsets.
  */
 public class PoemDetailFragment extends Fragment { // NO_UCD (use default)
+    private static final String TAG = Constants.TAG + PoemDetailFragment.class.getSimpleName();
+    private boolean mIsFavorite;
     /**
      * The fragment argument representing the item ID that this fragment
      * represents.
@@ -52,20 +61,44 @@ public class PoemDetailFragment extends Fragment { // NO_UCD (use default)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_poem_detail, container, false);
+        Log.v(TAG, "onCreateView");
+        final View rootView = inflater.inflate(R.layout.fragment_poem_detail, container, false);
+        TextView tvTitleView = (TextView) rootView.findViewById(R.id.title);
+        Typeface font = Font.getTypeface(getActivity());
+        tvTitleView.setTypeface(font);
+        updateView(getActivity(), rootView);
+        return rootView;
+    }
 
-        if (getArguments().containsKey(ARG_ITEM_ID)) {
-            long poemId = getArguments().getLong(ARG_ITEM_ID);
-            PoemCursor poemCursor = new PoemSelection().id(poemId).query(getActivity().getContentResolver());
-            if (poemCursor.moveToFirst()) {
+    private void updateView(final Activity activity, final View rootView) {
+        Log.v(TAG, "updateView");
+        new AsyncTask<Void, Void, PoemCursor>() {
+
+            @Override
+            protected PoemCursor doInBackground(Void... params) {
+                if (getArguments().containsKey(ARG_ITEM_ID)) {
+                    long poemId = getArguments().getLong(ARG_ITEM_ID);
+                    PoemCursor poemCursor = new PoemSelection().id(poemId).query(activity.getContentResolver());
+                    if (poemCursor.moveToFirst()) return poemCursor;
+                    poemCursor.close();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(PoemCursor poemCursor) {
+                boolean favorite = poemCursor.getIsFavorite();
+                if (favorite != mIsFavorite) {
+                    mIsFavorite = favorite;
+                    activity.invalidateOptionsMenu();
+                }
                 TextView tvTitleView = (TextView) rootView.findViewById(R.id.title);
-                Typeface font = Font.getTypeface(getActivity());
-                tvTitleView.setTypeface(font);
                 tvTitleView.setText(poemCursor.getTitle());
                 String preContent = poemCursor.getPreContent();
                 TextView preContentView = (TextView) rootView.findViewById(R.id.pre_content);
@@ -73,19 +106,69 @@ public class PoemDetailFragment extends Fragment { // NO_UCD (use default)
                 preContentView.setText(preContent);
                 ((TextView) rootView.findViewById(R.id.content)).setText(poemCursor.getContent());
 
-                String poemTypeAndNumber = Poems.getPoemNumberString(getActivity(), poemCursor);
+                String poemTypeAndNumber = Poems.getPoemNumberString(activity, poemCursor);
                 TextView tvPoemTypeAndNumber = (TextView) rootView.findViewById(R.id.poem_type_and_number);
                 tvPoemTypeAndNumber.setVisibility(TextUtils.isEmpty(poemTypeAndNumber) ? View.GONE : View.VISIBLE);
                 tvPoemTypeAndNumber.setText(poemTypeAndNumber);
 
+                String locationDateString = Poems.getLocationDateString(activity, poemCursor);
                 ((TextView) rootView.findViewById(R.id.author)).setText(R.string.author);
-                String locationDateString = Poems.getLocationDateString(getActivity(), poemCursor);
                 ((TextView) rootView.findViewById(R.id.location_and_date)).setText(locationDateString);
 
+                poemCursor.close();
             }
-            poemCursor.close();
-        }
+        }.execute();
 
-        return rootView;
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        Log.v(TAG, "onPrepareOptionsMenu");
+        super.onPrepareOptionsMenu(menu);
+        MenuItem fav = menu.findItem(R.id.action_favorite);
+        if (mIsFavorite) {
+            fav.setTitle(R.string.action_favorite_activated);
+            fav.setIcon(R.drawable.ic_action_favorite_activated);
+        } else {
+            fav.setTitle(R.string.action_favorite_normal);
+            fav.setIcon(R.drawable.ic_action_favorite_normal);
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Log.v(TAG, "onOptionsItemSelected");
+        if (item.getItemId() == R.id.action_favorite) {
+            final Activity activity = getActivity();
+            final View rootView = getView();
+            new AsyncTask<Void, Void, Void>() {
+
+                @Override
+                protected Void doInBackground(Void... params) {
+                    // Write the poem favorite field.
+                    long poemId = getArguments().getLong(ARG_ITEM_ID);
+                    PoemSelection poemSelection = new PoemSelection().id(poemId);
+                    PoemCursor cursor = poemSelection.query(activity.getContentResolver());
+                    try {
+                        if (cursor.moveToFirst()) {
+                            boolean wasFavorite = cursor.getIsFavorite();
+                            boolean isFavorite = !wasFavorite;
+                            new PoemContentValues().putIsFavorite(isFavorite).update(activity.getContentResolver(), poemSelection);
+                        }
+                    } finally {
+                        cursor.close();
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void onPostExecute(Void params) {
+                    // Reread the poem
+                    updateView(activity, rootView);
+                }
+
+            }.execute();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
