@@ -26,7 +26,7 @@ import ca.rmen.android.palidamuerte.provider.category.CategorySelection;
 
 public class Categories {
 
-    public static final long FAVORITE_CATEGORY_ID = -1;
+    public static final long FAVORITE_CATEGORY_ID = 10000;
 
     public static String getCategoryName(Context context, long categoryId) {
         if (categoryId == FAVORITE_CATEGORY_ID) return context.getString(R.string.favoritos);

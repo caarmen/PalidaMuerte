@@ -43,7 +43,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall" />
     </LinearLayout>
 
-    <ca.rmen.android.palidamuerte.app.category.list.HeaderGridView
+    <GridView
         android:id="@+id/gridview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
