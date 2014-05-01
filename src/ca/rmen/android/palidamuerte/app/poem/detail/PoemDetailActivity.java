@@ -165,6 +165,18 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
     }
 
     @Override
+    public void invalidateOptionsMenu() {
+        // https://code.google.com/p/android/issues/detail?id=29472#c20
+        findViewById(android.R.id.content).post(new Runnable() {
+
+            @Override
+            public void run() {
+                PoemDetailActivity.super.invalidateOptionsMenu();
+            }
+        });
+    }
+
+    @Override
     protected void onDestroy() {
         Log.v(TAG, "onDestroy");
         super.onDestroy();
