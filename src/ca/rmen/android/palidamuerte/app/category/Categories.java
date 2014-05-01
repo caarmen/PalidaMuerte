@@ -26,7 +26,10 @@ import ca.rmen.android.palidamuerte.provider.category.CategorySelection;
 
 public class Categories {
 
+    public static final long FAVORITE_CATEGORY_ID = -1;
+
     public static String getCategoryName(Context context, long categoryId) {
+        if (categoryId == FAVORITE_CATEGORY_ID) return context.getString(R.string.favoritos);
         CategoryCursor cursor = new CategorySelection().id(categoryId).query(context.getContentResolver(), new String[] { CategoryColumns.CATEGORY_NAME });
         try {
             if (!cursor.moveToFirst()) return null;

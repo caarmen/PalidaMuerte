@@ -190,8 +190,15 @@ public class PoemListFragment extends ListFragment { // NO_UCD (use default)
         public Loader<Cursor> onCreateLoader(int loaderId, Bundle bundle) {
             Log.v(TAG, "onCreateLoader, loaderId = " + loaderId + ", bundle = " + bundle);
             long categoryId = getActivity().getIntent().getLongExtra(PoemListActivity.EXTRA_CATEGORY_ID, -1);
-            String selection = PoemColumns.SERIES_ID + " =? AND " + PoemColumns.CATEGORY_ID + "=?";
-            String[] selectionArgs = new String[] { String.valueOf(1), String.valueOf(categoryId) };
+            final String selection;
+            final String[] selectionArgs;
+            if (categoryId == Categories.FAVORITE_CATEGORY_ID) {
+                selection = PoemColumns.SERIES_ID + " =? AND " + PoemColumns.IS_FAVORITE + "=1";
+                selectionArgs = new String[] { String.valueOf(1) };
+            } else {
+                selection = PoemColumns.SERIES_ID + " =? AND " + PoemColumns.CATEGORY_ID + "=?";
+                selectionArgs = new String[] { String.valueOf(1), String.valueOf(categoryId) };
+            }
             CursorLoader loader = new CursorLoader(getActivity(), PoemColumns.CONTENT_URI, null, selection, selectionArgs, null);
             return loader;
         }
