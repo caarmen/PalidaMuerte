@@ -27,6 +27,7 @@ import android.widget.CursorAdapter;
 import android.widget.TextView;
 import ca.rmen.android.palidamuerte.Constants;
 import ca.rmen.android.palidamuerte.R;
+import ca.rmen.android.palidamuerte.app.category.Categories;
 import ca.rmen.android.palidamuerte.provider.poem.PoemCursor;
 import ca.rmen.android.palidamuerte.ui.Font;
 
@@ -36,15 +37,22 @@ class PoemListCursorAdapter extends CursorAdapter {
 
     private final Context mContext;
 
-    PoemListCursorAdapter(Context context) {
+    // If the rendering of items in the favorite list and the normal lists
+    // evolves to have more differences than just showing the category
+    // title, perhaps a different cursor adapter class should be used
+    // for the two implementations, instead of a boolean field here.
+    private final boolean mShowCategoryName;
+
+    PoemListCursorAdapter(Context context, boolean showCategoryName) {
         super(context, null, false);
         Log.v(TAG, "Constructor");
         mContext = context;
+        mShowCategoryName = showCategoryName;
     }
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        View view = View.inflate(context, R.layout.poem_title, null);
+        View view = View.inflate(context, mShowCategoryName ? R.layout.favorite_poem_title : R.layout.poem_title, null);
         fillView(view, cursor);
         return view;
     }
@@ -56,9 +64,14 @@ class PoemListCursorAdapter extends CursorAdapter {
 
     private void fillView(View view, Cursor cursor) {
         PoemCursor cursorWrapper = (PoemCursor) cursor;
-        TextView title = (TextView) view.findViewById(R.id.title);
-        title.setText(cursorWrapper.getTitle());
-        title.setTypeface(Font.getTypeface(mContext));
+        TextView tvTitle = (TextView) view.findViewById(R.id.title);
+        tvTitle.setText(cursorWrapper.getTitle());
+        if (mShowCategoryName) {
+            TextView tvCategory = (TextView) view.findViewById(R.id.category);
+            String category = Categories.getCategoryName(mContext, cursorWrapper.getCategoryId());
+            tvCategory.setText(category);
+        }
+        tvTitle.setTypeface(Font.getTypeface(mContext));
     }
 
 }

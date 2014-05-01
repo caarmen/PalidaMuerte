@@ -199,7 +199,8 @@ public class PoemListFragment extends ListFragment { // NO_UCD (use default)
                 selection = PoemColumns.SERIES_ID + " =? AND " + PoemColumns.CATEGORY_ID + "=?";
                 selectionArgs = new String[] { String.valueOf(1), String.valueOf(categoryId) };
             }
-            CursorLoader loader = new CursorLoader(getActivity(), PoemColumns.CONTENT_URI, null, selection, selectionArgs, null);
+            CursorLoader loader = new CursorLoader(getActivity(), PoemColumns.CONTENT_URI, null, selection, selectionArgs, PoemColumns.CATEGORY_ID + ", "
+                    + PoemColumns._ID);
             return loader;
         }
 
@@ -207,7 +208,8 @@ public class PoemListFragment extends ListFragment { // NO_UCD (use default)
         public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
             Log.v(TAG, "onLoadFinished, loader = " + loader + ", cursor = " + cursor);
             if (mAdapter == null) {
-                mAdapter = new PoemListCursorAdapter(getActivity());
+                long categoryId = getActivity().getIntent().getLongExtra(PoemListActivity.EXTRA_CATEGORY_ID, -1);
+                mAdapter = new PoemListCursorAdapter(getActivity(), categoryId == Categories.FAVORITE_CATEGORY_ID);
                 setListAdapter(mAdapter);
             }
             mAdapter.changeCursor(new PoemCursor(cursor));
