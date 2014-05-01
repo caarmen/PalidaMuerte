@@ -1,4 +1,4 @@
-<!-- 
+<!--
   Copyright 2014 Carmen Alvarez
  
   This file is part of Pálida Muerte.
@@ -16,11 +16,28 @@
   You should have received a copy of the GNU General Public License
   along with Pálida Muerte. If not, see <http://www.gnu.org/licenses/>.
 -->
-<CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/title"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/selector"
-    android:gravity="center"
-    android:padding="8dp"
-    android:textAppearance="@style/TextAppearancePoemListTitle" />
+    android:orientation="horizontal" >
+
+    <CheckedTextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/selector"
+        android:gravity="center"
+        android:padding="8dp"
+        android:textAppearance="@style/TextAppearancePoemListTitle" />
+
+    <ImageView
+        android:id="@+id/favoriteIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@drawable/selector"
+        android:contentDescription="@string/favoritos"
+        android:paddingRight="8dp"
+        android:src="@drawable/ic_action_favorite_activated" />
+
+</LinearLayout>

@@ -58,6 +58,10 @@ class PoemListCursorAdapter extends CursorAdapter {
         PoemCursor cursorWrapper = (PoemCursor) cursor;
         TextView tvTitle = (TextView) view.findViewById(R.id.title);
         tvTitle.setText(cursorWrapper.getTitle());
+
+        View favoriteIcon = view.findViewById(R.id.favoriteIcon);
+        favoriteIcon.setVisibility(cursorWrapper.getIsFavorite() ? View.VISIBLE : View.GONE);
+
         tvTitle.setTypeface(Font.getTypeface(mContext));
     }
 
