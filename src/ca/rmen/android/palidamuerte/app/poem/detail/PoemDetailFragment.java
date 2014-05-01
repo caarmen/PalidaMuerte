@@ -59,9 +59,6 @@ public class PoemDetailFragment extends Fragment { // NO_UCD (use default)
         View rootView = inflater.inflate(R.layout.fragment_poem_detail, container, false);
 
         if (getArguments().containsKey(ARG_ITEM_ID)) {
-            // Load the dummy content specified by the fragment
-            // arguments. In a real-world scenario, use a Loader
-            // to load content from a content provider.
             long poemId = getArguments().getLong(ARG_ITEM_ID);
             PoemCursor poemCursor = new PoemSelection().id(poemId).query(getActivity().getContentResolver());
             if (poemCursor.moveToFirst()) {

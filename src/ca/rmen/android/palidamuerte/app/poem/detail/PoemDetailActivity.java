@@ -62,8 +62,8 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
         mViewPager = (ViewPager) findViewById(R.id.pager);
         final long categoryId = getIntent().getLongExtra(PoemListActivity.EXTRA_CATEGORY_ID, -1);
 
-        // If this is the first time we open the activity, we will use the meeting id provided in the intent.
-        // If we are recreating the activity (because of a device rotation, for example), we will display the meeting that the user 
+        // If this is the first time we open the activity, we will use the poem id provided in the intent.
+        // If we are recreating the activity (because of a device rotation, for example), we will display the poem that the user 
         // had previously swiped to, using the ViewPager.
         final long poemId;
         if (savedInstanceState != null) poemId = savedInstanceState.getLong(PoemDetailFragment.ARG_ITEM_ID);
@@ -97,27 +97,6 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
 
         // Show the Up button in the action bar.
         getActionBar().setDisplayHomeAsUpEnabled(true);
-
-        // savedInstanceState is non-null when there is fragment state
-        // saved from previous configurations of this activity
-        // (e.g. when rotating the screen from portrait to landscape).
-        // In this case, the fragment will automatically be re-added
-        // to its container so we don't need to manually add it.
-        // For more information, see the Fragments API guide at:
-        //
-        // http://developer.android.com/guide/components/fragments.html
-        //
-        /*
-        if (savedInstanceState == null) {
-            // Create the detail fragment and add it to the activity
-            // using a fragment transaction.
-            Bundle arguments = new Bundle();
-            arguments.putLong(PoemDetailFragment.ARG_ITEM_ID, getIntent().getLongExtra(PoemDetailFragment.ARG_ITEM_ID, -1));
-            PoemDetailFragment fragment = new PoemDetailFragment();
-            fragment.setArguments(arguments);
-            getSupportFragmentManager().beginTransaction().add(R.id.poem_detail_container, fragment).commit();
-        }
-        */
     }
 
     @Override
