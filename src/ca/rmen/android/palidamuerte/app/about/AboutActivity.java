@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with P‡lida Muerte. If not, see <http://www.gnu.org/licenses/>.
  */
-package ca.rmen.android.palidamuerte;
+package ca.rmen.android.palidamuerte.app.about;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -27,7 +27,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import ca.rmen.android.palidamuerte.app.ActionBar;
+import ca.rmen.android.palidamuerte.R;
+import ca.rmen.android.palidamuerte.ui.ActionBar;
 
 public class AboutActivity extends Activity { // NO_UCD (use default)
 

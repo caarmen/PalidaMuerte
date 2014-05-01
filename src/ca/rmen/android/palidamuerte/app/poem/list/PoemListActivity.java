@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with P‡lida Muerte. If not, see <http://www.gnu.org/licenses/>.
  */
-package ca.rmen.android.palidamuerte;
+package ca.rmen.android.palidamuerte.app.poem.list;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,7 +26,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ShareActionProvider;
-import ca.rmen.android.palidamuerte.app.Poems;
+import ca.rmen.android.palidamuerte.Constants;
+import ca.rmen.android.palidamuerte.R;
+import ca.rmen.android.palidamuerte.app.about.AboutActivity;
+import ca.rmen.android.palidamuerte.app.category.list.CategoriesActivity;
+import ca.rmen.android.palidamuerte.app.poem.detail.PoemDetailActivity;
+import ca.rmen.android.palidamuerte.app.poem.detail.PoemDetailFragment;
+import ca.rmen.android.palidamuerte.app.poem.detail.Poems;
+import ca.rmen.android.palidamuerte.ui.ActionBar;
 
 /**
  * An activity representing a list of poems. This activity
@@ -73,7 +80,7 @@ public class PoemListActivity extends FragmentActivity implements PoemListFragme
             // 'activated' state when touched.
             ((PoemListFragment) getSupportFragmentManager().findFragmentById(R.id.poem_list)).setActivateOnItemClick(true);
         }
-        ca.rmen.android.palidamuerte.app.ActionBar.setCustomFont(this);
+        ActionBar.setCustomFont(this);
 
     }
 

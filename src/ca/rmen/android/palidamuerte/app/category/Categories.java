@@ -16,22 +16,23 @@
  * You should have received a copy of the GNU General Public License
  * along with P‡lida Muerte. If not, see <http://www.gnu.org/licenses/>.
  */
-package ca.rmen.android.palidamuerte.app;
+package ca.rmen.android.palidamuerte.app.category;
 
 import android.content.Context;
 import ca.rmen.android.palidamuerte.R;
-import ca.rmen.android.palidamuerte.provider.poem_type.PoemTypeCursor;
-import ca.rmen.android.palidamuerte.provider.poem_type.PoemTypeSelection;
+import ca.rmen.android.palidamuerte.provider.category.CategoryColumns;
+import ca.rmen.android.palidamuerte.provider.category.CategoryCursor;
+import ca.rmen.android.palidamuerte.provider.category.CategorySelection;
 
-class PoemTypes {
+public class Categories {
 
-    static String getPoemTypeName(Context context, long poemTypeId) {
-        PoemTypeCursor cursor = new PoemTypeSelection().id(poemTypeId).query(context.getContentResolver());
+    public static String getCategoryName(Context context, long categoryId) {
+        CategoryCursor cursor = new CategorySelection().id(categoryId).query(context.getContentResolver(), new String[] { CategoryColumns.CATEGORY_NAME });
         try {
             if (!cursor.moveToFirst()) return null;
-            String poemTypeResIdName = cursor.getPoemTypeName();
-            int poemTypeResId = context.getResources().getIdentifier(poemTypeResIdName, "string", R.class.getPackage().getName());
-            return context.getString(poemTypeResId);
+            String categoryResIdName = cursor.getCategoryName();
+            int categoryResId = context.getResources().getIdentifier(categoryResIdName, "string", R.class.getPackage().getName());
+            return context.getString(categoryResId);
         } finally {
             cursor.close();
         }

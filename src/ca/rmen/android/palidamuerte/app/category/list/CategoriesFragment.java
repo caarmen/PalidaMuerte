@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with P‡lida Muerte. If not, see <http://www.gnu.org/licenses/>.
  */
-package ca.rmen.android.palidamuerte;
+package ca.rmen.android.palidamuerte.app.category.list;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -33,11 +33,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
-import ca.rmen.android.palidamuerte.app.CategoriesCursorAdapter;
+import ca.rmen.android.palidamuerte.Constants;
+import ca.rmen.android.palidamuerte.R;
+import ca.rmen.android.palidamuerte.app.poem.list.PoemListActivity;
 import ca.rmen.android.palidamuerte.provider.category.CategoryColumns;
 import ca.rmen.android.palidamuerte.provider.category.CategoryCursor;
 
-public class CategoriesFragment extends Fragment {
+public class CategoriesFragment extends Fragment { // NO_UCD (unused code)
 
     private static final String TAG = Constants.TAG + CategoriesFragment.class.getSimpleName();
     private static final int URL_LOADER = 0;

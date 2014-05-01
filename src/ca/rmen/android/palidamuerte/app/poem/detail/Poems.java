@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with P‡lida Muerte. If not, see <http://www.gnu.org/licenses/>.
  */
-package ca.rmen.android.palidamuerte.app;
+package ca.rmen.android.palidamuerte.app.poem.detail;
 
 import java.util.Calendar;
 
@@ -71,7 +71,7 @@ public class Poems {
         }.execute();
     }
 
-    public static String getLocationDateString(Context context, PoemCursor poemCursor) {
+    static String getLocationDateString(Context context, PoemCursor poemCursor) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, poemCursor.getYear());
         calendar.set(Calendar.MONTH, poemCursor.getMonth() - 1);
@@ -81,7 +81,7 @@ public class Poems {
         return locationDateString;
     }
 
-    public static String getPoemNumberString(Context context, PoemCursor poemCursor) {
+    static String getPoemNumberString(Context context, PoemCursor poemCursor) {
         Integer poemNumber = poemCursor.getPoemNumber();
         String poemTypeAndNumber = "";
         if (poemNumber != null) {

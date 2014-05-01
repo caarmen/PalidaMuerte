@@ -25,10 +25,10 @@
 
     <fragment
         android:id="@+id/poem_list"
-        android:name="ca.rmen.android.palidamuerte.PoemListFragment"
+        android:name="ca.rmen.android.palidamuerte.app.poem.list.PoemListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="ca.rmen.android.palidamuerte.poemListActivity"
+        tools:context="ca.rmen.android.palidamuerte.app.poem.list.poemListActivity"
         tools:layout="@android:layout/list_content" />
 
 </LinearLayout>

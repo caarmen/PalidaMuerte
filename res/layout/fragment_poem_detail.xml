@@ -21,7 +21,7 @@
     android:id="@+id/poem_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ca.rmen.android.palidamuerte.PoemDetailFragment" >
+    tools:context="ca.rmen.android.palidamuerte.app.poem.detail.PoemDetailFragment" >
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with P‡lida Muerte. If not, see <http://www.gnu.org/licenses/>.
  */
-package ca.rmen.android.palidamuerte.app;
+package ca.rmen.android.palidamuerte.app.poem.detail;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -26,17 +26,16 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.util.Log;
 import ca.rmen.android.palidamuerte.Constants;
-import ca.rmen.android.palidamuerte.PoemDetailFragment;
 import ca.rmen.android.palidamuerte.provider.poem.PoemColumns;
 import ca.rmen.android.palidamuerte.provider.poem.PoemCursor;
 
-public class PoemPagerAdapter extends FragmentStatePagerAdapter {
+class PoemPagerAdapter extends FragmentStatePagerAdapter {
     private static final String TAG = Constants.TAG + PoemPagerAdapter.class.getSimpleName();
 
     private PoemCursor mCursor;
     private final long mCategoryId;
 
-    public PoemPagerAdapter(Context context, long categoryId, FragmentManager fm) {
+    PoemPagerAdapter(Context context, long categoryId, FragmentManager fm) {
         super(fm);
         Log.v(TAG, "Constructor: categoryId = " + categoryId);
         mCategoryId = categoryId;
@@ -57,7 +56,7 @@ public class PoemPagerAdapter extends FragmentStatePagerAdapter {
         return fragment;
     }
 
-    public int getPositionForPoem(long poemId) {
+    int getPositionForPoem(long poemId) {
         if (mCursor.moveToFirst()) {
             do {
                 if (mCursor.getId() == poemId) return mCursor.getPosition();
@@ -66,7 +65,7 @@ public class PoemPagerAdapter extends FragmentStatePagerAdapter {
         return -1;
     }
 
-    public long getPoemIdAt(int position) {
+    long getPoemIdAt(int position) {
         mCursor.moveToPosition(position);
         return mCursor.getId();
     }
@@ -76,7 +75,7 @@ public class PoemPagerAdapter extends FragmentStatePagerAdapter {
         return mCursor.getCount();
     }
 
-    public void destroy() {
+    void destroy() {
         Log.v(TAG, "destroy");
         mCursor.close();
     }

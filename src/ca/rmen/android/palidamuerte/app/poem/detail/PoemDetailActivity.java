@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with P�lida Muerte. If not, see <http://www.gnu.org/licenses/>.
  */
-package ca.rmen.android.palidamuerte;
+package ca.rmen.android.palidamuerte.app.poem.detail;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -31,9 +31,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ShareActionProvider;
 import android.widget.TextView;
-import ca.rmen.android.palidamuerte.app.Categories;
-import ca.rmen.android.palidamuerte.app.PoemPagerAdapter;
-import ca.rmen.android.palidamuerte.app.Poems;
+import ca.rmen.android.palidamuerte.Constants;
+import ca.rmen.android.palidamuerte.R;
+import ca.rmen.android.palidamuerte.app.about.AboutActivity;
+import ca.rmen.android.palidamuerte.app.category.Categories;
+import ca.rmen.android.palidamuerte.app.poem.list.PoemListActivity;
+import ca.rmen.android.palidamuerte.ui.ActionBar;
 
 /**
  * An activity representing a single poem detail screen. This
@@ -55,7 +58,7 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_poem_detail);
-        ca.rmen.android.palidamuerte.app.ActionBar.setCustomFont(this);
+        ActionBar.setCustomFont(this);
         mViewPager = (ViewPager) findViewById(R.id.pager);
         final long categoryId = getIntent().getLongExtra(PoemListActivity.EXTRA_CATEGORY_ID, -1);
 

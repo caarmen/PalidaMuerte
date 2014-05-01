@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with P‡lida Muerte. If not, see <http://www.gnu.org/licenses/>.
  */
-package ca.rmen.android.palidamuerte.app;
+package ca.rmen.android.palidamuerte.app.poem.list;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -30,12 +30,12 @@ import ca.rmen.android.palidamuerte.Constants;
 import ca.rmen.android.palidamuerte.R;
 import ca.rmen.android.palidamuerte.provider.poem.PoemCursor;
 
-public class PoemListCursorAdapter extends CursorAdapter {
+class PoemListCursorAdapter extends CursorAdapter {
 
     private static final String TAG = Constants.TAG + PoemListCursorAdapter.class.getSimpleName();
     private final Typeface mFont;
 
-    public PoemListCursorAdapter(Context context) {
+    PoemListCursorAdapter(Context context) {
         super(context, null, false);
         Log.v(TAG, "Constructor");
         mFont = Typeface.createFromAsset(context.getAssets(), "dancing_script.ttf");

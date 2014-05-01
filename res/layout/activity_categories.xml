@@ -23,7 +23,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/gray_gradient"
     android:orientation="vertical"
-    tools:context="ca.rmen.android.palidamuerte.CategoriesActivity"
+    tools:context="ca.rmen.android.palidamuerte.app.category.list.CategoriesActivity"
     tools:ignore="MergeRootFrame" >
 
     <ImageView
@@ -55,7 +55,7 @@
 
         <fragment
             android:id="@+id/poem_list"
-            android:name="ca.rmen.android.palidamuerte.CategoriesFragment"
+            android:name="ca.rmen.android.palidamuerte.app.category.list.CategoriesFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:layout="@android:layout/list_content" />

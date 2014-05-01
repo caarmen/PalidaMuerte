@@ -27,7 +27,7 @@
     android:divider="?android:attr/dividerHorizontal"
     android:orientation="horizontal"
     android:showDividers="middle"
-    tools:context="ca.rmen.android.palidamuerte.PoemListActivity" >
+    tools:context="ca.rmen.android.palidamuerte.app.poem.list.PoemListActivity" >
 
     <!--
     This layout is a two-pane layout for the poems
@@ -42,7 +42,7 @@
 
     <fragment
         android:id="@+id/poem_list"
-        android:name="ca.rmen.android.palidamuerte.PoemListFragment"
+        android:name="ca.rmen.android.palidamuerte.app.poem.list.PoemListFragment"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"

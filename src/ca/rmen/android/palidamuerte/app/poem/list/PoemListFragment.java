@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with P‡lida Muerte. If not, see <http://www.gnu.org/licenses/>.
  */
-package ca.rmen.android.palidamuerte;
+package ca.rmen.android.palidamuerte.app.poem.list;
 
 import android.app.Activity;
 import android.database.Cursor;
@@ -29,8 +29,9 @@ import android.support.v4.content.Loader;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
-import ca.rmen.android.palidamuerte.app.Categories;
-import ca.rmen.android.palidamuerte.app.PoemListCursorAdapter;
+import ca.rmen.android.palidamuerte.Constants;
+import ca.rmen.android.palidamuerte.app.category.Categories;
+import ca.rmen.android.palidamuerte.app.poem.detail.PoemDetailFragment;
 import ca.rmen.android.palidamuerte.provider.poem.PoemColumns;
 import ca.rmen.android.palidamuerte.provider.poem.PoemCursor;
 

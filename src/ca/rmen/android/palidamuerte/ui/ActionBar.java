@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with P‡lida Muerte. If not, see <http://www.gnu.org/licenses/>.
  */
-package ca.rmen.android.palidamuerte.app;
+package ca.rmen.android.palidamuerte.ui;
 
 import android.app.Activity;
 import android.graphics.Typeface;

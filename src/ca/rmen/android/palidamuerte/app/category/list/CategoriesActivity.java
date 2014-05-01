@@ -16,10 +16,11 @@
  * You should have received a copy of the GNU General Public License
  * along with P‡lida Muerte. If not, see <http://www.gnu.org/licenses/>.
  */
-package ca.rmen.android.palidamuerte;
+package ca.rmen.android.palidamuerte.app.category.list;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import ca.rmen.android.palidamuerte.R;
 
 public class CategoriesActivity extends FragmentActivity { // NO_UCD (use default)
 

@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with P‡lida Muerte. If not, see <http://www.gnu.org/licenses/>.
  */
-package ca.rmen.android.palidamuerte.app;
+package ca.rmen.android.palidamuerte.app.category.list;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -30,13 +30,13 @@ import ca.rmen.android.palidamuerte.Constants;
 import ca.rmen.android.palidamuerte.R;
 import ca.rmen.android.palidamuerte.provider.category.CategoryCursor;
 
-public class CategoriesCursorAdapter extends CursorAdapter {
+class CategoriesCursorAdapter extends CursorAdapter {
     private static final String TAG = Constants.TAG + CategoriesCursorAdapter.class.getSimpleName();
 
     private final Context mContext;
     private final Typeface mFont;
 
-    public CategoriesCursorAdapter(Context context) {
+    CategoriesCursorAdapter(Context context) {
         super(context, null, false);
         Log.v(TAG, "Constructor");
         mContext = context;
