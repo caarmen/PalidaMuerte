@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- 
+<!--
   Copyright 2014 Carmen Alvarez
  
   This file is part of Pálida Muerte.
@@ -17,13 +16,24 @@
   You should have received a copy of the GNU General Public License
   along with Pálida Muerte. If not, see <http://www.gnu.org/licenses/>.
 -->
-<resources>
 
-    <string name="la_muerte">La muerte</string>
-    <string name="los_muertos">Los muertos</string>
-    <string name="politico_sociales">Político-Sociales</string>
-    <string name="espana">España 1936 &#8211; 1939</string>
-    <string name="irak">Irak 2003 &#8211; 2006</string>
-    <string name="mascotas">Mascotas</string>
-    <string name="favoritos">Favoritos</string>
-</resources>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:weightSum="1" >
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:background="@drawable/knotborder"
+        android:gravity="center"
+        android:minHeight="@dimen/category_title_min_height"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:singleLine="true"
+        android:textAppearance="@style/TextAppearanceCategoryTitle" />
+
+</LinearLayout>

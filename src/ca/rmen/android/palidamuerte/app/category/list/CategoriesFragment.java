@@ -33,11 +33,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
+import android.widget.TextView;
 import ca.rmen.android.palidamuerte.Constants;
 import ca.rmen.android.palidamuerte.R;
 import ca.rmen.android.palidamuerte.app.poem.list.PoemListActivity;
 import ca.rmen.android.palidamuerte.provider.category.CategoryColumns;
 import ca.rmen.android.palidamuerte.provider.category.CategoryCursor;
+import ca.rmen.android.palidamuerte.ui.Font;
 
 public class CategoriesFragment extends Fragment { // NO_UCD (unused code)
 
@@ -82,7 +84,12 @@ public class CategoriesFragment extends Fragment { // NO_UCD (unused code)
                 Activity activity = getActivity();
                 if (activity != null) {
                     mAdapter = new CategoriesCursorAdapter(activity);
-                    GridView gridView = (GridView) getActivity().findViewById(R.id.gridview);
+                    HeaderGridView gridView = (HeaderGridView) getActivity().findViewById(R.id.gridview);
+                    View header = View.inflate(activity, R.layout.favorites_category_title, null);
+                    TextView favTitle = (TextView) header.findViewById(R.id.title);
+                    favTitle.setTypeface(Font.getTypeface(activity));
+                    favTitle.setText(R.string.favoritos);
+                    gridView.addHeaderView(header, null, true);
                     gridView.setAdapter(mAdapter);
 
                 }
