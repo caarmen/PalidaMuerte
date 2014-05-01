@@ -28,13 +28,17 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import ca.rmen.android.palidamuerte.Constants;
+import ca.rmen.android.palidamuerte.R;
 import ca.rmen.android.palidamuerte.app.category.Categories;
 import ca.rmen.android.palidamuerte.app.poem.detail.PoemDetailFragment;
 import ca.rmen.android.palidamuerte.provider.poem.PoemColumns;
 import ca.rmen.android.palidamuerte.provider.poem.PoemCursor;
+import ca.rmen.android.palidamuerte.ui.Font;
 
 /**
  * A list fragment representing a list of poems. This fragment
@@ -119,6 +123,13 @@ public class PoemListFragment extends ListFragment { // NO_UCD (use default)
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ListView listView = getListView();
+        ViewGroup parent = (ViewGroup) listView.getParent();
+        View emptyListView = getActivity().getLayoutInflater().inflate(R.layout.empty_list, parent, false);
+        TextView emptyTitle = (TextView) emptyListView.findViewById(R.id.title);
+        emptyTitle.setTypeface(Font.getTypeface(getActivity()));
+        parent.addView(emptyListView);
+        listView.setEmptyView(emptyListView);
 
         // Restore the previously serialized activated item position.
         if (savedInstanceState != null && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
