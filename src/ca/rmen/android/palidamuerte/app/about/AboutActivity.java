@@ -29,6 +29,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import ca.rmen.android.palidamuerte.R;
 import ca.rmen.android.palidamuerte.ui.ActionBar;
+import ca.rmen.android.palidamuerte.ui.Font;
 
 public class AboutActivity extends Activity { // NO_UCD (use default)
 
@@ -62,7 +63,7 @@ public class AboutActivity extends Activity { // NO_UCD (use default)
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_about, container, false);
             TextView tvTitleView = (TextView) rootView.findViewById(R.id.author_name);
-            Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "dancing_script.ttf");
+            Typeface font = Font.getTypeface(getActivity());
             tvTitleView.setTypeface(font);
             return rootView;
         }

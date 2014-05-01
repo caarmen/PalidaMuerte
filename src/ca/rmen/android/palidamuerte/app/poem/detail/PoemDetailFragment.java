@@ -30,6 +30,7 @@ import ca.rmen.android.palidamuerte.R;
 import ca.rmen.android.palidamuerte.app.poem.list.PoemListActivity;
 import ca.rmen.android.palidamuerte.provider.poem.PoemCursor;
 import ca.rmen.android.palidamuerte.provider.poem.PoemSelection;
+import ca.rmen.android.palidamuerte.ui.Font;
 
 /**
  * A fragment representing a single poem detail screen.
@@ -63,7 +64,7 @@ public class PoemDetailFragment extends Fragment { // NO_UCD (use default)
             PoemCursor poemCursor = new PoemSelection().id(poemId).query(getActivity().getContentResolver());
             if (poemCursor.moveToFirst()) {
                 TextView tvTitleView = (TextView) rootView.findViewById(R.id.title);
-                Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "dancing_script.ttf");
+                Typeface font = Font.getTypeface(getActivity());
                 tvTitleView.setTypeface(font);
                 tvTitleView.setText(poemCursor.getTitle());
                 String preContent = poemCursor.getPreContent();

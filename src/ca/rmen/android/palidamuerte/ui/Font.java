@@ -18,22 +18,19 @@
  */
 package ca.rmen.android.palidamuerte.ui;
 
-import android.app.Activity;
+import android.content.Context;
 import android.graphics.Typeface;
-import android.util.TypedValue;
-import android.widget.TextView;
 
-public class ActionBar {
+public class Font {
 
-    public static void setCustomFont(Activity activity) {
-        // http://stackoverflow.com/questions/8607707/how-to-set-a-custom-font-in-the-actionbar-title
-        int titleId = activity.getResources().getIdentifier("action_bar_title", "id", "android");
-        TextView tvActionBarTitle = (TextView) activity.findViewById(titleId);
-        if (tvActionBarTitle != null) {
-            Typeface typeface = Font.getTypeface(activity);
-            tvActionBarTitle.setTypeface(typeface);
-            tvActionBarTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, tvActionBarTitle.getTextSize() * 1.5f);
-        }
+    private static Typeface sTypeface;
+
+    /**
+     * Lazy initialize the font.
+     */
+    public static Typeface getTypeface(Context context) {
+        if (sTypeface == null) sTypeface = Typeface.createFromAsset(context.getAssets(), "dancing_script.ttf");
+        return sTypeface;
     }
 
 }

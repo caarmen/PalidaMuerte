@@ -20,7 +20,6 @@ package ca.rmen.android.palidamuerte.app.poem.list;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Typeface;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,16 +28,18 @@ import android.widget.TextView;
 import ca.rmen.android.palidamuerte.Constants;
 import ca.rmen.android.palidamuerte.R;
 import ca.rmen.android.palidamuerte.provider.poem.PoemCursor;
+import ca.rmen.android.palidamuerte.ui.Font;
 
 class PoemListCursorAdapter extends CursorAdapter {
 
     private static final String TAG = Constants.TAG + PoemListCursorAdapter.class.getSimpleName();
-    private final Typeface mFont;
+
+    private final Context mContext;
 
     PoemListCursorAdapter(Context context) {
         super(context, null, false);
         Log.v(TAG, "Constructor");
-        mFont = Typeface.createFromAsset(context.getAssets(), "dancing_script.ttf");
+        mContext = context;
     }
 
     @Override
@@ -57,7 +58,7 @@ class PoemListCursorAdapter extends CursorAdapter {
         PoemCursor cursorWrapper = (PoemCursor) cursor;
         TextView title = (TextView) view.findViewById(R.id.title);
         title.setText(cursorWrapper.getTitle());
-        title.setTypeface(mFont);
+        title.setTypeface(Font.getTypeface(mContext));
     }
 
 }
