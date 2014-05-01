@@ -1,4 +1,4 @@
-<!-- 
+<!--
   Copyright 2014 Carmen Alvarez
  
   This file is part of Pálida Muerte.
@@ -16,15 +16,27 @@
   You should have received a copy of the GNU General Public License
   along with Pálida Muerte. If not, see <http://www.gnu.org/licenses/>.
 -->
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/title"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:minHeight="@dimen/category_title_min_height"
-    android:layout_gravity="center"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:singleLine="false"
-    android:background="@drawable/knotborder"
-    android:gravity="center"
-    android:textAppearance="@style/TextAppearanceCategoryTitle"/>
+    android:gravity="center" >
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/oldbook" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@null"
+        android:gravity="center"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:singleLine="false"
+        android:textAppearance="@style/TextAppearanceCategoryTitle" />
+
+</FrameLayout>
