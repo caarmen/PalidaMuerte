@@ -25,6 +25,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside"
         android:src="@drawable/oldbook" />
 
     <TextView
@@ -32,10 +34,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@null"
         android:gravity="center"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
+        android:paddingLeft="26dp"
+        android:paddingRight="20dp"
         android:singleLine="false"
         android:textAppearance="@style/TextAppearanceCategoryTitle" />
 

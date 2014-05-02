@@ -18,8 +18,8 @@
 -->
 <resources>
 
-    <dimen name="grid_view_horizontal_spacing" format="integer" type="integer">20dp</dimen>
-    <dimen name="grid_view_horizontal_padding" format="integer" type="integer">48dp</dimen>
-    <dimen name="category_title_text_size">42sp</dimen>
+    <dimen name="grid_view_horizontal_spacing" format="integer" type="integer">10dp</dimen>
+    <dimen name="grid_view_horizontal_padding" format="integer" type="integer">10dp</dimen>
+    <dimen name="category_title_text_size">36sp</dimen>
 
 </resources>

@@ -19,5 +19,6 @@
 <resources>
 
     <dimen name="category_title_text_size">20sp</dimen>
+    <dimen name="grid_column_width" format="integer" type="integer">100dp</dimen>
 
 </resources>
