@@ -30,6 +30,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.CycleInterpolator;
+import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
@@ -101,10 +105,29 @@ public class CategoriesFragment extends Fragment { // NO_UCD (unused code)
     private OnItemClickListener mOnItemClickListener = new OnItemClickListener() {
 
         @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Intent intent = new Intent(getActivity(), PoemListActivity.class);
-            intent.putExtra(PoemListActivity.EXTRA_CATEGORY_ID, id);
-            startActivity(intent);
+        public void onItemClick(AdapterView<?> parent, final View view, int position, final long id) {
+            TranslateAnimation translation = new TranslateAnimation(0f, 5f, 0f, 0f);
+            translation.setDuration(250);
+            translation.setFillAfter(true);
+            translation.setInterpolator(new CycleInterpolator(1f));
+            view.startAnimation(translation);
+            translation.setAnimationListener(new AnimationListener() {
+
+                @Override
+                public void onAnimationStart(Animation animation) {}
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {}
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    Intent intent = new Intent(getActivity(), PoemListActivity.class);
+                    intent.putExtra(PoemListActivity.EXTRA_CATEGORY_ID, id);
+                    startActivity(intent);
+
+                }
+            });
+            translation.start();
         }
     };
 
