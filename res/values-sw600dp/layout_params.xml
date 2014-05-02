@@ -21,5 +21,6 @@
     <dimen name="grid_view_horizontal_spacing" format="integer" type="integer">10dp</dimen>
     <dimen name="grid_view_horizontal_padding" format="integer" type="integer">10dp</dimen>
     <dimen name="category_title_text_size">36sp</dimen>
+    <dimen name="grid_column_width" format="integer" type="integer">150dp</dimen>
 
 </resources>
