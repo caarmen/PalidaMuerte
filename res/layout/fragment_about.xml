@@ -115,10 +115,22 @@
             android:scaleType="center" />
 
         <TextView
-            android:id="@+id/credits_app"
+            android:id="@+id/app_name_and_version"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/divider"
+            android:autoLink="email"
+            android:paddingBottom="16dp"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:text="@string/app_name_and_version"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/credits_app"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/app_name_and_version"
             android:autoLink="email"
             android:paddingBottom="16dp"
             android:paddingLeft="@dimen/activity_horizontal_margin"
