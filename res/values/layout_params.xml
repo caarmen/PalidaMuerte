@@ -23,6 +23,6 @@
     <dimen name="grid_view_horizontal_spacing" format="integer" type="integer">8dp</dimen>
     <dimen name="grid_view_horizontal_padding" format="integer" type="integer">8dp</dimen>
     <dimen name="grid_column_width" format="integer" type="integer">100dp</dimen>
-    <dimen name="category_title_text_size">24sp</dimen>
+    <dimen name="category_title_text_size">20sp</dimen>
 
 </resources>

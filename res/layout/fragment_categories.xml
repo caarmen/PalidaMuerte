@@ -55,7 +55,7 @@
         android:numColumns="auto_fit"
         android:paddingLeft="@dimen/grid_view_horizontal_padding"
         android:paddingRight="@dimen/grid_view_horizontal_padding"
-        android:stretchMode="columnWidth"
+        android:stretchMode="spacingWidth"
         android:verticalSpacing="20dp" />
 
 </FrameLayout>
