@@ -29,6 +29,8 @@
     <string name="action_favorite_activated">Eliminar de favoritos</string>
     <string name="action_about">Acerca de</string>
     <string name="action_share">Compartir</string>
+    <string name="action_music_on">Apagar la música</string>
+    <string name="action_music_off">Encender la música</string>
     <string name="empty_title">Ningún poema en los favoritos</string>
     <string name="empty_description1">Puntee en el icono corazón</string>
     <string name="empty_description2">en la parte inferior de un poema para añadirlo a los favoritos.</string>

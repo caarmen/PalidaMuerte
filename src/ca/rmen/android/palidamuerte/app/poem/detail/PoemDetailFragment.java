@@ -22,6 +22,7 @@ import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Log;
@@ -33,11 +34,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import ca.rmen.android.palidamuerte.Constants;
+import ca.rmen.android.palidamuerte.MusicPlayer;
 import ca.rmen.android.palidamuerte.R;
 import ca.rmen.android.palidamuerte.app.poem.list.PoemListActivity;
 import ca.rmen.android.palidamuerte.provider.poem.PoemContentValues;
 import ca.rmen.android.palidamuerte.provider.poem.PoemCursor;
 import ca.rmen.android.palidamuerte.provider.poem.PoemSelection;
+import ca.rmen.android.palidamuerte.ui.ActionBar;
 import ca.rmen.android.palidamuerte.ui.Font;
 
 /**
@@ -46,6 +49,7 @@ import ca.rmen.android.palidamuerte.ui.Font;
  */
 public class PoemDetailFragment extends Fragment { // NO_UCD (use default)
     private static final String TAG = Constants.TAG + PoemDetailFragment.class.getSimpleName();
+    private Handler mHandler;
     private boolean mIsFavorite;
     /**
      * The fragment argument representing the item ID that this fragment
@@ -63,6 +67,7 @@ public class PoemDetailFragment extends Fragment { // NO_UCD (use default)
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        mHandler = new Handler();
 
     }
 
@@ -126,6 +131,8 @@ public class PoemDetailFragment extends Fragment { // NO_UCD (use default)
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         Log.v(TAG, "onCreateOptionsMenu");
         super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_music, menu);
+        ActionBar.updateMusicMenuItem(getActivity(), menu.findItem(R.id.action_music));
     }
 
     @Override
@@ -179,6 +186,16 @@ public class PoemDetailFragment extends Fragment { // NO_UCD (use default)
                 }
 
             }.execute();
+        } else if (item.getItemId() == R.id.action_music) {
+            MusicPlayer.getInstance(getActivity()).toggle();
+            final Activity activity = getActivity();
+            mHandler.postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    activity.invalidateOptionsMenu();
+                }
+            }, 200);
         }
         return super.onOptionsItemSelected(item);
     }

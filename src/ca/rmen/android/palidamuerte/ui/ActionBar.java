@@ -19,14 +19,18 @@
 package ca.rmen.android.palidamuerte.ui;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.TextView;
 import ca.rmen.android.palidamuerte.Constants;
+import ca.rmen.android.palidamuerte.MusicPlayer;
+import ca.rmen.android.palidamuerte.R;
 
 public class ActionBar {
 
@@ -40,6 +44,17 @@ public class ActionBar {
             Typeface typeface = Font.getTypeface(activity);
             tvActionBarTitle.setTypeface(typeface);
             tvActionBarTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, tvActionBarTitle.getTextSize() * 1.5f);
+        }
+    }
+
+    public static void updateMusicMenuItem(Context context, MenuItem menuItem) {
+        MusicPlayer musicPlayer = MusicPlayer.getInstance(context);
+        if (musicPlayer.isPlaying()) {
+            menuItem.setIcon(R.drawable.ic_action_music_on);
+            menuItem.setTitle(R.string.action_music_off);
+        } else {
+            menuItem.setIcon(R.drawable.ic_action_music_off);
+            menuItem.setTitle(R.string.action_music_on);
         }
     }
 
