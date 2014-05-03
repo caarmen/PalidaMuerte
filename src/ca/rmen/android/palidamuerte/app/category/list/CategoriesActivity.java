@@ -20,6 +20,8 @@ package ca.rmen.android.palidamuerte.app.category.list;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.ImageView;
 import ca.rmen.android.palidamuerte.R;
 
 public class CategoriesActivity extends FragmentActivity { // NO_UCD (use default)
@@ -28,6 +30,14 @@ public class CategoriesActivity extends FragmentActivity { // NO_UCD (use defaul
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories);
+        ImageView imageView = new ImageView(this);
+        imageView.setImageResource(R.drawable.logo);
+        LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+        imageView.setLayoutParams(layoutParams);
+        getActionBar().setCustomView(imageView);
+        getActionBar().setDisplayShowTitleEnabled(false);
+        getActionBar().setDisplayShowHomeEnabled(false);
+        getActionBar().setDisplayShowCustomEnabled(true);
     }
 
 }

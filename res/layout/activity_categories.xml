@@ -26,22 +26,12 @@
     tools:context="ca.rmen.android.palidamuerte.app.category.list.CategoriesActivity"
     tools:ignore="MergeRootFrame" >
 
-    <ImageView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:contentDescription="@string/app_name"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:paddingTop="16dp"
-        android:src="@drawable/logo" />
-
     <TextView
         android:id="@+id/subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:text="@string/subtitle"
         android:textColor="#ffffdd" />
