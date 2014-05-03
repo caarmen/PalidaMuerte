@@ -53,11 +53,15 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
     private PoemPagerAdapter mPoemPagerAdapter;
     private ViewPager mViewPager;
     private ShareActionProvider mShareActionProvider;
+    private TextView mTextViewPageNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_poem_detail);
+        getActionBar().setDisplayShowCustomEnabled(true);
+        getActionBar().setCustomView(R.layout.poem_number);
+        mTextViewPageNumber = (TextView) getActionBar().getCustomView();
         ActionBar.setCustomFont(this);
         mViewPager = (ViewPager) findViewById(R.id.pager);
         final long categoryId = getIntent().getLongExtra(PoemListActivity.EXTRA_CATEGORY_ID, -1);
@@ -90,7 +94,7 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
                 mViewPager.setCurrentItem(position);
                 getActionBar().setTitle(mCategoryName);
                 String pageNumber = getString(R.string.page_number, position + 1, mPoemPagerAdapter.getCount());
-                ((TextView) findViewById(R.id.page_number)).setText(pageNumber);
+                mTextViewPageNumber.setText(pageNumber);
                 invalidateOptionsMenu();
             }
         }.execute();
@@ -189,7 +193,7 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
         public void onPageSelected(int position) {
             Log.v(TAG, "onPageSelected, position = " + position + ", item =" + mViewPager.getCurrentItem());
             String pageNumber = getString(R.string.page_number, position + 1, mPoemPagerAdapter.getCount());
-            ((TextView) findViewById(R.id.page_number)).setText(pageNumber);
+            mTextViewPageNumber.setText(pageNumber);
             long poemId = mPoemPagerAdapter.getPoemIdAt(position);
             if (mShareActionProvider != null) Poems.updateShareIntent(mShareActionProvider, PoemDetailActivity.this, poemId);
             invalidateOptionsMenu();

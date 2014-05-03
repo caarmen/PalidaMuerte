@@ -21,7 +21,7 @@
 
     <string name="app_name">Pálida Muerte</string>
     <string name="loading">Cargando&#8230;</string>
-    <string name="page_number">Poema %1$d de %2$d</string>
+    <string name="page_number">%1$d de %2$d</string>
     <string name="poem_type_and_number">%1$s N° %2$d</string>
     <string name="action_prev">Anterior</string>
     <string name="action_next">Siguiente</string>
