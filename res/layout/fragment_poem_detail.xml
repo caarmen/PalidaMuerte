@@ -25,6 +25,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:paddingBottom="@dimen/padding_bottom_poem_detail"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal" >
 

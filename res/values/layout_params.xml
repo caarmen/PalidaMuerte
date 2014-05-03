@@ -24,5 +24,6 @@
     <dimen name="grid_view_horizontal_padding" format="integer" type="integer">8dp</dimen>
     <dimen name="grid_column_width" format="integer" type="integer">100dp</dimen>
     <dimen name="category_title_text_size">20sp</dimen>
+    <dimen name="padding_bottom_poem_detail">48dp</dimen>
 
 </resources>

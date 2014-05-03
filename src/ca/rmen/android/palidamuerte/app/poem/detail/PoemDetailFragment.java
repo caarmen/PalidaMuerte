@@ -27,6 +27,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -122,10 +123,20 @@ public class PoemDetailFragment extends Fragment { // NO_UCD (use default)
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        Log.v(TAG, "onCreateOptionsMenu");
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
     public void onPrepareOptionsMenu(Menu menu) {
         Log.v(TAG, "onPrepareOptionsMenu");
         super.onPrepareOptionsMenu(menu);
         MenuItem fav = menu.findItem(R.id.action_favorite);
+        if (fav == null) {
+            Log.v(TAG, "Menu not inflated yet?");
+            return;
+        }
         if (mIsFavorite) {
             fav.setTitle(R.string.action_favorite_activated);
             fav.setIcon(R.drawable.ic_action_favorite_activated);

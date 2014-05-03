@@ -21,6 +21,7 @@
 
     <color name="light_gray">#606575</color>
     <color name="dark_gray">#202126</color>
+    <drawable name="selector_activated">#888799</drawable>
     <drawable name="selector_focused">#888799</drawable>
     <drawable name="selector_selected">#888799</drawable>
     <drawable name="selector_checked">#666588</drawable>

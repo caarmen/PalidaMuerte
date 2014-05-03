@@ -116,6 +116,7 @@ public class PoemListActivity extends FragmentActivity implements PoemListFragme
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        Log.v(TAG, "onCreateOptionsMenu");
         super.onCreateOptionsMenu(menu);
         if (mTwoPane && mPoemId >= 0) {
             getMenuInflater().inflate(R.menu.poem, menu);
