@@ -139,6 +139,8 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
             prev.setEnabled(mViewPager.getCurrentItem() > 0);
             next.setEnabled(mViewPager.getCurrentItem() < mPoemPagerAdapter.getCount() - 1);
         }
+        final View view = menu.findItem(R.id.action_share).getActionView();
+        ActionBar.hackSetMaxHeight(view, getActionBar().getHeight());
         return true;
     }
 
