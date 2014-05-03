@@ -165,10 +165,24 @@
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <TextView
-            android:id="@+id/credits_font"
+            android:id="@+id/credits_music"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/credits_clipart"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:autoLink="web"
+            android:paddingBottom="48dp"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:text="@string/credits_music"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/credits_font"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/credits_music"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:autoLink="web"

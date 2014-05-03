@@ -22,15 +22,15 @@
     <string name="app_name">Pálida Muerte</string>
     <string name="loading">Cargando&#8230;</string>
     <string name="page_number">%1$d de %2$d</string>
-    <string name="poem_type_and_number">%1$s N° %2$d</string>
+    <string name="poem_type_and_number">%1$s n°%2$d</string>
     <string name="action_prev">Anterior</string>
     <string name="action_next">Siguiente</string>
     <string name="action_favorite_normal">Añadir a favoritos</string>
     <string name="action_favorite_activated">Eliminar de favoritos</string>
     <string name="action_about">Acerca de</string>
     <string name="action_share">Compartir</string>
-    <string name="action_music_on">Apagar la música</string>
-    <string name="action_music_off">Encender la música</string>
+    <string name="action_music_off">Apagar la música</string>
+    <string name="action_music_on">Encender la música</string>
     <string name="empty_title">Ningún poema en los favoritos</string>
     <string name="empty_description1">Puntee en el icono corazón</string>
     <string name="empty_description2">en la parte inferior de un poema para añadirlo a los favoritos.</string>
@@ -41,13 +41,4 @@
     <string name="author_date">1935 &#8211; 2014</string>
     <string name="author_description">Nacido en Cantabria, España, poeta de estilo clásico, autor de más de 8000 poemas, entre ellos 3600 sonetos.\n\nhttp://poesiadelmomento.com</string>
     <string name="app_name_and_version">%1$s versión %2$s</string>
-    <string name="credits_app">Aplicación programada por Carmen Alvarez (hija de Francisco): c@rmen.ca</string>
-    <string name="credits_thanks">Agradecimientos:</string>
-    <string name="credits_clipart">Imágenes:
-\n\nhttps://www.flickr.com/photos/thousandshipz/6107392686 (John Ott)
-\n\nhttp://openclipart.org/detail/171579/stylized-border-flowers-by-cyberscooty-171579 (cyberscooty)
-\n\nhttp://openclipart.org/detail/171582/stylized-plant-separation-by-cyberscooty-171582 (cyberscooty)
-\n\nhttp://openclipart.org/detail/21390/used-quill-by-solar_granulation (Solar_Granulation)</string>
-    <string name="credits_font">Fuente: http://openfontlibrary.org/fr/font/dancing</string>
-
 </resources>

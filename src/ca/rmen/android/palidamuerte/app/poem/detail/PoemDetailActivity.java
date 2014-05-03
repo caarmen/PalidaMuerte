@@ -19,6 +19,7 @@
 package ca.rmen.android.palidamuerte.app.poem.detail;
 
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -61,6 +62,7 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
         setContentView(R.layout.activity_poem_detail);
         getActionBar().setDisplayShowCustomEnabled(true);
         getActionBar().setCustomView(R.layout.poem_number);
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
         mTextViewPageNumber = (TextView) getActionBar().getCustomView();
         ActionBar.setCustomFont(this);
         mViewPager = (ViewPager) findViewById(R.id.pager);

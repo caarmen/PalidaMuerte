@@ -18,6 +18,7 @@
  */
 package ca.rmen.android.palidamuerte.app.category.list;
 
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import ca.rmen.android.palidamuerte.R;
@@ -28,6 +29,7 @@ public class CategoriesActivity extends FragmentActivity { // NO_UCD (use defaul
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories);
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
         getActionBar().setCustomView(R.layout.actionbar_title);
         getActionBar().setDisplayShowTitleEnabled(false);

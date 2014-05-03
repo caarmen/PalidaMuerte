@@ -19,6 +19,7 @@
 package ca.rmen.android.palidamuerte.app.poem.list;
 
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
@@ -68,6 +69,7 @@ public class PoemListActivity extends FragmentActivity implements PoemListFragme
         setContentView(R.layout.activity_poem_list);
         // Show the Up button in the action bar.
         getActionBar().setDisplayHomeAsUpEnabled(true);
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
         if (findViewById(R.id.poem_detail_container) != null) {
             // The detail container view will be present only in the
