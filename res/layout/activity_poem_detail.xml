@@ -1,4 +1,4 @@
-<!-- 
+<!--
   Copyright 2014 Carmen Alvarez
  
   This file is part of Pálida Muerte.
@@ -21,7 +21,7 @@
     android:id="@+id/poem_detail_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gray_gradient" >
+    android:paddingTop="?android:attr/actionBarSize" >
 
     <LinearLayout
         android:id="@+id/activity_loading"
@@ -46,19 +46,10 @@
             android:textAppearance="?android:attr/textAppearanceSmall" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/page_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true" />
-
     <android.support.v4.view.ViewPager
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/page_number" />
+        android:layout_height="match_parent"/>
 
 </RelativeLayout>
