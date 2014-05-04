@@ -22,21 +22,26 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.SearchView;
 import ca.rmen.android.palidamuerte.Constants;
+import ca.rmen.android.palidamuerte.MusicPlayer;
 import ca.rmen.android.palidamuerte.R;
+import ca.rmen.android.palidamuerte.ui.ActionBar;
 
 public class CategoriesActivity extends FragmentActivity { // NO_UCD (use default)
 
     private static final String TAG = Constants.TAG + CategoriesActivity.class.getSimpleName();
+    private Handler mHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mHandler = new Handler();
         setContentView(R.layout.activity_categories);
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
@@ -51,6 +56,7 @@ public class CategoriesActivity extends FragmentActivity { // NO_UCD (use defaul
         Log.v(TAG, "onCreateOptionsMenu");
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.menu_music, menu);
+        ActionBar.updateMusicMenuItem(this, menu.findItem(R.id.action_music));
         getMenuInflater().inflate(R.menu.menu_search, menu);
         // Associate searchable configuration with the SearchView
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
@@ -62,7 +68,18 @@ public class CategoriesActivity extends FragmentActivity { // NO_UCD (use defaul
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Log.v(TAG, "onOptionsItemSelected");
-        return super.onOptionsItemSelected(item);
+        if (item.getItemId() == R.id.action_music) {
+            MusicPlayer.getInstance(this).toggle();
+            mHandler.postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    invalidateOptionsMenu();
+                }
+            }, 200);
+            return true;
+        } else
+            return super.onOptionsItemSelected(item);
     }
 
     @Override
