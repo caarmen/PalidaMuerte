@@ -20,6 +20,7 @@ package ca.rmen.android.palidamuerte.app.poem.list;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,13 +57,26 @@ public class FavoritePoemListCursorAdapter extends CursorAdapter {
     }
 
     private void fillView(View view, Cursor cursor) {
-        PoemCursor cursorWrapper = (PoemCursor) cursor;
+        final PoemCursor cursorWrapper = (PoemCursor) cursor;
         TextView tvTitle = (TextView) view.findViewById(R.id.title);
         tvTitle.setText(cursorWrapper.getTitle());
-        TextView tvCategory = (TextView) view.findViewById(R.id.category);
-        String category = Categories.getCategoryName(mContext, cursorWrapper.getCategoryId());
-        tvCategory.setText(category);
         tvTitle.setTypeface(Font.getTypeface(mContext));
+        final long categoryId = cursorWrapper.getCategoryId();
+
+        final TextView tvCategory = (TextView) view.findViewById(R.id.category);
+        tvCategory.setTag(cursorWrapper.getCategoryId());
+        new AsyncTask<Void, Void, String>() {
+
+            @Override
+            protected String doInBackground(Void... params) {
+                return Categories.getCategoryName(mContext, categoryId);
+            }
+
+            @Override
+            protected void onPostExecute(String result) {
+                if (tvCategory.getTag() == (Long) categoryId) tvCategory.setText(result);
+            }
+        }.execute();
     }
 
 }

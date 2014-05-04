@@ -20,6 +20,7 @@ package ca.rmen.android.palidamuerte.app.poem.list;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -28,6 +29,7 @@ import android.widget.CursorAdapter;
 import android.widget.TextView;
 import ca.rmen.android.palidamuerte.Constants;
 import ca.rmen.android.palidamuerte.R;
+import ca.rmen.android.palidamuerte.app.category.Categories;
 import ca.rmen.android.palidamuerte.app.poem.detail.Poems;
 import ca.rmen.android.palidamuerte.provider.poem.PoemCursor;
 import ca.rmen.android.palidamuerte.ui.Font;
@@ -59,13 +61,31 @@ public class SearchResultPoemListCursorAdapter extends CursorAdapter {
     }
 
     private void fillView(View view, Cursor cursor) {
-        PoemCursor cursorWrapper = (PoemCursor) cursor;
+        final PoemCursor cursorWrapper = (PoemCursor) cursor;
         TextView tvTitle = (TextView) view.findViewById(R.id.title);
         tvTitle.setText(cursorWrapper.getTitle());
+        tvTitle.setTypeface(Font.getTypeface(mContext));
+
         TextView tvMatchedText = (TextView) view.findViewById(R.id.matched_text);
         CharSequence matchedText = getMatchedText(cursorWrapper);
         tvMatchedText.setText(matchedText);
-        tvTitle.setTypeface(Font.getTypeface(mContext));
+
+        final long categoryId = cursorWrapper.getCategoryId();
+
+        final TextView tvCategory = (TextView) view.findViewById(R.id.category);
+        tvCategory.setTag(cursorWrapper.getCategoryId());
+        new AsyncTask<Void, Void, String>() {
+
+            @Override
+            protected String doInBackground(Void... params) {
+                return Categories.getCategoryName(mContext, categoryId);
+            }
+
+            @Override
+            protected void onPostExecute(String result) {
+                if (tvCategory.getTag() == (Long) categoryId) tvCategory.setText(result);
+            }
+        }.execute();
     }
 
     /**

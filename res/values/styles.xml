@@ -86,4 +86,9 @@
         <item name="android:textColor">#DDDDCC</item>
     </style>
 
+    <style name="TextAppearancePoemListSearchContext" parent="@android:style/TextAppearance.Small">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#D8CCDD</item>
+    </style>
+
 </resources>
