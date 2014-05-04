@@ -37,7 +37,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import ca.rmen.android.palidamuerte.Constants;
 import ca.rmen.android.palidamuerte.R;
-import ca.rmen.android.palidamuerte.app.category.Categories;
 import ca.rmen.android.palidamuerte.app.poem.detail.PoemDetailFragment;
 import ca.rmen.android.palidamuerte.app.poem.detail.Poems;
 import ca.rmen.android.palidamuerte.provider.poem.PoemColumns;
@@ -112,11 +111,7 @@ public class PoemListFragment extends ListFragment { // NO_UCD (use default)
 
             @Override
             protected String doInBackground(Void... params) {
-                long categoryId = activity.getIntent().getLongExtra(PoemListActivity.EXTRA_CATEGORY_ID, -1);
-                if (categoryId >= 0) return Categories.getCategoryName(activity, categoryId);
-                else if (activity.getIntent().hasExtra(SearchManager.QUERY)) return getString(R.string.search_results);
-                else
-                    return null;
+                return Poems.getActivityTitle(activity, activity.getIntent());
             }
 
             @Override

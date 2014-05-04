@@ -35,7 +35,6 @@ import android.widget.TextView;
 import ca.rmen.android.palidamuerte.Constants;
 import ca.rmen.android.palidamuerte.R;
 import ca.rmen.android.palidamuerte.app.about.AboutActivity;
-import ca.rmen.android.palidamuerte.app.category.Categories;
 import ca.rmen.android.palidamuerte.app.poem.list.PoemListActivity;
 import ca.rmen.android.palidamuerte.provider.poem.PoemSelection;
 import ca.rmen.android.palidamuerte.ui.ActionBar;
@@ -79,11 +78,11 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
 
         new AsyncTask<Void, Void, PoemPagerAdapter>() {
 
-            private String mCategoryName;
+            private String mActivityTitle;
 
             @Override
             protected PoemPagerAdapter doInBackground(Void... params) {
-                mCategoryName = Categories.getCategoryName(PoemDetailActivity.this, categoryId);
+                mActivityTitle = Poems.getActivityTitle(PoemDetailActivity.this, getIntent());
                 PoemSelection poemSelection = Poems.getPoemSelection(PoemDetailActivity.this, getIntent());
                 return new PoemPagerAdapter(PoemDetailActivity.this, poemSelection, getSupportFragmentManager());
             }
@@ -96,7 +95,7 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
                 findViewById(R.id.activity_loading).setVisibility(View.GONE);
                 int position = mPoemPagerAdapter.getPositionForPoem(poemId);
                 mViewPager.setCurrentItem(position);
-                getActionBar().setTitle(mCategoryName);
+                getActionBar().setTitle(mActivityTitle);
                 String pageNumber = getString(R.string.page_number, position + 1, mPoemPagerAdapter.getCount());
                 mTextViewPageNumber.setText(pageNumber);
                 invalidateOptionsMenu();

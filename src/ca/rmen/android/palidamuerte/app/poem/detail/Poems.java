@@ -135,4 +135,11 @@ public class Poems {
             return new PoemListCursorAdapter(context);
     }
 
+    public static String getActivityTitle(Context context, Intent intent) {
+        long categoryId = intent.getLongExtra(PoemListActivity.EXTRA_CATEGORY_ID, -1);
+        if (categoryId >= 0) return Categories.getCategoryName(context, categoryId);
+        else if (intent.hasExtra(SearchManager.QUERY)) return context.getString(R.string.search_results);
+        else
+            return null;
+    }
 }
