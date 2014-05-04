@@ -32,7 +32,8 @@
     <string name="action_music_off">Apagar la música</string>
     <string name="action_music_on">Encender la música</string>
     <string name="action_search">Buscar</string>
-    <string name="search_hint">Palabras claves</string>
+    <string name="search_hint">Términos de búsqueda</string>
+    <string name="search_results">Resultados de búsqueda</string>
     <string name="empty_title">Ningún poema en los favoritos</string>
     <string name="empty_description1">Puntee en el icono corazón</string>
     <string name="empty_description2">en la parte inferior de un poema para añadirlo a los favoritos.</string>

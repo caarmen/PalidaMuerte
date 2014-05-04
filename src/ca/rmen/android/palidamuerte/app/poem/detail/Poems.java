@@ -103,13 +103,16 @@ public class Poems {
         intent.getExtras().isEmpty(); // so toString() will display the extras
         Log.v(TAG, "getPoemSelection, intent = " + intent + ", extras = " + intent.getExtras());
         final PoemSelection poemSelection;
+        // Build a selection based on search keywords
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String queryString = intent.getStringExtra(SearchManager.QUERY);
             poemSelection = Search.buildSelection(queryString);
         } else {
             long categoryId = intent.getLongExtra(PoemListActivity.EXTRA_CATEGORY_ID, -1);
             poemSelection = new PoemSelection();
+            // Build a selection which returns favorite poems
             if (categoryId == Categories.FAVORITE_CATEGORY_ID) poemSelection.isFavorite(true);
+            // Build a selection which returns poems in the given category.
             else
                 poemSelection.categoryId(categoryId);
         }

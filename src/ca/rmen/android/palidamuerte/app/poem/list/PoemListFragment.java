@@ -19,6 +19,7 @@
 package ca.rmen.android.palidamuerte.app.poem.list;
 
 import android.app.Activity;
+import android.app.SearchManager;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
@@ -106,12 +107,15 @@ public class PoemListFragment extends ListFragment { // NO_UCD (use default)
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final Activity activity = getActivity();
-        final long categoryId = activity.getIntent().getLongExtra(PoemListActivity.EXTRA_CATEGORY_ID, -1);
         new AsyncTask<Void, Void, String>() {
 
             @Override
             protected String doInBackground(Void... params) {
-                return Categories.getCategoryName(activity, categoryId);
+                long categoryId = activity.getIntent().getLongExtra(PoemListActivity.EXTRA_CATEGORY_ID, -1);
+                if (categoryId >= 0) return Categories.getCategoryName(activity, categoryId);
+                else if (activity.getIntent().hasExtra(SearchManager.QUERY)) return getString(R.string.search_results);
+                else
+                    return null;
             }
 
             @Override
