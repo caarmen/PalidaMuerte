@@ -19,7 +19,6 @@
 package ca.rmen.android.palidamuerte.app.poem.list;
 
 import android.app.Activity;
-import android.app.SearchManager;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
@@ -38,6 +37,7 @@ import ca.rmen.android.palidamuerte.Constants;
 import ca.rmen.android.palidamuerte.R;
 import ca.rmen.android.palidamuerte.app.category.Categories;
 import ca.rmen.android.palidamuerte.app.poem.detail.PoemDetailFragment;
+import ca.rmen.android.palidamuerte.app.poem.detail.Poems;
 import ca.rmen.android.palidamuerte.provider.poem.PoemColumns;
 import ca.rmen.android.palidamuerte.provider.poem.PoemCursor;
 import ca.rmen.android.palidamuerte.provider.poem.PoemSelection;
@@ -206,17 +206,7 @@ public class PoemListFragment extends ListFragment { // NO_UCD (use default)
             Log.v(TAG, "onCreateLoader, loaderId = " + loaderId + ", bundle = " + bundle);
             Activity activity = getActivity();
             Intent intent = activity.getIntent();
-            final PoemSelection poemSelection;
-            if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-                String queryString = intent.getStringExtra(SearchManager.QUERY);
-                poemSelection = Search.buildSelection(queryString);
-            } else {
-                long categoryId = intent.getLongExtra(PoemListActivity.EXTRA_CATEGORY_ID, -1);
-                poemSelection = new PoemSelection();
-                if (categoryId == Categories.FAVORITE_CATEGORY_ID) poemSelection.isFavorite(true);
-                else
-                    poemSelection.categoryId(categoryId);
-            }
+            PoemSelection poemSelection = Poems.getPoemSelection(activity, intent);
             CursorLoader loader = new CursorLoader(activity, PoemColumns.CONTENT_URI, null, poemSelection.sel(), poemSelection.args(), PoemColumns.CATEGORY_ID
                     + ", " + PoemColumns._ID);
             return loader;

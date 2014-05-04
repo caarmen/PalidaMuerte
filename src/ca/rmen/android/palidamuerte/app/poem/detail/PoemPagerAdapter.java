@@ -26,30 +26,19 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.util.Log;
 import ca.rmen.android.palidamuerte.Constants;
-import ca.rmen.android.palidamuerte.app.category.Categories;
 import ca.rmen.android.palidamuerte.provider.poem.PoemColumns;
 import ca.rmen.android.palidamuerte.provider.poem.PoemCursor;
+import ca.rmen.android.palidamuerte.provider.poem.PoemSelection;
 
 class PoemPagerAdapter extends FragmentStatePagerAdapter {
     private static final String TAG = Constants.TAG + PoemPagerAdapter.class.getSimpleName();
 
     private PoemCursor mCursor;
-    private final long mCategoryId;
 
-    PoemPagerAdapter(Context context, long categoryId, FragmentManager fm) {
+    PoemPagerAdapter(Context context, PoemSelection poemSelection, FragmentManager fm) {
         super(fm);
-        Log.v(TAG, "Constructor: categoryId = " + categoryId);
-        mCategoryId = categoryId;
-        final String selection;
-        final String[] selectionArgs;
-        if (categoryId == Categories.FAVORITE_CATEGORY_ID) {
-            selection = PoemColumns.IS_FAVORITE + "=1";
-            selectionArgs = null;
-        } else {
-            selection = PoemColumns.CATEGORY_ID + "=?";
-            selectionArgs = new String[] { String.valueOf(mCategoryId) };
-        }
-        Cursor cursor = context.getContentResolver().query(PoemColumns.CONTENT_URI, null, selection, selectionArgs, null);
+        Log.v(TAG, "Constructor");
+        Cursor cursor = context.getContentResolver().query(PoemColumns.CONTENT_URI, null, poemSelection.sel(), poemSelection.args(), null);
         mCursor = new PoemCursor(cursor);
         mCursor.getCount();
     }

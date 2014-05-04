@@ -37,6 +37,7 @@ import ca.rmen.android.palidamuerte.R;
 import ca.rmen.android.palidamuerte.app.about.AboutActivity;
 import ca.rmen.android.palidamuerte.app.category.Categories;
 import ca.rmen.android.palidamuerte.app.poem.list.PoemListActivity;
+import ca.rmen.android.palidamuerte.provider.poem.PoemSelection;
 import ca.rmen.android.palidamuerte.ui.ActionBar;
 
 /**
@@ -83,7 +84,8 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
             @Override
             protected PoemPagerAdapter doInBackground(Void... params) {
                 mCategoryName = Categories.getCategoryName(PoemDetailActivity.this, categoryId);
-                return new PoemPagerAdapter(PoemDetailActivity.this, categoryId, getSupportFragmentManager());
+                PoemSelection poemSelection = Poems.getPoemSelection(PoemDetailActivity.this, getIntent());
+                return new PoemPagerAdapter(PoemDetailActivity.this, poemSelection, getSupportFragmentManager());
             }
 
             @Override

@@ -18,6 +18,7 @@
  */
 package ca.rmen.android.palidamuerte.app.poem.list;
 
+import android.app.SearchManager;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
@@ -110,6 +111,8 @@ public class PoemListActivity extends FragmentActivity implements PoemListFragme
             // In single-pane mode, simply start the detail activity
             // for the selected item ID.
             Intent detailIntent = new Intent(this, PoemDetailActivity.class);
+            detailIntent.setAction(getIntent().getAction());
+            detailIntent.putExtra(SearchManager.QUERY, getIntent().getStringExtra(SearchManager.QUERY));
             detailIntent.putExtra(PoemDetailFragment.ARG_ITEM_ID, id);
             detailIntent.putExtra(EXTRA_CATEGORY_ID, getIntent().getLongExtra(EXTRA_CATEGORY_ID, -1));
             startActivity(detailIntent);

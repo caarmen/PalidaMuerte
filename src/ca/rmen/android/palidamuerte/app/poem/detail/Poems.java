@@ -20,17 +20,25 @@ package ca.rmen.android.palidamuerte.app.poem.detail;
 
 import java.util.Calendar;
 
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.widget.ShareActionProvider;
+import ca.rmen.android.palidamuerte.Constants;
 import ca.rmen.android.palidamuerte.R;
+import ca.rmen.android.palidamuerte.app.category.Categories;
+import ca.rmen.android.palidamuerte.app.poem.list.PoemListActivity;
+import ca.rmen.android.palidamuerte.app.poem.list.Search;
 import ca.rmen.android.palidamuerte.provider.poem.PoemCursor;
 import ca.rmen.android.palidamuerte.provider.poem.PoemSelection;
 
 public class Poems {
+
+    private static final String TAG = Constants.TAG + Poems.class.getSimpleName();
 
     public static void updateShareIntent(final ShareActionProvider shareActionProvider, final Context context, final long poemId) {
         new AsyncTask<Void, Void, Intent>() {
@@ -90,4 +98,22 @@ public class Poems {
         }
         return poemTypeAndNumber;
     }
+
+    public static PoemSelection getPoemSelection(Context context, Intent intent) {
+        intent.getExtras().isEmpty(); // so toString() will display the extras
+        Log.v(TAG, "getPoemSelection, intent = " + intent + ", extras = " + intent.getExtras());
+        final PoemSelection poemSelection;
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String queryString = intent.getStringExtra(SearchManager.QUERY);
+            poemSelection = Search.buildSelection(queryString);
+        } else {
+            long categoryId = intent.getLongExtra(PoemListActivity.EXTRA_CATEGORY_ID, -1);
+            poemSelection = new PoemSelection();
+            if (categoryId == Categories.FAVORITE_CATEGORY_ID) poemSelection.isFavorite(true);
+            else
+                poemSelection.categoryId(categoryId);
+        }
+        return poemSelection;
+    }
+
 }
