@@ -83,7 +83,7 @@ public class Poems {
         }.execute();
     }
 
-    static String getLocationDateString(Context context, PoemCursor poemCursor) {
+    public static String getLocationDateString(Context context, PoemCursor poemCursor) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, poemCursor.getYear());
         calendar.set(Calendar.MONTH, poemCursor.getMonth() - 1);

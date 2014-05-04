@@ -20,6 +20,7 @@ package ca.rmen.android.palidamuerte.app.poem.list;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ import android.widget.CursorAdapter;
 import android.widget.TextView;
 import ca.rmen.android.palidamuerte.Constants;
 import ca.rmen.android.palidamuerte.R;
+import ca.rmen.android.palidamuerte.app.poem.detail.Poems;
 import ca.rmen.android.palidamuerte.provider.poem.PoemCursor;
 import ca.rmen.android.palidamuerte.ui.Font;
 
@@ -61,10 +63,32 @@ public class SearchResultPoemListCursorAdapter extends CursorAdapter {
         TextView tvTitle = (TextView) view.findViewById(R.id.title);
         tvTitle.setText(cursorWrapper.getTitle());
         TextView tvMatchedText = (TextView) view.findViewById(R.id.matched_text);
-        String content = cursorWrapper.getContent();
-        CharSequence matchedText = Search.findContext(content, mSearchTerms);
+        CharSequence matchedText = getMatchedText(cursorWrapper);
         tvMatchedText.setText(matchedText);
         tvTitle.setTypeface(Font.getTypeface(mContext));
+    }
+
+    /**
+     * @return the text in the poem (or poem meta data) that contains the query terms
+     */
+    private CharSequence getMatchedText(PoemCursor cursor) {
+        // Search in the main content
+        CharSequence matchedText = Search.findContext(cursor.getContent(), mSearchTerms);
+        if (!TextUtils.isEmpty(matchedText)) return matchedText;
+
+        // Search in the pre-content
+        matchedText = Search.findContext(cursor.getPreContent(), mSearchTerms);
+        if (!TextUtils.isEmpty(matchedText)) return matchedText;
+
+        // If the location matches, return the location/date string
+        matchedText = Search.findContext(cursor.getLocation(), mSearchTerms);
+        if (!TextUtils.isEmpty(matchedText)) return Poems.getLocationDateString(mContext, cursor);
+
+        // If the year matches, return the location/date string
+        for (String searchTerm : mSearchTerms) {
+            if (TextUtils.isDigitsOnly(searchTerm) && Integer.valueOf(searchTerm) == cursor.getYear()) return Poems.getLocationDateString(mContext, cursor);
+        }
+        return null;
     }
 
 }

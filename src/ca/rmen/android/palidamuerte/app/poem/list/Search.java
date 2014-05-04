@@ -73,6 +73,7 @@ public class Search {
     }
 
     public static CharSequence findContext(String content, String[] searchTerms) {
+        if (content == null) return null;
         String collatedContent = collateText(content);
         for (String searchTerm : searchTerms) {
             String collatedSearchTerm = collateText(searchTerm);
