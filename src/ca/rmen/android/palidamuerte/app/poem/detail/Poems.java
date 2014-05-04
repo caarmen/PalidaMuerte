@@ -27,12 +27,16 @@ import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.Log;
+import android.widget.CursorAdapter;
 import android.widget.ShareActionProvider;
 import ca.rmen.android.palidamuerte.Constants;
 import ca.rmen.android.palidamuerte.R;
 import ca.rmen.android.palidamuerte.app.category.Categories;
+import ca.rmen.android.palidamuerte.app.poem.list.FavoritePoemListCursorAdapter;
 import ca.rmen.android.palidamuerte.app.poem.list.PoemListActivity;
+import ca.rmen.android.palidamuerte.app.poem.list.PoemListCursorAdapter;
 import ca.rmen.android.palidamuerte.app.poem.list.Search;
+import ca.rmen.android.palidamuerte.app.poem.list.SearchResultPoemListCursorAdapter;
 import ca.rmen.android.palidamuerte.provider.poem.PoemCursor;
 import ca.rmen.android.palidamuerte.provider.poem.PoemSelection;
 
@@ -117,6 +121,18 @@ public class Poems {
                 poemSelection.categoryId(categoryId);
         }
         return poemSelection;
+    }
+
+    public static CursorAdapter getPoemListAdapter(Context context, Intent intent) {
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String queryString = intent.getStringExtra(SearchManager.QUERY);
+            String[] searchTerms = Search.getSearchTerms(queryString);
+            return new SearchResultPoemListCursorAdapter(context, searchTerms);
+        }
+        long categoryId = intent.getLongExtra(PoemListActivity.EXTRA_CATEGORY_ID, -1);
+        if (categoryId == Categories.FAVORITE_CATEGORY_ID) return new FavoritePoemListCursorAdapter(context);
+        else
+            return new PoemListCursorAdapter(context);
     }
 
 }

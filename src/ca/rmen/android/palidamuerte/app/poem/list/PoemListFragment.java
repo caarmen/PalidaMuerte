@@ -137,7 +137,7 @@ public class PoemListFragment extends ListFragment { // NO_UCD (use default)
         String searchTerms = getActivity().getIntent().getStringExtra(SearchManager.QUERY);
         if (!TextUtils.isEmpty(searchTerms)) {
             emptyListView = getActivity().getLayoutInflater().inflate(R.layout.empty_search_list, parent, false);
-            String[] keyWords = searchTerms.split(" ");
+            String[] keyWords = Search.getSearchTerms(searchTerms);
             ((TextView) emptyListView.findViewById(R.id.empty_search_list_description)).setText(getResources().getQuantityString(
                     R.plurals.empty_search_list_description, keyWords.length, searchTerms));
 
@@ -231,11 +231,8 @@ public class PoemListFragment extends ListFragment { // NO_UCD (use default)
         public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
             Log.v(TAG, "onLoadFinished, loader = " + loader + ", cursor = " + cursor);
             if (mAdapter == null) {
-                long categoryId = getActivity().getIntent().getLongExtra(PoemListActivity.EXTRA_CATEGORY_ID, -1);
-                if (categoryId == Categories.FAVORITE_CATEGORY_ID) mAdapter = new FavoritePoemListCursorAdapter(getActivity());
-                else
-
-                    mAdapter = new PoemListCursorAdapter(getActivity());
+                Activity activity = getActivity();
+                mAdapter = Poems.getPoemListAdapter(activity, activity.getIntent());
                 setListAdapter(mAdapter);
             }
             mAdapter.changeCursor(new PoemCursor(cursor));

@@ -27,8 +27,12 @@ public class Search {
     private static final String ACCENTS = "‡Ž’—œ–çƒêîò„";
     private static final String NO_ACCENTS = "aeiounaeioun";
 
+    public static String[] getSearchTerms(String queryString) {
+        return TextUtils.split(queryString, " ");
+    }
+
     public static PoemSelection buildSelection(String searchQuery) {
-        String[] searchTerms = searchQuery.split(" ");
+        String[] searchTerms = getSearchTerms(searchQuery);
         for (int i = 0; i < searchTerms.length; i++)
             searchTerms[i] = collateSearchTerm(searchTerms[i]);
 

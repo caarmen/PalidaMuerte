@@ -18,6 +18,8 @@
  */
 package ca.rmen.android.palidamuerte.app.poem.list;
 
+import java.util.Arrays;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
@@ -27,25 +29,26 @@ import android.widget.CursorAdapter;
 import android.widget.TextView;
 import ca.rmen.android.palidamuerte.Constants;
 import ca.rmen.android.palidamuerte.R;
-import ca.rmen.android.palidamuerte.app.category.Categories;
 import ca.rmen.android.palidamuerte.provider.poem.PoemCursor;
 import ca.rmen.android.palidamuerte.ui.Font;
 
-public class FavoritePoemListCursorAdapter extends CursorAdapter {
+public class SearchResultPoemListCursorAdapter extends CursorAdapter {
 
-    private static final String TAG = Constants.TAG + FavoritePoemListCursorAdapter.class.getSimpleName();
+    private static final String TAG = Constants.TAG + SearchResultPoemListCursorAdapter.class.getSimpleName();
 
     private final Context mContext;
+    private final String[] mSearchTerms;
 
-    public FavoritePoemListCursorAdapter(Context context) {
+    public SearchResultPoemListCursorAdapter(Context context, String[] searchTerms) {
         super(context, null, false);
         Log.v(TAG, "Constructor");
         mContext = context;
+        mSearchTerms = searchTerms;
     }
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        View view = View.inflate(context, R.layout.favorite_poem_title, null);
+        View view = View.inflate(context, R.layout.search_result_poem_title, null);
         fillView(view, cursor);
         return view;
     }
@@ -59,9 +62,8 @@ public class FavoritePoemListCursorAdapter extends CursorAdapter {
         PoemCursor cursorWrapper = (PoemCursor) cursor;
         TextView tvTitle = (TextView) view.findViewById(R.id.title);
         tvTitle.setText(cursorWrapper.getTitle());
-        TextView tvCategory = (TextView) view.findViewById(R.id.category);
-        String category = Categories.getCategoryName(mContext, cursorWrapper.getCategoryId());
-        tvCategory.setText(category);
+        TextView tvMatchedText = (TextView) view.findViewById(R.id.matched_text);
+        tvMatchedText.setText(Arrays.toString(mSearchTerms));
         tvTitle.setTypeface(Font.getTypeface(mContext));
     }
 

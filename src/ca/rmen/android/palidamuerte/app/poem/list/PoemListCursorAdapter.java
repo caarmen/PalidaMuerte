@@ -30,13 +30,13 @@ import ca.rmen.android.palidamuerte.R;
 import ca.rmen.android.palidamuerte.provider.poem.PoemCursor;
 import ca.rmen.android.palidamuerte.ui.Font;
 
-class PoemListCursorAdapter extends CursorAdapter {
+public class PoemListCursorAdapter extends CursorAdapter {
 
     private static final String TAG = Constants.TAG + PoemListCursorAdapter.class.getSimpleName();
 
     private final Context mContext;
 
-    PoemListCursorAdapter(Context context) {
+    public PoemListCursorAdapter(Context context) {
         super(context, null, false);
         Log.v(TAG, "Constructor");
         mContext = context;
