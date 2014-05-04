@@ -28,6 +28,7 @@ import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -132,7 +133,17 @@ public class PoemListFragment extends ListFragment { // NO_UCD (use default)
         super.onViewCreated(view, savedInstanceState);
         ListView listView = getListView();
         ViewGroup parent = (ViewGroup) listView.getParent();
-        View emptyListView = getActivity().getLayoutInflater().inflate(R.layout.empty_list, parent, false);
+        final View emptyListView;
+        String searchTerms = getActivity().getIntent().getStringExtra(SearchManager.QUERY);
+        if (!TextUtils.isEmpty(searchTerms)) {
+            emptyListView = getActivity().getLayoutInflater().inflate(R.layout.empty_search_list, parent, false);
+            String[] keyWords = searchTerms.split(" ");
+            ((TextView) emptyListView.findViewById(R.id.empty_search_list_description)).setText(getResources().getQuantityString(
+                    R.plurals.empty_search_list_description, keyWords.length, searchTerms));
+
+        } else {
+            emptyListView = getActivity().getLayoutInflater().inflate(R.layout.empty_favorite_list, parent, false);
+        }
         TextView emptyTitle = (TextView) emptyListView.findViewById(R.id.title);
         emptyTitle.setTypeface(Font.getTypeface(getActivity()));
         parent.addView(emptyListView);

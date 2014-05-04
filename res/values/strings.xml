@@ -34,9 +34,16 @@
     <string name="action_search">Buscar</string>
     <string name="search_hint">Términos de búsqueda</string>
     <string name="search_results">Resultados de búsqueda</string>
-    <string name="empty_title">Ningún poema en los favoritos</string>
-    <string name="empty_description1">Puntee en el icono corazón</string>
-    <string name="empty_description2">en la parte inferior de un poema para añadirlo a los favoritos.</string>
+    <string name="empty_favorite_list_title">Ningún poema en los favoritos</string>
+    <string name="empty_favorite_list_description1">Puntee en el icono corazón</string>
+    <string name="empty_favorite_list_description2">en la parte inferior de un poema para añadirlo a los favoritos.</string>
+    <string name="empty_search_list_title">Ningún poema</string>
+
+    <plurals name="empty_search_list_description">
+        <item quantity="one">No se ha encontrado ningún poema conteniendo la palabra \'%s\'.</item>
+        <item quantity="other">No se ha encontrado ningún poema conteniendo las palabras \'%s\'.</item>
+    </plurals>
+
     <string name="copyright">Copyright &#169; Francisco Alvarez Hidalgo</string>
     <string name="author">Francisco Alvarez Hidalgo</string>
     <string name="subtitle">Poemas de Francisco Alvarez Hidalgo</string>
@@ -44,4 +51,5 @@
     <string name="author_date">1935 &#8211; 2014</string>
     <string name="author_description">Nacido en Cantabria, España, poeta de estilo clásico, autor de más de 8000 poemas, entre ellos 3600 sonetos.\n\nhttp://poesiadelmomento.com</string>
     <string name="app_name_and_version">%1$s versión %2$s</string>
+
 </resources>
