@@ -22,20 +22,35 @@
     android:background="@drawable/selector"
     android:orientation="vertical" >
 
-    <CheckedTextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="left"
-        android:padding="8dp"
-        android:textAppearance="@style/TextAppearancePoemListTitle" />
+        android:orientation="horizontal"
+        android:padding="8dp" >
+
+        <CheckedTextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:textAppearance="@style/TextAppearancePoemListTitle" />
+
+        <ImageView
+            android:id="@+id/favoriteIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:visibility="gone"
+            android:src="@drawable/ic_action_favorite_activated" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/category"
         android:layout_width="wrap_content"
-        android:paddingLeft="8dp"
-        android:gravity="left"
         android:layout_height="wrap_content"
+        android:gravity="left"
+        android:paddingLeft="8dp"
         android:textAppearance="@style/TextAppearancePoemListCategoryName" />
 
     <TextView

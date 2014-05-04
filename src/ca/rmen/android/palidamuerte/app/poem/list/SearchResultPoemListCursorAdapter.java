@@ -26,6 +26,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import ca.rmen.android.palidamuerte.Constants;
 import ca.rmen.android.palidamuerte.R;
@@ -70,6 +71,9 @@ public class SearchResultPoemListCursorAdapter extends CursorAdapter {
         TextView tvMatchedText = ViewHolder.get(view, R.id.matched_text);
         CharSequence matchedText = getMatchedText(cursorWrapper);
         tvMatchedText.setText(matchedText);
+
+        ImageView ivFavoriteIcon = ViewHolder.get(view, R.id.favoriteIcon);
+        ivFavoriteIcon.setVisibility(cursorWrapper.getIsFavorite() ? View.VISIBLE : View.GONE);
 
         final long categoryId = cursorWrapper.getCategoryId();
 
