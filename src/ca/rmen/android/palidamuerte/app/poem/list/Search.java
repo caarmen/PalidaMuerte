@@ -19,39 +19,32 @@
 package ca.rmen.android.palidamuerte.app.poem.list;
 
 import android.text.TextUtils;
-import ca.rmen.android.palidamuerte.provider.poem.PoemColumns;
+import ca.rmen.android.palidamuerte.provider.poem.PoemSelection;
 
 public class Search {
-    static class Query {
-        String selection;
-        String[] selectionArgs;
-    }
 
-    public static Query buildSelection(String searchQuery) {
-        String[] searchColumns = new String[] { PoemColumns.LOCATION, PoemColumns.YEAR, PoemColumns.TITLE, PoemColumns.PRE_CONTENT, PoemColumns.CONTENT };
-        String[] selections = new String[searchColumns.length];
+    public static PoemSelection buildSelection(String searchQuery) {
         String[] keyWords = searchQuery.split(" ");
-        for (int i = 0; i < searchColumns.length; i++) {
-            selections[i] = buildSelection(keyWords, searchColumns[i]);
+
+        PoemSelection poemSelection = new PoemSelection();
+
+        // Search the year column for keywords that are numeric
+        for (String keyWord : keyWords) {
+            if (TextUtils.isDigitsOnly(keyWord)) {
+                if (poemSelection.args() != null && poemSelection.args().length > 0) poemSelection.or();
+                poemSelection.year(Integer.valueOf(keyWord));
+            }
         }
-        Query result = new Query();
-        result.selection = TextUtils.join(" OR ", selections);
-        int selectionArgCount = searchColumns.length * keyWords.length;
-        String[] selectionArgs = new String[selectionArgCount];
-        int i = 0;
-        for (@SuppressWarnings("unused")
-        String searchColumn : searchColumns)
-            for (String keyWord : keyWords)
-                selectionArgs[i++] = "%" + keyWord + "%";
-        result.selectionArgs = selectionArgs;
-        return result;
+
+        if (poemSelection.args() != null && poemSelection.args().length > 0) poemSelection.or();
+
+        // Surround keywords with % to use with the LIKE query
+        for (int i = 0; i < keyWords.length; i++)
+            keyWords[i] = "%" + keyWords[i] + "%";
+
+        poemSelection.locationLike(keyWords).or().titleLike(keyWords).or().preContentLike(keyWords).or().contentLike(keyWords);
+
+        return poemSelection;
     }
 
-    private static String buildSelection(String[] keyWords, String column) {
-        String[] selections = new String[keyWords.length];
-        for (int i = 0; i < keyWords.length; i++)
-            selections[i] = column + " LIKE ?";
-        String selection = TextUtils.join(" OR ", selections);
-        return selection;
-    }
 }

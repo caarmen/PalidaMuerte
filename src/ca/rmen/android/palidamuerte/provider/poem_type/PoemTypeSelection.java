@@ -19,10 +19,10 @@ public class PoemTypeSelection extends AbstractSelection<PoemTypeSelection> {
     public Uri uri() {
         return PoemTypeColumns.CONTENT_URI;
     }
-    
+
     /**
      * Query the given content resolver using this selection.
-     * 
+     *
      * @param contentResolver The content resolver to query.
      * @param projection A list of which columns to return. Passing null will return all columns, which is inefficient.
      * @param sortOrder How to order the rows, formatted as an SQL ORDER BY clause (excluding the ORDER BY itself). Passing null will use the default sort
@@ -48,21 +48,26 @@ public class PoemTypeSelection extends AbstractSelection<PoemTypeSelection> {
     public PoemTypeCursor query(ContentResolver contentResolver) {
         return query(contentResolver, null, null);
     }
-    
-    
+
+
     public PoemTypeSelection id(long... value) {
         addEquals(PoemTypeColumns._ID, toObjectArray(value));
         return this;
     }
 
+
     public PoemTypeSelection poemTypeName(String... value) {
         addEquals(PoemTypeColumns.POEM_TYPE_NAME, value);
         return this;
     }
-    
+
     public PoemTypeSelection poemTypeNameNot(String... value) {
         addNotEquals(PoemTypeColumns.POEM_TYPE_NAME, value);
         return this;
     }
 
+    public PoemTypeSelection poemTypeNameLike(String... value) {
+        addLike(PoemTypeColumns.POEM_TYPE_NAME, value);
+        return this;
+    }
 }

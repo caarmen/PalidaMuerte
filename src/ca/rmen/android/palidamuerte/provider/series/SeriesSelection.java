@@ -19,10 +19,10 @@ public class SeriesSelection extends AbstractSelection<SeriesSelection> {
     public Uri uri() {
         return SeriesColumns.CONTENT_URI;
     }
-    
+
     /**
      * Query the given content resolver using this selection.
-     * 
+     *
      * @param contentResolver The content resolver to query.
      * @param projection A list of which columns to return. Passing null will return all columns, which is inefficient.
      * @param sortOrder How to order the rows, formatted as an SQL ORDER BY clause (excluding the ORDER BY itself). Passing null will use the default sort
@@ -48,21 +48,26 @@ public class SeriesSelection extends AbstractSelection<SeriesSelection> {
     public SeriesCursor query(ContentResolver contentResolver) {
         return query(contentResolver, null, null);
     }
-    
-    
+
+
     public SeriesSelection id(long... value) {
         addEquals(SeriesColumns._ID, toObjectArray(value));
         return this;
     }
 
+
     public SeriesSelection seriesName(String... value) {
         addEquals(SeriesColumns.SERIES_NAME, value);
         return this;
     }
-    
+
     public SeriesSelection seriesNameNot(String... value) {
         addNotEquals(SeriesColumns.SERIES_NAME, value);
         return this;
     }
 
+    public SeriesSelection seriesNameLike(String... value) {
+        addLike(SeriesColumns.SERIES_NAME, value);
+        return this;
+    }
 }

@@ -38,9 +38,9 @@ import ca.rmen.android.palidamuerte.Constants;
 import ca.rmen.android.palidamuerte.R;
 import ca.rmen.android.palidamuerte.app.category.Categories;
 import ca.rmen.android.palidamuerte.app.poem.detail.PoemDetailFragment;
-import ca.rmen.android.palidamuerte.app.poem.list.Search.Query;
 import ca.rmen.android.palidamuerte.provider.poem.PoemColumns;
 import ca.rmen.android.palidamuerte.provider.poem.PoemCursor;
+import ca.rmen.android.palidamuerte.provider.poem.PoemSelection;
 import ca.rmen.android.palidamuerte.ui.Font;
 
 /**
@@ -206,25 +206,19 @@ public class PoemListFragment extends ListFragment { // NO_UCD (use default)
             Log.v(TAG, "onCreateLoader, loaderId = " + loaderId + ", bundle = " + bundle);
             Activity activity = getActivity();
             Intent intent = activity.getIntent();
-            final String selection;
-            final String[] selectionArgs;
+            final PoemSelection poemSelection;
             if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
                 String queryString = intent.getStringExtra(SearchManager.QUERY);
-                Query query = Search.buildSelection(queryString);
-                selection = query.selection;
-                selectionArgs = query.selectionArgs;
+                poemSelection = Search.buildSelection(queryString);
             } else {
                 long categoryId = intent.getLongExtra(PoemListActivity.EXTRA_CATEGORY_ID, -1);
-                if (categoryId == Categories.FAVORITE_CATEGORY_ID) {
-                    selection = PoemColumns.SERIES_ID + " =? AND " + PoemColumns.IS_FAVORITE + "=1";
-                    selectionArgs = new String[] { String.valueOf(1) };
-                } else {
-                    selection = PoemColumns.SERIES_ID + " =? AND " + PoemColumns.CATEGORY_ID + "=?";
-                    selectionArgs = new String[] { String.valueOf(1), String.valueOf(categoryId) };
-                }
+                poemSelection = new PoemSelection();
+                if (categoryId == Categories.FAVORITE_CATEGORY_ID) poemSelection.isFavorite(true);
+                else
+                    poemSelection.categoryId(categoryId);
             }
-            CursorLoader loader = new CursorLoader(activity, PoemColumns.CONTENT_URI, null, selection, selectionArgs, PoemColumns.CATEGORY_ID + ", "
-                    + PoemColumns._ID);
+            CursorLoader loader = new CursorLoader(activity, PoemColumns.CONTENT_URI, null, poemSelection.sel(), poemSelection.args(), PoemColumns.CATEGORY_ID
+                    + ", " + PoemColumns._ID);
             return loader;
         }
 

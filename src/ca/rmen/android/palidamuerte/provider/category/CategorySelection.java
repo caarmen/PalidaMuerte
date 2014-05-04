@@ -19,10 +19,10 @@ public class CategorySelection extends AbstractSelection<CategorySelection> {
     public Uri uri() {
         return CategoryColumns.CONTENT_URI;
     }
-    
+
     /**
      * Query the given content resolver using this selection.
-     * 
+     *
      * @param contentResolver The content resolver to query.
      * @param projection A list of which columns to return. Passing null will return all columns, which is inefficient.
      * @param sortOrder How to order the rows, formatted as an SQL ORDER BY clause (excluding the ORDER BY itself). Passing null will use the default sort
@@ -48,21 +48,26 @@ public class CategorySelection extends AbstractSelection<CategorySelection> {
     public CategoryCursor query(ContentResolver contentResolver) {
         return query(contentResolver, null, null);
     }
-    
-    
+
+
     public CategorySelection id(long... value) {
         addEquals(CategoryColumns._ID, toObjectArray(value));
         return this;
     }
 
+
     public CategorySelection categoryName(String... value) {
         addEquals(CategoryColumns.CATEGORY_NAME, value);
         return this;
     }
-    
+
     public CategorySelection categoryNameNot(String... value) {
         addNotEquals(CategoryColumns.CATEGORY_NAME, value);
         return this;
     }
 
+    public CategorySelection categoryNameLike(String... value) {
+        addLike(CategoryColumns.CATEGORY_NAME, value);
+        return this;
+    }
 }

@@ -3,9 +3,12 @@
  */
 package ca.rmen.android.palidamuerte.provider.poem;
 
+import java.util.Date;
+
 import android.content.ContentResolver;
 import android.database.Cursor;
 import android.net.Uri;
+
 import ca.rmen.android.palidamuerte.provider.base.AbstractSelection;
 
 /**
@@ -19,7 +22,7 @@ public class PoemSelection extends AbstractSelection<PoemSelection> {
 
     /**
      * Query the given content resolver using this selection.
-     * 
+     *
      * @param contentResolver The content resolver to query.
      * @param projection A list of which columns to return. Passing null will return all columns, which is inefficient.
      * @param sortOrder How to order the rows, formatted as an SQL ORDER BY clause (excluding the ORDER BY itself). Passing null will use the default sort
@@ -46,10 +49,12 @@ public class PoemSelection extends AbstractSelection<PoemSelection> {
         return query(contentResolver, null, null);
     }
 
+
     public PoemSelection id(long... value) {
         addEquals(PoemColumns._ID, toObjectArray(value));
         return this;
     }
+
 
     public PoemSelection poemTypeId(long... value) {
         addEquals(PoemColumns.POEM_TYPE_ID, toObjectArray(value));
@@ -181,6 +186,11 @@ public class PoemSelection extends AbstractSelection<PoemSelection> {
         return this;
     }
 
+    public PoemSelection locationLike(String... value) {
+        addLike(PoemColumns.LOCATION, value);
+        return this;
+    }
+
     public PoemSelection year(int... value) {
         addEquals(PoemColumns.YEAR, toObjectArray(value));
         return this;
@@ -281,6 +291,11 @@ public class PoemSelection extends AbstractSelection<PoemSelection> {
         return this;
     }
 
+    public PoemSelection titleLike(String... value) {
+        addLike(PoemColumns.TITLE, value);
+        return this;
+    }
+
     public PoemSelection preContent(String... value) {
         addEquals(PoemColumns.PRE_CONTENT, value);
         return this;
@@ -288,6 +303,11 @@ public class PoemSelection extends AbstractSelection<PoemSelection> {
 
     public PoemSelection preContentNot(String... value) {
         addNotEquals(PoemColumns.PRE_CONTENT, value);
+        return this;
+    }
+
+    public PoemSelection preContentLike(String... value) {
+        addLike(PoemColumns.PRE_CONTENT, value);
         return this;
     }
 
@@ -301,9 +321,13 @@ public class PoemSelection extends AbstractSelection<PoemSelection> {
         return this;
     }
 
-    public PoemSelection isFavorite(boolean value) {
-        addEquals(PoemColumns.IS_FAVORITE, value ? new Object[] { "1" } : new Object[] { "0" });
+    public PoemSelection contentLike(String... value) {
+        addLike(PoemColumns.CONTENT, value);
         return this;
     }
 
+    public PoemSelection isFavorite(boolean value) {
+        addEquals(PoemColumns.IS_FAVORITE, toObjectArray(value));
+        return this;
+    }
 }
