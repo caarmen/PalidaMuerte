@@ -31,6 +31,7 @@ import ca.rmen.android.palidamuerte.R;
 import ca.rmen.android.palidamuerte.app.category.Categories;
 import ca.rmen.android.palidamuerte.provider.poem.PoemCursor;
 import ca.rmen.android.palidamuerte.ui.Font;
+import ca.rmen.android.palidamuerte.ui.ViewHolder;
 
 public class FavoritePoemListCursorAdapter extends CursorAdapter {
 
@@ -58,12 +59,12 @@ public class FavoritePoemListCursorAdapter extends CursorAdapter {
 
     private void fillView(View view, Cursor cursor) {
         final PoemCursor cursorWrapper = (PoemCursor) cursor;
-        TextView tvTitle = (TextView) view.findViewById(R.id.title);
+        TextView tvTitle = ViewHolder.get(view, R.id.title);
         tvTitle.setText(cursorWrapper.getTitle());
         tvTitle.setTypeface(Font.getTypeface(mContext));
         final long categoryId = cursorWrapper.getCategoryId();
 
-        final TextView tvCategory = (TextView) view.findViewById(R.id.category);
+        final TextView tvCategory = ViewHolder.get(view, R.id.category);
         tvCategory.setTag(cursorWrapper.getCategoryId());
         new AsyncTask<Void, Void, String>() {
 

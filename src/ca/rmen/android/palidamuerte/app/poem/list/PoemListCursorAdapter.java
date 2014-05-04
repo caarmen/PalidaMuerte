@@ -29,6 +29,7 @@ import ca.rmen.android.palidamuerte.Constants;
 import ca.rmen.android.palidamuerte.R;
 import ca.rmen.android.palidamuerte.provider.poem.PoemCursor;
 import ca.rmen.android.palidamuerte.ui.Font;
+import ca.rmen.android.palidamuerte.ui.ViewHolder;
 
 public class PoemListCursorAdapter extends CursorAdapter {
 
@@ -56,10 +57,10 @@ public class PoemListCursorAdapter extends CursorAdapter {
 
     private void fillView(View view, Cursor cursor) {
         PoemCursor cursorWrapper = (PoemCursor) cursor;
-        TextView tvTitle = (TextView) view.findViewById(R.id.title);
+        TextView tvTitle = ViewHolder.get(view, R.id.title);
         tvTitle.setText(cursorWrapper.getTitle());
 
-        View favoriteIcon = view.findViewById(R.id.favoriteIcon);
+        View favoriteIcon = ViewHolder.get(view, R.id.favoriteIcon);
         favoriteIcon.setVisibility(cursorWrapper.getIsFavorite() ? View.VISIBLE : View.GONE);
 
         tvTitle.setTypeface(Font.getTypeface(mContext));
