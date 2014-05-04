@@ -1,6 +1,8 @@
 package ca.rmen.android.palidamuerte;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Random;
 
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
@@ -54,9 +56,22 @@ public class MusicPlayer {
         mMediaPlayer.setOnInfoListener(mOnInfoListener);
         try {
             mMusicFileNames = context.getResources().getAssets().list("music");
+            shuffle();
         } catch (IOException e) {
             Log.e(TAG, e.getMessage(), e);
         }
+    }
+
+    private void shuffle() {
+        Log.v(TAG, "shuffle");
+        Random random = new Random();
+        for (int i = mMusicFileNames.length - 1; i > 0; i--) {
+            int j = random.nextInt(i);
+            String tempFileName = mMusicFileNames[i];
+            mMusicFileNames[i] = mMusicFileNames[j];
+            mMusicFileNames[j] = tempFileName;
+        }
+        Log.v(TAG, "play list is now: " + Arrays.toString(mMusicFileNames));
     }
 
     public void play() {
