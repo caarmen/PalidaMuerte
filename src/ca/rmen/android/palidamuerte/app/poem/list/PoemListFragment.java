@@ -19,6 +19,8 @@
 package ca.rmen.android.palidamuerte.app.poem.list;
 
 import android.app.Activity;
+import android.app.SearchManager;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -36,6 +38,7 @@ import ca.rmen.android.palidamuerte.Constants;
 import ca.rmen.android.palidamuerte.R;
 import ca.rmen.android.palidamuerte.app.category.Categories;
 import ca.rmen.android.palidamuerte.app.poem.detail.PoemDetailFragment;
+import ca.rmen.android.palidamuerte.app.poem.list.Search.Query;
 import ca.rmen.android.palidamuerte.provider.poem.PoemColumns;
 import ca.rmen.android.palidamuerte.provider.poem.PoemCursor;
 import ca.rmen.android.palidamuerte.ui.Font;
@@ -102,8 +105,8 @@ public class PoemListFragment extends ListFragment { // NO_UCD (use default)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final long categoryId = getActivity().getIntent().getLongExtra(PoemListActivity.EXTRA_CATEGORY_ID, -1);
         final Activity activity = getActivity();
+        final long categoryId = activity.getIntent().getLongExtra(PoemListActivity.EXTRA_CATEGORY_ID, -1);
         new AsyncTask<Void, Void, String>() {
 
             @Override
@@ -201,17 +204,26 @@ public class PoemListFragment extends ListFragment { // NO_UCD (use default)
         @Override
         public Loader<Cursor> onCreateLoader(int loaderId, Bundle bundle) {
             Log.v(TAG, "onCreateLoader, loaderId = " + loaderId + ", bundle = " + bundle);
-            long categoryId = getActivity().getIntent().getLongExtra(PoemListActivity.EXTRA_CATEGORY_ID, -1);
+            Activity activity = getActivity();
+            Intent intent = activity.getIntent();
             final String selection;
             final String[] selectionArgs;
-            if (categoryId == Categories.FAVORITE_CATEGORY_ID) {
-                selection = PoemColumns.SERIES_ID + " =? AND " + PoemColumns.IS_FAVORITE + "=1";
-                selectionArgs = new String[] { String.valueOf(1) };
+            if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+                String queryString = intent.getStringExtra(SearchManager.QUERY);
+                Query query = Search.buildSelection(queryString);
+                selection = query.selection;
+                selectionArgs = query.selectionArgs;
             } else {
-                selection = PoemColumns.SERIES_ID + " =? AND " + PoemColumns.CATEGORY_ID + "=?";
-                selectionArgs = new String[] { String.valueOf(1), String.valueOf(categoryId) };
+                long categoryId = intent.getLongExtra(PoemListActivity.EXTRA_CATEGORY_ID, -1);
+                if (categoryId == Categories.FAVORITE_CATEGORY_ID) {
+                    selection = PoemColumns.SERIES_ID + " =? AND " + PoemColumns.IS_FAVORITE + "=1";
+                    selectionArgs = new String[] { String.valueOf(1) };
+                } else {
+                    selection = PoemColumns.SERIES_ID + " =? AND " + PoemColumns.CATEGORY_ID + "=?";
+                    selectionArgs = new String[] { String.valueOf(1), String.valueOf(categoryId) };
+                }
             }
-            CursorLoader loader = new CursorLoader(getActivity(), PoemColumns.CONTENT_URI, null, selection, selectionArgs, PoemColumns.CATEGORY_ID + ", "
+            CursorLoader loader = new CursorLoader(activity, PoemColumns.CONTENT_URI, null, selection, selectionArgs, PoemColumns.CATEGORY_ID + ", "
                     + PoemColumns._ID);
             return loader;
         }
