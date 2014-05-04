@@ -34,7 +34,7 @@ public class Search {
     public static PoemSelection buildSelection(String searchQuery) {
         String[] searchTerms = getSearchTerms(searchQuery);
         for (int i = 0; i < searchTerms.length; i++)
-            searchTerms[i] = collateSearchTerm(searchTerms[i]);
+            searchTerms[i] = collateText(searchTerms[i]);
 
         PoemSelection poemSelection = new PoemSelection();
 
@@ -61,7 +61,7 @@ public class Search {
         return poemSelection;
     }
 
-    private static String collateSearchTerm(String searchTerm) {
+    private static String collateText(String searchTerm) {
         searchTerm = searchTerm.toLowerCase();
         for (int j = 0; j < ACCENTS.length(); j++)
             searchTerm = searchTerm.replace(ACCENTS.charAt(j), NO_ACCENTS.charAt(j));
@@ -72,6 +72,30 @@ public class Search {
         String result = " LOWER(" + columnName + ")";
         for (int i = 0; i < ACCENTS.length(); i++)
             result = "replace(" + result + ",'" + ACCENTS.charAt(i) + "','" + NO_ACCENTS.charAt(i) + "')";
+        return result;
+    }
+
+    public static String findContext(String content, String[] searchTerms) {
+        String collatedContent = collateText(content);
+        for (String searchTerm : searchTerms) {
+            String collatedSearchTerm = collateText(searchTerm);
+            String context = findContext(collatedContent, collatedSearchTerm);
+            if (context != null) return context;
+        }
+        return null;
+    }
+
+    private static String findContext(String content, String searchTerm) {
+        int i = content.indexOf(searchTerm);
+        if (i < 0) return null;
+        int begin = Math.max(0, i - 20);
+        int end = Math.min(i + searchTerm.length() + 20, content.length());
+        String result = content.substring(begin, end);
+        if (begin > 0) result = "..." + result;
+        if (end < content.length()) result = result + "...";
+        result = result.replace("\n", " ");
+        result = result.replace("\r", " ");
+        result = result.replaceAll("  ", " ");
         return result;
     }
 

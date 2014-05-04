@@ -18,8 +18,6 @@
  */
 package ca.rmen.android.palidamuerte.app.poem.list;
 
-import java.util.Arrays;
-
 import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
@@ -63,7 +61,9 @@ public class SearchResultPoemListCursorAdapter extends CursorAdapter {
         TextView tvTitle = (TextView) view.findViewById(R.id.title);
         tvTitle.setText(cursorWrapper.getTitle());
         TextView tvMatchedText = (TextView) view.findViewById(R.id.matched_text);
-        tvMatchedText.setText(Arrays.toString(mSearchTerms));
+        String content = cursorWrapper.getContent();
+        String matchedText = Search.findContext(content, mSearchTerms);
+        tvMatchedText.setText(matchedText);
         tvTitle.setTypeface(Font.getTypeface(mContext));
     }
 
