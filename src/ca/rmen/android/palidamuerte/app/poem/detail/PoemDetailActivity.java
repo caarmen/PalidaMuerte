@@ -18,6 +18,7 @@
  */
 package ca.rmen.android.palidamuerte.app.poem.detail;
 
+import android.app.SearchManager;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.os.AsyncTask;
@@ -159,6 +160,8 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
             // http://developer.android.com/design/patterns/navigation.html#up-vs-back
             //
             Intent intent = new Intent(this, PoemListActivity.class);
+            intent.setAction(getIntent().getAction());
+            intent.putExtra(SearchManager.QUERY, getIntent().getStringExtra(SearchManager.QUERY));
             intent.putExtra(PoemListActivity.EXTRA_CATEGORY_ID, getIntent().getLongExtra(PoemListActivity.EXTRA_CATEGORY_ID, -1));
             NavUtils.navigateUpTo(this, intent);
             return true;
