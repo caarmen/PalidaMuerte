@@ -50,7 +50,7 @@
     </style>
 
     <style name="ActionBarStyle" parent="@android:style/Widget.Holo.ActionBar.Solid">
-        <item name="android:backgroundSplit">#88000000</item>
+        <item name="android:backgroundSplit">#CC000000</item>
     </style>
 
     <style name="ActionBarTransparentStyle" parent="@android:style/Widget.Holo.ActionBar.Solid">
