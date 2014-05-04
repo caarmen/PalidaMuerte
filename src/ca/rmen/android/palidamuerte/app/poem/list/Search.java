@@ -18,6 +18,7 @@
  */
 package ca.rmen.android.palidamuerte.app.poem.list;
 
+import android.text.Html;
 import android.text.TextUtils;
 import ca.rmen.android.palidamuerte.provider.poem.PoemColumns;
 import ca.rmen.android.palidamuerte.provider.poem.PoemSelection;
@@ -26,8 +27,10 @@ public class Search {
 
     private static final String ACCENTS = "‡Ž’—œ–çƒêîò„";
     private static final String NO_ACCENTS = "aeiounaeioun";
+    private static final int SEARCH_CONTEXT_SIZE = 100;
 
     public static String[] getSearchTerms(String queryString) {
+        queryString = queryString.trim();
         return TextUtils.split(queryString, " ");
     }
 
@@ -53,8 +56,10 @@ public class Search {
 
         String[] columnNames = new String[] { PoemColumns.LOCATION, PoemColumns.TITLE, PoemColumns.PRE_CONTENT, PoemColumns.CONTENT };
         for (int i = 0; i < columnNames.length; i++) {
-            for (int j = 0; j < searchTerms.length; j++)
+            for (int j = 0; j < searchTerms.length; j++) {
                 poemSelection.addRaw(collateColumn(columnNames[i]) + " LIKE ?", new String[] { searchTerms[j] });
+                if (j < searchTerms.length - 1) poemSelection.or();
+            }
             if (i < columnNames.length - 1) poemSelection.or();
         }
 
@@ -75,28 +80,29 @@ public class Search {
         return result;
     }
 
-    public static String findContext(String content, String[] searchTerms) {
+    public static CharSequence findContext(String content, String[] searchTerms) {
         String collatedContent = collateText(content);
         for (String searchTerm : searchTerms) {
             String collatedSearchTerm = collateText(searchTerm);
-            String context = findContext(collatedContent, collatedSearchTerm);
+            CharSequence context = findContext(content, collatedContent, collatedSearchTerm);
             if (context != null) return context;
         }
         return null;
     }
 
-    private static String findContext(String content, String searchTerm) {
-        int i = content.indexOf(searchTerm);
+    private static CharSequence findContext(String originalContent, String collatedContent, String collatedSearchTerm) {
+        int i = collatedContent.indexOf(collatedSearchTerm);
         if (i < 0) return null;
-        int begin = Math.max(0, i - 20);
-        int end = Math.min(i + searchTerm.length() + 20, content.length());
-        String result = content.substring(begin, end);
+        String result = "<b>" + originalContent.substring(i, i + collatedSearchTerm.length()) + "</b>";
+        int begin = Math.max(0, i - SEARCH_CONTEXT_SIZE / 2);
+        int end = Math.min(i + collatedSearchTerm.length() + SEARCH_CONTEXT_SIZE / 2, collatedContent.length());
+        result = originalContent.substring(begin, i) + result + originalContent.substring(i + collatedSearchTerm.length(), end);
         if (begin > 0) result = "..." + result;
-        if (end < content.length()) result = result + "...";
+        if (end < collatedContent.length()) result = result + "...";
         result = result.replace("\n", " ");
         result = result.replace("\r", " ");
         result = result.replaceAll("  ", " ");
-        return result;
+        return Html.fromHtml(result);
     }
 
 }

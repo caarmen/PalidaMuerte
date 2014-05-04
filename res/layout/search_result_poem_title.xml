@@ -28,9 +28,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="left"
-        android:paddingBottom="8dp"
-        android:paddingLeft="8dp"
-        android:paddingTop="8dp"
+        android:padding="8dp"
         android:textAppearance="@style/TextAppearancePoemListTitle" />
 
     <TextView
@@ -39,7 +37,9 @@
         android:layout_height="match_parent"
         android:background="@drawable/selector"
         android:gravity="bottom|left"
+        android:paddingBottom="8dp"
         android:paddingLeft="8dp"
+        android:paddingRight="8dp"
         android:textAppearance="@style/TextAppearancePoemListCategoryName" />
 
 </LinearLayout>

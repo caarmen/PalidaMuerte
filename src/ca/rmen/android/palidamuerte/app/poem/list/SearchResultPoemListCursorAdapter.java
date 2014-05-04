@@ -62,7 +62,7 @@ public class SearchResultPoemListCursorAdapter extends CursorAdapter {
         tvTitle.setText(cursorWrapper.getTitle());
         TextView tvMatchedText = (TextView) view.findViewById(R.id.matched_text);
         String content = cursorWrapper.getContent();
-        String matchedText = Search.findContext(content, mSearchTerms);
+        CharSequence matchedText = Search.findContext(content, mSearchTerms);
         tvMatchedText.setText(matchedText);
         tvTitle.setTypeface(Font.getTypeface(mContext));
     }
