@@ -28,6 +28,8 @@ public class Search {
     private static final String ACCENTS = "‡Ž’—œ–çƒêîò„";
     private static final String NO_ACCENTS = "aeiounaeioun";
     private static final int SEARCH_CONTEXT_SIZE = 100;
+    private static final String[] SEARCH_COLUMNS = new String[] { PoemColumns.YEAR, PoemColumns.LOCATION, PoemColumns.TITLE, PoemColumns.PRE_CONTENT,
+            PoemColumns.CONTENT };
 
     public static String[] getSearchTerms(String queryString) {
         queryString = queryString.trim();
@@ -39,38 +41,28 @@ public class Search {
         for (int i = 0; i < searchTerms.length; i++)
             searchTerms[i] = collateText(searchTerms[i]);
 
-        PoemSelection poemSelection = new PoemSelection();
-
-        // Search the year column for searchTerms that are numeric
-        for (String searchTerm : searchTerms) {
-            if (TextUtils.isDigitsOnly(searchTerm)) {
-                if (poemSelection.args() != null && poemSelection.args().length > 0) poemSelection.or();
-                poemSelection.year(Integer.valueOf(searchTerm));
-            }
-        }
-        if (poemSelection.args() != null && poemSelection.args().length > 0) poemSelection.or();
-
         // Surround searchTerms with % to use with the LIKE query
         for (int i = 0; i < searchTerms.length; i++)
             searchTerms[i] = "%" + searchTerms[i] + "%";
 
-        String[] columnNames = new String[] { PoemColumns.LOCATION, PoemColumns.TITLE, PoemColumns.PRE_CONTENT, PoemColumns.CONTENT };
-        for (int i = 0; i < columnNames.length; i++) {
+        PoemSelection poemSelection = new PoemSelection();
+
+        for (int i = 0; i < SEARCH_COLUMNS.length; i++) {
             for (int j = 0; j < searchTerms.length; j++) {
-                poemSelection.addRaw(collateColumn(columnNames[i]) + " LIKE ?", new String[] { searchTerms[j] });
+                poemSelection.addRaw(collateColumn(SEARCH_COLUMNS[i]) + " LIKE ?", new String[] { searchTerms[j] });
                 if (j < searchTerms.length - 1) poemSelection.or();
             }
-            if (i < columnNames.length - 1) poemSelection.or();
+            if (i < SEARCH_COLUMNS.length - 1) poemSelection.or();
         }
 
         return poemSelection;
     }
 
-    private static String collateText(String searchTerm) {
-        searchTerm = searchTerm.toLowerCase();
+    private static String collateText(String text) {
+        text = text.toLowerCase();
         for (int j = 0; j < ACCENTS.length(); j++)
-            searchTerm = searchTerm.replace(ACCENTS.charAt(j), NO_ACCENTS.charAt(j));
-        return searchTerm;
+            text = text.replace(ACCENTS.charAt(j), NO_ACCENTS.charAt(j));
+        return text;
     }
 
     private static String collateColumn(String columnName) {
