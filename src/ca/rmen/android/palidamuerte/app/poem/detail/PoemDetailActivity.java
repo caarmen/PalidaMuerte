@@ -89,16 +89,23 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
 
             @Override
             protected void onPostExecute(PoemPagerAdapter result) {
-                mPoemPagerAdapter = result;
-                mViewPager.setAdapter(mPoemPagerAdapter);
-                mViewPager.setOnPageChangeListener(mOnPageChangeListener);
-                findViewById(R.id.activity_loading).setVisibility(View.GONE);
-                int position = mPoemPagerAdapter.getPositionForPoem(poemId);
-                mViewPager.setCurrentItem(position);
-                getActionBar().setTitle(mActivityTitle);
-                String pageNumber = getString(R.string.page_number, position + 1, mPoemPagerAdapter.getCount());
-                mTextViewPageNumber.setText(pageNumber);
-                invalidateOptionsMenu();
+                if (isFinishing()) return;
+                try {
+                    mPoemPagerAdapter = result;
+                    mViewPager.setAdapter(mPoemPagerAdapter);
+                    mViewPager.setOnPageChangeListener(mOnPageChangeListener);
+                    findViewById(R.id.activity_loading).setVisibility(View.GONE);
+                    int position = mPoemPagerAdapter.getPositionForPoem(poemId);
+                    mViewPager.setCurrentItem(position);
+                    getActionBar().setTitle(mActivityTitle);
+                    String pageNumber = getString(R.string.page_number, position + 1, mPoemPagerAdapter.getCount());
+                    mTextViewPageNumber.setText(pageNumber);
+                    invalidateOptionsMenu();
+                } catch (IllegalStateException e) {
+                    // Don't have time to investigate the root cause now
+                    //https://groups.google.com/forum/#!topic/android-developers/Zpb8YSzTltA 
+                    Log.e(TAG, e.getMessage(), e);
+                }
             }
         }.execute();
 
