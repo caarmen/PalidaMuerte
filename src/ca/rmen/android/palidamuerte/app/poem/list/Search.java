@@ -19,32 +19,56 @@
 package ca.rmen.android.palidamuerte.app.poem.list;
 
 import android.text.TextUtils;
+import ca.rmen.android.palidamuerte.provider.poem.PoemColumns;
 import ca.rmen.android.palidamuerte.provider.poem.PoemSelection;
 
 public class Search {
 
+    private static final String ACCENTS = "‡Ž’—œ–çƒêîò„";
+    private static final String NO_ACCENTS = "aeiounaeioun";
+
     public static PoemSelection buildSelection(String searchQuery) {
-        String[] keyWords = searchQuery.split(" ");
+        String[] searchTerms = searchQuery.split(" ");
+        for (int i = 0; i < searchTerms.length; i++)
+            searchTerms[i] = collateSearchTerm(searchTerms[i]);
 
         PoemSelection poemSelection = new PoemSelection();
 
-        // Search the year column for keywords that are numeric
-        for (String keyWord : keyWords) {
-            if (TextUtils.isDigitsOnly(keyWord)) {
+        // Search the year column for searchTerms that are numeric
+        for (String searchTerm : searchTerms) {
+            if (TextUtils.isDigitsOnly(searchTerm)) {
                 if (poemSelection.args() != null && poemSelection.args().length > 0) poemSelection.or();
-                poemSelection.year(Integer.valueOf(keyWord));
+                poemSelection.year(Integer.valueOf(searchTerm));
             }
         }
-
         if (poemSelection.args() != null && poemSelection.args().length > 0) poemSelection.or();
 
-        // Surround keywords with % to use with the LIKE query
-        for (int i = 0; i < keyWords.length; i++)
-            keyWords[i] = "%" + keyWords[i] + "%";
+        // Surround searchTerms with % to use with the LIKE query
+        for (int i = 0; i < searchTerms.length; i++)
+            searchTerms[i] = "%" + searchTerms[i] + "%";
 
-        poemSelection.locationLike(keyWords).or().titleLike(keyWords).or().preContentLike(keyWords).or().contentLike(keyWords);
+        String[] columnNames = new String[] { PoemColumns.LOCATION, PoemColumns.TITLE, PoemColumns.PRE_CONTENT, PoemColumns.CONTENT };
+        for (int i = 0; i < columnNames.length; i++) {
+            for (int j = 0; j < searchTerms.length; j++)
+                poemSelection.addRaw(collateColumn(columnNames[i]) + " LIKE ?", new String[] { searchTerms[j] });
+            if (i < columnNames.length - 1) poemSelection.or();
+        }
 
         return poemSelection;
+    }
+
+    private static String collateSearchTerm(String searchTerm) {
+        searchTerm = searchTerm.toLowerCase();
+        for (int j = 0; j < ACCENTS.length(); j++)
+            searchTerm = searchTerm.replace(ACCENTS.charAt(j), NO_ACCENTS.charAt(j));
+        return searchTerm;
+    }
+
+    private static String collateColumn(String columnName) {
+        String result = " LOWER(" + columnName + ")";
+        for (int i = 0; i < ACCENTS.length(); i++)
+            result = "replace(" + result + ",'" + ACCENTS.charAt(i) + "','" + NO_ACCENTS.charAt(i) + "')";
+        return result;
     }
 
 }
