@@ -28,6 +28,11 @@
         android:showAsAction="ifRoom"
         android:title="@string/action_share"/>
     <item
+        android:id="@+id/action_music"
+        android:icon="@drawable/ic_action_music_on"
+        android:showAsAction="ifRoom"
+        android:title="@string/action_music_on"/>
+    <item
         android:id="@+id/action_about"
         android:icon="@drawable/ic_action_about"
         android:showAsAction="ifRoom"

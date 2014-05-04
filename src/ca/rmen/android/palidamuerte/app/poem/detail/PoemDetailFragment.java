@@ -131,7 +131,6 @@ public class PoemDetailFragment extends Fragment { // NO_UCD (use default)
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         Log.v(TAG, "onCreateOptionsMenu");
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_music, menu);
         ActionBar.updateMusicMenuItem(getActivity(), menu.findItem(R.id.action_music));
     }
 

@@ -124,7 +124,7 @@ public class PoemListActivity extends FragmentActivity implements PoemListFragme
         Log.v(TAG, "onCreateOptionsMenu");
         super.onCreateOptionsMenu(menu);
         if (mTwoPane && mPoemId >= 0) {
-            getMenuInflater().inflate(R.menu.poem, menu);
+            getMenuInflater().inflate(R.menu.menu_poem, menu);
             mShareActionProvider = (ShareActionProvider) menu.findItem(R.id.action_share).getActionProvider();
             Poems.updateShareIntent(mShareActionProvider, this, mPoemId);
         }

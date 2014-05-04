@@ -67,7 +67,6 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
         mTextViewPageNumber = (TextView) getActionBar().getCustomView();
         ActionBar.setCustomFont(this);
         mViewPager = (ViewPager) findViewById(R.id.pager);
-        final long categoryId = getIntent().getLongExtra(PoemListActivity.EXTRA_CATEGORY_ID, -1);
 
         // If this is the first time we open the activity, we will use the poem id provided in the intent.
         // If we are recreating the activity (because of a device rotation, for example), we will display the poem that the user 
@@ -121,7 +120,7 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
     public boolean onCreateOptionsMenu(Menu menu) {
         Log.v(TAG, "onCreateOptionsMenu");
         super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.poem, menu);
+        getMenuInflater().inflate(R.menu.menu_poem, menu);
         menu.findItem(R.id.action_about).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
         mShareActionProvider = (ShareActionProvider) menu.findItem(R.id.action_share).getActionProvider();
         if (mPoemPagerAdapter != null) {
