@@ -120,8 +120,13 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/divider"
             android:layout_centerHorizontal="true"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:marqueeRepeatLimit="marquee_forever"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
+            android:singleLine="true"
             android:text="@string/current_song"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:visibility="gone" />
