@@ -19,22 +19,12 @@
 package ca.rmen.android.palidamuerte.app.about;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 import ca.rmen.android.palidamuerte.Constants;
 import ca.rmen.android.palidamuerte.R;
 import ca.rmen.android.palidamuerte.ui.ActionBar;
-import ca.rmen.android.palidamuerte.ui.Font;
 
 public class AboutActivity extends Activity { // NO_UCD (use default)
     private static final String TAG = Constants.TAG + AboutActivity.class.getSimpleName();
@@ -46,7 +36,7 @@ public class AboutActivity extends Activity { // NO_UCD (use default)
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
         if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction().add(R.id.container, new PlaceholderFragment()).commit();
+            getFragmentManager().beginTransaction().add(R.id.container, new AboutFragment()).commit();
         }
         ActionBar.setCustomFont(this);
         getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -57,31 +47,6 @@ public class AboutActivity extends Activity { // NO_UCD (use default)
         int id = item.getItemId();
         if (id == android.R.id.home) onBackPressed();
         return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment { // NO_UCD (use private)
-
-        public PlaceholderFragment() {}
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_about, container, false);
-            TextView tvTitleView = (TextView) rootView.findViewById(R.id.author_name);
-            Typeface font = Font.getTypeface(getActivity());
-            tvTitleView.setTypeface(font);
-            PackageInfo pInfo;
-            try {
-                pInfo = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0);
-                TextView tvAppNameAndVersion = (TextView) rootView.findViewById(R.id.app_name_and_version);
-                tvAppNameAndVersion.setText(getString(R.string.app_name_and_version, getString(R.string.app_name), pInfo.versionName));
-            } catch (NameNotFoundException e) {
-                Log.e(TAG, e.getMessage(), e);
-            }
-            return rootView;
-        }
     }
 
 }
