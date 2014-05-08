@@ -27,6 +27,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.TextView;
 import ca.rmen.android.palidamuerte.MusicPlayer;
 import ca.rmen.android.palidamuerte.MusicPlayer.Song;
@@ -54,6 +55,9 @@ public class AboutFragment extends Fragment {
             tvAppNameAndVersion.setText(getString(R.string.app_name_and_version, getString(R.string.app_name), pInfo.versionName));
             MusicPlayer musicPlayer = MusicPlayer.getInstance(getActivity());
             Song currentSong = musicPlayer.getCurrentSong();
+            WebView wvCredits = (WebView) rootView.findViewById(R.id.credits);
+            wvCredits.setBackgroundColor(0);
+            wvCredits.loadUrl("file:///android_asset/credits.html");
             if (currentSong != null) {
                 rootView.findViewById(R.id.divider2).setVisibility(View.VISIBLE);
                 TextView tvCurrentSong = (TextView) rootView.findViewById(R.id.current_song);
@@ -65,4 +69,5 @@ public class AboutFragment extends Fragment {
         }
         return rootView;
     }
+
 }
