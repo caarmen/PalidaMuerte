@@ -115,10 +115,33 @@
             android:scaleType="center" />
 
         <TextView
-            android:id="@+id/app_name_and_version"
+            android:id="@+id/current_song"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/divider"
+            android:layout_centerHorizontal="true"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:text="@string/current_song"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/divider2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/current_song"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:background="@drawable/cyberscooty_stylized_plant_separation"
+            android:scaleType="center"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/app_name_and_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/divider2"
             android:autoLink="email"
             android:paddingBottom="16dp"
             android:paddingLeft="@dimen/activity_horizontal_margin"

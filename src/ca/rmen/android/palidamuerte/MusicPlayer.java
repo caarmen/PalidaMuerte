@@ -33,6 +33,16 @@ import android.util.Log;
  */
 public class MusicPlayer {
 
+    public static class Song {
+        public final String composer;
+        public final String title;
+
+        public Song(String composer, String title) {
+            this.composer = composer;
+            this.title = title;
+        }
+    }
+
     private static final String TAG = Constants.TAG + MusicPlayer.class.getSimpleName();
     private static final String PREF_LAST_SONG_PLAYED = "pref_last_song_played";
     private static MusicPlayer sInstance = null;
@@ -80,6 +90,24 @@ public class MusicPlayer {
         if (mSongIndex == mMusicFileNames.length) mSongIndex = 0;
         if (mMediaPlayer.isPlaying()) return;
         playSong(mSongIndex);
+    }
+
+    /**
+     * @return The currently playing song, if any. If no song is currently playing, return null.
+     */
+    public Song getCurrentSong() {
+        if (isPlaying()) {
+            String fileName = mMusicFileNames[mSongIndex];
+            fileName = fileName.replaceAll("-", " ");
+            fileName = fileName.replaceAll(".mid", "");
+            fileName = fileName.replaceAll("No([0-9])", "n°$1");
+            fileName = fileName.replaceAll("Op([0-9])", "Op. $1");
+            String[] tokens = fileName.split("_");
+            String composer = tokens[0];
+            String songName = tokens[1];
+            return new Song(composer, songName);
+        }
+        return null;
     }
 
     private void playSong(int index) {

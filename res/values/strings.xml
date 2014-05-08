@@ -50,6 +50,7 @@
     <string name="about">Acerca de</string>
     <string name="author_date">1935 &#8211; 2014</string>
     <string name="author_description">Nacido en Cantabria, España, poeta de estilo clásico, autor de más de 8000 poemas, entre ellos 3600 sonetos.\n\nhttp://poesiadelmomento.com</string>
+    <string name="current_song">\u266c Canción actual: %1$s - %2$s\u266c</string>
     <string name="app_name_and_version">%1$s versión %2$s</string>
 
 </resources>

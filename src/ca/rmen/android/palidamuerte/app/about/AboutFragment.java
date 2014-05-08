@@ -28,6 +28,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import ca.rmen.android.palidamuerte.MusicPlayer;
+import ca.rmen.android.palidamuerte.MusicPlayer.Song;
 import ca.rmen.android.palidamuerte.R;
 import ca.rmen.android.palidamuerte.ui.Font;
 
@@ -50,6 +52,14 @@ public class AboutFragment extends Fragment {
             pInfo = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0);
             TextView tvAppNameAndVersion = (TextView) rootView.findViewById(R.id.app_name_and_version);
             tvAppNameAndVersion.setText(getString(R.string.app_name_and_version, getString(R.string.app_name), pInfo.versionName));
+            MusicPlayer musicPlayer = MusicPlayer.getInstance(getActivity());
+            Song currentSong = musicPlayer.getCurrentSong();
+            if (currentSong != null) {
+                rootView.findViewById(R.id.divider2).setVisibility(View.VISIBLE);
+                TextView tvCurrentSong = (TextView) rootView.findViewById(R.id.current_song);
+                tvCurrentSong.setText(getString(R.string.current_song, currentSong.composer, currentSong.title));
+                tvCurrentSong.setVisibility(View.VISIBLE);
+            }
         } catch (NameNotFoundException e) {
             Log.e(TAG, e.getMessage(), e);
         }
