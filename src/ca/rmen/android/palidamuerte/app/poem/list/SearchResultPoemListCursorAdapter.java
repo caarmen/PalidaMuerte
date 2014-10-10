@@ -53,16 +53,11 @@ public class SearchResultPoemListCursorAdapter extends CursorAdapter {
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
         View view = View.inflate(context, R.layout.search_result_poem_title, null);
-        fillView(view, cursor);
         return view;
     }
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        fillView(view, cursor);
-    }
-
-    private void fillView(View view, Cursor cursor) {
         final PoemCursor cursorWrapper = (PoemCursor) cursor;
         TextView tvTitle = ViewHolder.get(view, R.id.title);
         tvTitle.setText(cursorWrapper.getTitle());

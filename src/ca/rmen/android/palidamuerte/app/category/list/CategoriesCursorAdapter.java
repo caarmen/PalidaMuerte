@@ -44,16 +44,11 @@ class CategoriesCursorAdapter extends CursorAdapter {
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
         View view = View.inflate(context, R.layout.category_title, null);
-        fillView(view, cursor);
         return view;
     }
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        fillView(view, cursor);
-    }
-
-    private void fillView(View view, Cursor cursor) {
         CategoryCursor cursorWrapper = (CategoryCursor) cursor;
         TextView title = (TextView) view.findViewById(R.id.title);
         String categoryName = cursorWrapper.getCategoryName();
