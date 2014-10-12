@@ -29,6 +29,7 @@ import ca.rmen.android.palidamuerte.Constants;
 import ca.rmen.android.palidamuerte.R;
 import ca.rmen.android.palidamuerte.provider.category.CategoryCursor;
 import ca.rmen.android.palidamuerte.ui.Font;
+import ca.rmen.android.palidamuerte.ui.ViewHolder;
 
 class CategoriesCursorAdapter extends CursorAdapter {
     private static final String TAG = Constants.TAG + CategoriesCursorAdapter.class.getSimpleName();
@@ -50,7 +51,7 @@ class CategoriesCursorAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         CategoryCursor cursorWrapper = (CategoryCursor) cursor;
-        TextView title = (TextView) view.findViewById(R.id.title);
+        TextView title = ViewHolder.get(view, R.id.title);
         String categoryName = cursorWrapper.getCategoryName();
         int categoryResId = mContext.getResources().getIdentifier(categoryName, "string", R.class.getPackage().getName());
         title.setText(mContext.getString(categoryResId));
