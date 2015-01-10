@@ -19,12 +19,12 @@
 -->
 <resources>
 
-    <string name="la_muerte">Categoría 1</string>
-    <string name="los_muertos">Categoría 2</string>
-    <string name="politico_sociales">Categoría 3</string>
-    <string name="espana">Categoría 4</string>
-    <string name="irak">Categoría 5</string>
-    <string name="mascotas">Categoría 6</string>
+    <string name="la_muerte">Libro 1</string>
+    <string name="los_muertos">Libro 2</string>
+    <string name="politico_sociales">Libro 3</string>
+    <string name="espana">Libro 4</string>
+    <string name="irak">Libro 5</string>
+    <string name="mascotas">Libro 6</string>
     <string name="favoritos">Favoritos</string>
 
 </resources>
