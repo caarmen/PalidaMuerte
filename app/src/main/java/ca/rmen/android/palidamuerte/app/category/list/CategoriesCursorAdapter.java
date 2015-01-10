@@ -53,7 +53,7 @@ class CategoriesCursorAdapter extends CursorAdapter {
         CategoryCursor cursorWrapper = (CategoryCursor) cursor;
         TextView title = ViewHolder.get(view, R.id.title);
         String categoryName = cursorWrapper.getCategoryName();
-        int categoryResId = mContext.getResources().getIdentifier(categoryName, "string", R.class.getPackage().getName());
+        int categoryResId = mContext.getResources().getIdentifier(categoryName, "string", context.getPackageName());
         title.setText(mContext.getString(categoryResId));
         title.setTypeface(Font.getTypeface(mContext));
     }

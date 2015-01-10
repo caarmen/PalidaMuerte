@@ -19,7 +19,7 @@
 -->
 <resources>
 
-    <string name="app_name">Pálida Muerte</string>
+    <string name="app_name">Poemas</string>
     <string name="loading">Cargando&#8230;</string>
     <string name="page_number">%1$d de %2$d</string>
     <string name="poem_type_and_number">%1$s n°%2$d</string>

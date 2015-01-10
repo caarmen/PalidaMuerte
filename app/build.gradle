@@ -28,6 +28,15 @@ android {
         targetSdkVersion 19
     }
 
+    productFlavors {
+        demo {
+            applicationId = "ca.rmen.android.poemas"
+        }
+        palidaMuerte {
+            applicationId = "ca.rmen.android.palidamuerte"
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled true

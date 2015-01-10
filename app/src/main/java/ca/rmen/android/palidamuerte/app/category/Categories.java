@@ -34,7 +34,7 @@ public class Categories {
         try {
             if (!cursor.moveToFirst()) return null;
             String categoryResIdName = cursor.getCategoryName();
-            int categoryResId = context.getResources().getIdentifier(categoryResIdName, "string", R.class.getPackage().getName());
+            int categoryResId = context.getResources().getIdentifier(categoryResIdName, "string", context.getPackageName());
             return context.getString(categoryResId);
         } finally {
             cursor.close();

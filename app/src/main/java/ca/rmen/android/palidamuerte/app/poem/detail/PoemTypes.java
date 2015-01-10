@@ -30,7 +30,7 @@ class PoemTypes {
         try {
             if (!cursor.moveToFirst()) return null;
             String poemTypeResIdName = cursor.getPoemTypeName();
-            int poemTypeResId = context.getResources().getIdentifier(poemTypeResIdName, "string", R.class.getPackage().getName());
+            int poemTypeResId = context.getResources().getIdentifier(poemTypeResIdName, "string", context.getPackageName());
             return context.getString(poemTypeResId);
         } finally {
             cursor.close();

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 
+<!--
   Copyright 2014 Carmen Alvarez
  
   This file is part of Pálida Muerte.
@@ -19,12 +19,5 @@
 -->
 <resources>
 
-    <string name="la_muerte">Categoría 1</string>
-    <string name="los_muertos">Categoría 2</string>
-    <string name="politico_sociales">Categoría 3</string>
-    <string name="espana">Categoría 4</string>
-    <string name="irak">Categoría 5</string>
-    <string name="mascotas">Categoría 6</string>
-    <string name="favoritos">Favoritos</string>
-
+    <string name="app_name">Pálida Muerte</string>
 </resources>

@@ -19,12 +19,11 @@
 -->
 <resources>
 
-    <string name="la_muerte">Categoría 1</string>
-    <string name="los_muertos">Categoría 2</string>
-    <string name="politico_sociales">Categoría 3</string>
-    <string name="espana">Categoría 4</string>
-    <string name="irak">Categoría 5</string>
-    <string name="mascotas">Categoría 6</string>
+    <string name="la_muerte">La muerte</string>
+    <string name="los_muertos">Los muertos</string>
+    <string name="politico_sociales">Político-Sociales</string>
+    <string name="espana">España 1936 &#8211; 1939</string>
+    <string name="irak">Irak 2003 &#8211; 2006</string>
+    <string name="mascotas">Mascotas</string>
     <string name="favoritos">Favoritos</string>
-
 </resources>
