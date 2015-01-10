@@ -31,9 +31,15 @@ android {
     productFlavors {
         demo {
             applicationId = "ca.rmen.android.poemas"
+            buildConfigField 'String', 'PROVIDER_AUTHORITY', "\"ca.rmen.android.poemasfah.provider\""
         }
         palidaMuerte {
             applicationId = "ca.rmen.android.palidamuerte"
+            buildConfigField 'String', 'PROVIDER_AUTHORITY', "\"ca.rmen.android.palidamuerte.provider\""
+        }
+        seleccionLectores {
+            applicationId = "ca.rmen.android.poemasfah.seleccionlectores"
+            buildConfigField 'String', 'PROVIDER_AUTHORITY', "\"ca.rmen.android.poemasfah.seleccionlectores.provider\""
         }
     }
 

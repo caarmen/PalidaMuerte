@@ -32,7 +32,7 @@ public class PalidaMuerteProvider extends ContentProvider {
     private static final String TYPE_CURSOR_ITEM = "vnd.android.cursor.item/";
     private static final String TYPE_CURSOR_DIR = "vnd.android.cursor.dir/";
 
-    public static final String AUTHORITY = "ca.rmen.android.palidamuerte.provider";
+    public static final String AUTHORITY = BuildConfig.PROVIDER_AUTHORITY;
     public static final String CONTENT_URI_BASE = "content://" + AUTHORITY;
 
     public static final String QUERY_NOTIFY = "QUERY_NOTIFY";

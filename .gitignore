@@ -5,3 +5,5 @@ local.properties
 .idea/
 /build/
 signing.properties
+/app/src/palidaMuerte/assets/data.xls
+/app/src/seleccionLectores/assets/data.xls
