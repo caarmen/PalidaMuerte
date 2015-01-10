@@ -84,11 +84,23 @@ public class Poems {
     }
 
     public static String getLocationDateString(Context context, PoemCursor poemCursor) {
+        int dateDisplayFlags = DateUtils.FORMAT_SHOW_DATE;
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, poemCursor.getYear());
         calendar.set(Calendar.MONTH, poemCursor.getMonth() - 1);
-        calendar.set(Calendar.DAY_OF_MONTH, poemCursor.getDay());
-        String dateString = DateUtils.formatDateTime(context, calendar.getTimeInMillis(), DateUtils.FORMAT_SHOW_DATE);
+        int day = poemCursor.getDay();
+        // If the day is invalid, this means that we don't know
+        // the day: we only know the year and the month.
+        // We'll pretend that the day is 1 (this is required
+        // for the month to be determined correctly), but
+        // we won't display the day.
+        if (day < 1) {
+            day = 1;
+            dateDisplayFlags = DateUtils.FORMAT_NO_MONTH_DAY;
+        }
+
+        calendar.set(Calendar.DAY_OF_MONTH, day);
+        String dateString = DateUtils.formatDateTime(context, calendar.getTimeInMillis(), dateDisplayFlags);
         String locationDateString = String.format("%s, %s", poemCursor.getLocation(), dateString);
         return locationDateString;
     }
