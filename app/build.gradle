@@ -23,14 +23,13 @@ android {
     buildToolsVersion "21.1.1"
 
     defaultConfig {
-        applicationId "ca.rmen.android.palidamuerte"
         minSdkVersion 14
         targetSdkVersion 19
     }
 
     productFlavors {
         demo {
-            applicationId = "ca.rmen.android.poemas"
+            applicationId = "ca.rmen.android.poemasfah"
             buildConfigField 'String', 'PROVIDER_AUTHORITY', "\"ca.rmen.android.poemasfah.provider\""
         }
         palidaMuerte {
