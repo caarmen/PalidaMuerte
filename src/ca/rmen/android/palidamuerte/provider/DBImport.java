@@ -97,9 +97,12 @@ class DBImport {
             Cell[] row = sheet.getRow(r);
             ContentValues rowData = new ContentValues(columnCount);
             for (int c = 0; c < columnCount; c++) {
+                String columnName = columnNames.get(c);
+                if (columnName.startsWith("#"))
+                    continue;
                 String cellData = row[c].getContents();
                 cellData = clean(cellData);
-                rowData.put(columnNames.get(c), cellData);
+                rowData.put(columnName, cellData);
             }
             result[r - 1] = rowData;
         }
