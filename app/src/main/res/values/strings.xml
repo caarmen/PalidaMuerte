@@ -65,8 +65,10 @@
     font-family: "dancing_script";
     src: url("file:///android_asset/dancing_script.ttf");
   }
+  @page  {
+    margin: 25mm 25mm 25mm 25mm;
+  }
   body {
-    margin: 2cm 2cm 2cm 2cm;
     white-space: pre-wrap;
     font-size: 12pt;
   }
