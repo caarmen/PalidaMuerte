@@ -1,5 +1,5 @@
 /**
- * Copyright 2014 Carmen Alvarez
+ * Copyright 2014-2017 Carmen Alvarez
  *
  * This file is part of Pálida Muerte.
  *
@@ -21,6 +21,7 @@ package ca.rmen.android.palidamuerte.app.poem.detail;
 import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -33,6 +34,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import ca.rmen.android.palidamuerte.Constants;
 import ca.rmen.android.palidamuerte.MusicPlayer;
 import ca.rmen.android.palidamuerte.R;
@@ -150,11 +152,16 @@ public class PoemDetailFragment extends Fragment { // NO_UCD (use default)
             fav.setTitle(R.string.action_favorite_normal);
             fav.setIcon(R.drawable.ic_action_favorite_normal);
         }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+            MenuItem print = menu.findItem(R.id.action_print);
+            print.setVisible(false);
+        }
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Log.v(TAG, "onOptionsItemSelected");
+        final long poemId = getArguments().getLong(ARG_ITEM_ID);
         if (item.getItemId() == R.id.action_favorite) {
             final Activity activity = getActivity();
             final View rootView = getView();
@@ -163,7 +170,6 @@ public class PoemDetailFragment extends Fragment { // NO_UCD (use default)
                 @Override
                 protected Void doInBackground(Void... params) {
                     // Write the poem favorite field.
-                    long poemId = getArguments().getLong(ARG_ITEM_ID);
                     PoemSelection poemSelection = new PoemSelection().id(poemId);
                     PoemCursor cursor = poemSelection.query(activity.getContentResolver());
                     try {
@@ -185,6 +191,8 @@ public class PoemDetailFragment extends Fragment { // NO_UCD (use default)
                 }
 
             }.execute();
+        } else if (item.getItemId() == R.id.action_print && Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            PoemPrinter.print(getContext(), poemId);
         } else if (item.getItemId() == R.id.action_music) {
             MusicPlayer.getInstance(getActivity()).toggle();
             final Activity activity = getActivity();

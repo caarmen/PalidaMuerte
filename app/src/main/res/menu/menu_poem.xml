@@ -33,6 +33,11 @@
         android:showAsAction="ifRoom"
         android:title="@string/action_music_on"/>
     <item
+        android:id="@+id/action_print"
+        android:icon="@drawable/ic_action_print"
+        android:showAsAction="ifRoom"
+        android:title="@string/action_print"/>
+    <item
         android:id="@+id/action_about"
         android:icon="@drawable/ic_action_about"
         android:showAsAction="ifRoom"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Copyright 2014 Carmen Alvarez
+  Copyright 2014-2017 Carmen Alvarez
  
   This file is part of Pálida Muerte.
  
@@ -31,6 +31,7 @@
     <string name="action_share">Compartir</string>
     <string name="action_music_off">Apagar la música</string>
     <string name="action_music_on">Encender la música</string>
+    <string name="action_print">Imprimir</string>
     <string name="action_search">Buscar</string>
     <string name="search_hint">Términos de búsqueda</string>
     <string name="search_results">Resultados de búsqueda</string>
@@ -54,4 +55,68 @@
     <string name="app_name_and_version">%1$s versión %2$s</string>
     <string name="credits_app">Aplicación programada por Carmen Alvarez (hija de Francisco): c@rmen.ca</string>
 
+    <string name="print_preview_html" translatable="false">
+<![CDATA[
+<html>
+ <head>
+  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"/>
+  <style type="text/css">
+  @font-face {
+    font-family: "dancing_script";
+    src: url("file:///android_asset/dancing_script.ttf");
+  }
+  body {
+    margin: 2cm 2cm 2cm 2cm;
+    white-space: pre-wrap;
+    font-size: 12pt;
+  }
+  .container {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+  }
+  .poem-title {
+    font-size: 24pt;
+    font-family: "dancing_script";
+  }
+  .poem-pre-content {
+    opacity: 0.5;
+    font-size: 10pt;
+  }
+  .poem-text {
+    text-align: left;
+    white-space: pre-wrap;
+    margin-left: auto;
+    margin-right: auto;
+    display: inline-block;
+    position: relative;
+  }
+  .poem-number {
+    opacity: 0.7;
+    font-size: 10pt;
+    font-style: italic;
+  }
+  .poem-author {
+    font-size: 10pt;
+  }
+  </style>
+ </head>
+ <body>
+  <div class="container">
+  <div class="poem-title">%1$s</div>
+  <br>
+  <div class="poem-pre-content">%2$s</div>
+  <br>
+  <div class="poem-text">%3$s</div>
+  <br>
+  <br>
+  <div class="poem-number">%4$s</div>
+  <br>
+  <div class="poem-author">Francisco Álvarez Hidalgo<br>%5$s</div>
+ </div>
+ </body>
+</html>
+]]>
+    </string>
 </resources>
