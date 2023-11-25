@@ -1,14 +1,13 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.getkeepsafe.dexcount'
 apply plugin: 'com.github.ben-manes.versions'
 
 buildscript {
     repositories {
-        jcenter()
+        mavenCentral()
+        gradlePluginPortal()
     }
     dependencies {
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.15.0'
-        classpath 'com.getkeepsafe.dexcount:dexcount-gradle-plugin:0.7.2'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.50.0'
     }
 }
 android {
@@ -30,28 +29,36 @@ android {
         android.buildTypes.release.signingConfig = null
     }
 
+    buildToolsVersion "33.0.1"
     compileSdkVersion 34
-    buildToolsVersion "25.0.3"
 
     defaultConfig {
         versionCode 1500
         versionName "1.5.0"
         minSdkVersion 14
         targetSdkVersion 34
+        namespace "ca.rmen.android.palidamuerte"
+        buildFeatures {
+            buildConfig = true
+        }
     }
 
+    flavorDimensions "poemsource"
     productFlavors {
         demo {
             applicationId = "ca.rmen.android.poemasfah"
             buildConfigField 'String', 'PROVIDER_AUTHORITY', "\"ca.rmen.android.poemasfah.provider\""
+            dimension "poemsource"
         }
         palidaMuerte {
             applicationId = "ca.rmen.android.palidamuerte"
             buildConfigField 'String', 'PROVIDER_AUTHORITY', "\"ca.rmen.android.palidamuerte.provider\""
+            dimension "poemsource"
         }
         seleccionLectores {
             applicationId = "ca.rmen.android.poemasfah.seleccionlectores"
             buildConfigField 'String', 'PROVIDER_AUTHORITY', "\"ca.rmen.android.poemasfah.seleccionlectores.provider\""
+            dimension "poemsource"
         }
     }
 
@@ -64,13 +71,13 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:25.3.1'
-    compile ('net.sourceforge.jexcelapi:jxl:2.6.12') {
+    implementation 'com.android.support:support-v4:25.3.1'
+    implementation('net.sourceforge.jexcelapi:jxl:2.6.12') {
         exclude group: "log4j"
     }
 }
 // Only show real releases with the ben-manes plugin.
-dependencyUpdates.resolutionStrategy = {
+dependencyUpdates.resolutionStrategy {
     componentSelection { rules ->
         rules.all { ComponentSelection selection ->
             boolean rejected = ['alpha', 'alpha-preview', 'beta', 'rc', 'cr', 'm'].any { qualifier ->
