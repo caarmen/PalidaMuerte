@@ -17,6 +17,7 @@
   along with Pálida Muerte. If not, see <http://www.gnu.org/licenses/>.
 -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -34,7 +35,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:scaleType="fitStart"
-            android:src="@drawable/cyberscooty_stylized_floral_border_top_left" />
+            app:srcCompat="@drawable/cyberscooty_stylized_floral_border_top_left" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -42,7 +43,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:scaleType="fitStart"
-            android:src="@drawable/cyberscooty_stylized_floral_border_top_right" />
+            app:srcCompat="@drawable/cyberscooty_stylized_floral_border_top_right" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -50,7 +51,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:scaleType="fitStart"
-            android:src="@drawable/cyberscooty_stylized_floral_border_bottom_left" />
+            app:srcCompat="@drawable/cyberscooty_stylized_floral_border_bottom_left" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -58,7 +59,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:scaleType="fitStart"
-            android:src="@drawable/cyberscooty_stylized_floral_border_bottom_right" />
+            app:srcCompat="@drawable/cyberscooty_stylized_floral_border_bottom_right" />
 
         <TextView
             android:id="@+id/author_name"
@@ -78,7 +79,7 @@
             android:layout_below="@id/author_name"
             android:layout_centerHorizontal="true"
             android:padding="16dp"
-            android:src="@drawable/paco697a" />
+            app:srcCompat="@drawable/paco697a" />
 
         <TextView
             android:id="@+id/author_date"

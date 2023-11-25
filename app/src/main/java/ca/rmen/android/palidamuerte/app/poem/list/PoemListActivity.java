@@ -22,12 +22,15 @@ import android.app.SearchManager;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ShareActionProvider;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.ShareActionProvider;
+import androidx.core.app.NavUtils;
+import androidx.core.view.MenuItemCompat;
+
 import ca.rmen.android.palidamuerte.Constants;
 import ca.rmen.android.palidamuerte.R;
 import ca.rmen.android.palidamuerte.app.about.AboutActivity;
@@ -51,7 +54,7 @@ import ca.rmen.android.palidamuerte.ui.ActionBar;
  * This activity also implements the required {@link PoemListFragment.Callbacks} interface
  * to listen for item selections.
  */
-public class PoemListActivity extends FragmentActivity implements PoemListFragment.Callbacks { // NO_UCD (use default)
+public class PoemListActivity extends AppCompatActivity implements PoemListFragment.Callbacks { // NO_UCD (use default)
 
     public static final String EXTRA_CATEGORY_ID = "poem_category_id";
     private static final String TAG = Constants.TAG + PoemListActivity.class.getSimpleName();
@@ -69,7 +72,7 @@ public class PoemListActivity extends FragmentActivity implements PoemListFragme
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_poem_list);
         // Show the Up button in the action bar.
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
         if (findViewById(R.id.poem_detail_container) != null) {
@@ -125,7 +128,7 @@ public class PoemListActivity extends FragmentActivity implements PoemListFragme
         super.onCreateOptionsMenu(menu);
         if (mTwoPane && mPoemId >= 0) {
             getMenuInflater().inflate(R.menu.menu_poem, menu);
-            mShareActionProvider = (ShareActionProvider) menu.findItem(R.id.action_share).getActionProvider();
+            mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menu.findItem(R.id.action_share));
             Poems.updateShareIntent(mShareActionProvider, this, mPoemId);
         }
         return true;

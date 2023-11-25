@@ -18,15 +18,17 @@
  */
 package ca.rmen.android.palidamuerte.app.about;
 
-import android.app.Activity;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.MenuItem;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import ca.rmen.android.palidamuerte.Constants;
 import ca.rmen.android.palidamuerte.R;
 import ca.rmen.android.palidamuerte.ui.ActionBar;
 
-public class AboutActivity extends Activity { // NO_UCD (use default)
+public class AboutActivity extends AppCompatActivity { // NO_UCD (use default)
     private static final String TAG = Constants.TAG + AboutActivity.class.getSimpleName();
 
     @Override
@@ -36,10 +38,10 @@ public class AboutActivity extends Activity { // NO_UCD (use default)
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
         if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction().add(R.id.container, new AboutFragment()).commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.container, new AboutFragment()).commit();
         }
         ActionBar.setCustomFont(this);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

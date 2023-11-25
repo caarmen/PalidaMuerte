@@ -19,13 +19,15 @@
 package ca.rmen.android.palidamuerte.app.category.list;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager.LoaderCallbacks;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
+import androidx.fragment.app.Fragment;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.app.LoaderManager.LoaderCallbacks;
+import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,11 +63,11 @@ public class CategoriesFragment extends Fragment { // NO_UCD (unused code)
     }
 
     @Override
-    public void onAttach(Activity activity) {
+    public void onAttach(Context context) {
         Log.v(TAG, "onAttach");
-        super.onAttach(activity);
+        super.onAttach(context);
 
-        getLoaderManager().restartLoader(URL_LOADER, null, mLoaderCallbacks);
+        LoaderManager.getInstance(this).restartLoader(URL_LOADER, null, mLoaderCallbacks);
     }
 
     private LoaderCallbacks<Cursor> mLoaderCallbacks = new LoaderCallbacks<Cursor>() {

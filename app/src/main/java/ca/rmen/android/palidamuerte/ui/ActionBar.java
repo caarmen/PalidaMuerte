@@ -18,7 +18,6 @@
  */
 package ca.rmen.android.palidamuerte.ui;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.util.Log;
@@ -28,6 +27,9 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import ca.rmen.android.palidamuerte.Constants;
 import ca.rmen.android.palidamuerte.MusicPlayer;
 import ca.rmen.android.palidamuerte.R;
@@ -36,7 +38,7 @@ public class ActionBar {
 
     private static final String TAG = Constants.TAG + ActionBar.class.getSimpleName();
 
-    public static void setCustomFont(Activity activity) {
+    public static void setCustomFont(AppCompatActivity activity) {
         // http://stackoverflow.com/questions/8607707/how-to-set-a-custom-font-in-the-actionbar-title
         int titleId = activity.getResources().getIdentifier("action_bar_title", "id", "android");
         TextView tvActionBarTitle = (TextView) activity.findViewById(titleId);

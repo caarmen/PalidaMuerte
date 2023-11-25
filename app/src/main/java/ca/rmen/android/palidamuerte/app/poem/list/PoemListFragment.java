@@ -24,10 +24,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
-import android.support.v4.app.LoaderManager.LoaderCallbacks;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -35,6 +31,14 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.ListFragment;
+import androidx.loader.app.LoaderManager.LoaderCallbacks;
+import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
+
 import ca.rmen.android.palidamuerte.Constants;
 import ca.rmen.android.palidamuerte.R;
 import ca.rmen.android.palidamuerte.app.poem.detail.PoemDetailFragment;
@@ -106,7 +110,7 @@ public class PoemListFragment extends ListFragment { // NO_UCD (use default)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final Activity activity = getActivity();
+        final AppCompatActivity activity = (AppCompatActivity) getActivity();
         new AsyncTask<Void, Void, String>() {
 
             @Override
@@ -116,7 +120,7 @@ public class PoemListFragment extends ListFragment { // NO_UCD (use default)
 
             @Override
             protected void onPostExecute(String categoryName) {
-                activity.getActionBar().setTitle(categoryName);
+                activity.getSupportActionBar().setTitle(categoryName);
             }
 
         }.execute();

@@ -24,7 +24,7 @@
     android:layout_marginRight="16dp"
     android:background="@drawable/gray_gradient"
     android:baselineAligned="false"
-    android:divider="?android:attr/dividerHorizontal"
+    android:divider="?attr/dividerHorizontal"
     android:orientation="horizontal"
     android:showDividers="middle"
     tools:context="ca.rmen.android.palidamuerte.app.poem.list.PoemListActivity" >

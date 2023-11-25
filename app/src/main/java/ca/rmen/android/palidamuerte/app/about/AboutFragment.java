@@ -18,7 +18,6 @@
  */
 package ca.rmen.android.palidamuerte.app.about;
 
-import android.app.Fragment;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Typeface;
@@ -29,6 +28,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+
 import ca.rmen.android.palidamuerte.MusicPlayer;
 import ca.rmen.android.palidamuerte.MusicPlayer.Song;
 import ca.rmen.android.palidamuerte.R;

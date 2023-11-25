@@ -18,8 +18,6 @@
  */
 package ca.rmen.android.palidamuerte.app.poem.detail;
 
-import java.util.Calendar;
-
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -28,7 +26,11 @@ import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.widget.CursorAdapter;
-import android.widget.ShareActionProvider;
+
+import androidx.appcompat.widget.ShareActionProvider;
+
+import java.util.Calendar;
+
 import ca.rmen.android.palidamuerte.Constants;
 import ca.rmen.android.palidamuerte.R;
 import ca.rmen.android.palidamuerte.app.category.Categories;

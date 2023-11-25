@@ -24,7 +24,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,6 +33,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import ca.rmen.android.palidamuerte.Constants;
 import ca.rmen.android.palidamuerte.MusicPlayer;
@@ -84,7 +86,7 @@ public class PoemDetailFragment extends Fragment { // NO_UCD (use default)
         return rootView;
     }
 
-    private void updateView(final Activity activity, final View rootView) {
+    private void updateView(final FragmentActivity activity, final View rootView) {
         Log.v(TAG, "updateView");
         new AsyncTask<Void, Void, PoemCursor>() {
 
@@ -163,7 +165,7 @@ public class PoemDetailFragment extends Fragment { // NO_UCD (use default)
         Log.v(TAG, "onOptionsItemSelected");
         final long poemId = getArguments().getLong(ARG_ITEM_ID);
         if (item.getItemId() == R.id.action_favorite) {
-            final Activity activity = getActivity();
+            final FragmentActivity activity = getActivity();
             final View rootView = getView();
             new AsyncTask<Void, Void, Void>() {
 

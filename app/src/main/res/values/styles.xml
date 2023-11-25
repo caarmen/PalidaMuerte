@@ -34,27 +34,27 @@
     <style name="AppTheme" parent="AppBaseTheme">
 
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
-        <item name="android:selectableItemBackground">@drawable/selector</item>
-        <item name="android:actionBarItemBackground">@drawable/selector</item>
+        <item name="selectableItemBackground">@drawable/selector</item>
+        <item name="actionBarItemBackground">@drawable/selector</item>
         <item name="android:windowBackground">@drawable/gray_gradient</item>
-        <item name="android:actionBarStyle">@style/ActionBarStyle</item>
+        <item name="actionBarStyle">@style/ActionBarStyle</item>
     </style>
 
     <style name="CategoryListTheme" parent="AppTheme">
-        <item name="android:actionBarStyle">@style/ActionBarTransparentStyle</item>
-        <item name="android:windowActionBarOverlay">true</item>
+        <item name="actionBarStyle">@style/ActionBarTransparentStyle</item>
+        <item name="windowActionBarOverlay">true</item>
     </style>
 
     <style name="PoemDetailTheme" parent="AppTheme">
-        <item name="android:windowActionBarOverlay">true</item>
+        <item name="windowActionBarOverlay">true</item>
     </style>
 
     <style name="ActionBarStyle" parent="@android:style/Widget.Holo.ActionBar.Solid">
-        <item name="android:backgroundSplit">#CC000000</item>
+        <item name="backgroundSplit">#CC000000</item>
     </style>
 
     <style name="ActionBarTransparentStyle" parent="@android:style/Widget.Holo.ActionBar.Solid">
-        <item name="android:background">@null</item>
+        <item name="background">@null</item>
     </style>
 
     <style name="TextAppearancePoemDetailTitle" parent="@android:style/TextAppearance.Large">

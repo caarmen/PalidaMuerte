@@ -1,4 +1,5 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="ca.rmen.android.palidamuerte.CategoriesActivity" >
 
@@ -6,41 +7,41 @@
         android:id="@+id/action_prev"
         android:enabled="false"
         android:icon="@drawable/ic_action_prev"
-        android:showAsAction="ifRoom"
+        app:showAsAction="ifRoom"
         android:title="@string/action_prev"
         android:visible="false"/>
     <item
         android:id="@+id/action_next"
         android:enabled="false"
         android:icon="@drawable/ic_action_next"
-        android:showAsAction="ifRoom"
+        app:showAsAction="ifRoom"
         android:title="@string/action_next"
         android:visible="false"/>
     <item
         android:id="@+id/action_favorite"
         android:icon="@drawable/ic_action_favorite_normal"
-        android:showAsAction="ifRoom"
+        app:showAsAction="ifRoom"
         android:title="@string/action_favorite_normal"/>
     <item
         android:id="@+id/action_share"
-        android:actionProviderClass="android.widget.ShareActionProvider"
+        app:actionProviderClass="androidx.appcompat.widget.ShareActionProvider"
         android:icon="@drawable/ic_action_share"
-        android:showAsAction="ifRoom"
+        app:showAsAction="ifRoom"
         android:title="@string/action_share"/>
     <item
         android:id="@+id/action_music"
         android:icon="@drawable/ic_action_music_on"
-        android:showAsAction="ifRoom"
+        app:showAsAction="ifRoom"
         android:title="@string/action_music_on"/>
     <item
         android:id="@+id/action_print"
         android:icon="@drawable/ic_action_print"
-        android:showAsAction="ifRoom"
+        app:showAsAction="ifRoom"
         android:title="@string/action_print"/>
     <item
         android:id="@+id/action_about"
         android:icon="@drawable/ic_action_about"
-        android:showAsAction="ifRoom"
+        app:showAsAction="ifRoom"
         android:orderInCategory="1000"
         android:title="@string/action_about"/>
 

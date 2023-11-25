@@ -23,16 +23,19 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.NavUtils;
-import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ShareActionProvider;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.ShareActionProvider;
+import androidx.core.app.NavUtils;
+import androidx.core.view.MenuItemCompat;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
+
 import ca.rmen.android.palidamuerte.Constants;
 import ca.rmen.android.palidamuerte.R;
 import ca.rmen.android.palidamuerte.app.about.AboutActivity;
@@ -49,7 +52,7 @@ import ca.rmen.android.palidamuerte.ui.ActionBar;
  * This activity is mostly just a 'shell' activity containing nothing
  * more than a {@link PoemDetailFragment}.
  */
-public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use default)
+public class PoemDetailActivity extends AppCompatActivity { // NO_UCD (use default)
 
     private static final String TAG = Constants.TAG + PoemDetailActivity.class.getSimpleName();
     private PoemPagerAdapter mPoemPagerAdapter;
@@ -61,10 +64,10 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_poem_detail);
-        getActionBar().setDisplayShowCustomEnabled(true);
-        getActionBar().setCustomView(R.layout.poem_number);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setCustomView(R.layout.poem_number);
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
-        mTextViewPageNumber = (TextView) getActionBar().getCustomView();
+        mTextViewPageNumber = (TextView) getSupportActionBar().getCustomView();
         ActionBar.setCustomFont(this);
         mViewPager = (ViewPager) findViewById(R.id.pager);
 
@@ -97,7 +100,7 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
                     findViewById(R.id.activity_loading).setVisibility(View.GONE);
                     int position = mPoemPagerAdapter.getPositionForPoem(poemId);
                     mViewPager.setCurrentItem(position);
-                    getActionBar().setTitle(mActivityTitle);
+                    getSupportActionBar().setTitle(mActivityTitle);
                     String pageNumber = getString(R.string.page_number, position + 1, mPoemPagerAdapter.getCount());
                     mTextViewPageNumber.setText(pageNumber);
                     invalidateOptionsMenu();
@@ -110,7 +113,7 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
         }.execute();
 
         // Show the Up button in the action bar.
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -128,8 +131,8 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
         Log.v(TAG, "onCreateOptionsMenu");
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.menu_poem, menu);
-        menu.findItem(R.id.action_about).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
-        mShareActionProvider = (ShareActionProvider) menu.findItem(R.id.action_share).getActionProvider();
+        MenuItemCompat.setShowAsAction(menu.findItem(R.id.action_about), MenuItem.SHOW_AS_ACTION_NEVER);
+        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menu.findItem(R.id.action_share));
         if (mPoemPagerAdapter != null) {
             long poemId = mPoemPagerAdapter.getPoemIdAt(mViewPager.getCurrentItem());
             Poems.updateShareIntent(mShareActionProvider, PoemDetailActivity.this, poemId);
@@ -149,8 +152,8 @@ public class PoemDetailActivity extends FragmentActivity { // NO_UCD (use defaul
             prev.setEnabled(mViewPager.getCurrentItem() > 0);
             next.setEnabled(mViewPager.getCurrentItem() < mPoemPagerAdapter.getCount() - 1);
         }
-        final View view = menu.findItem(R.id.action_share).getActionView();
-        ActionBar.hackSetMaxHeight(view, getActionBar().getHeight());
+        final View view = MenuItemCompat.getActionView(menu.findItem(R.id.action_share));
+        ActionBar.hackSetMaxHeight(view, getSupportActionBar().getHeight());
         return true;
     }
 
