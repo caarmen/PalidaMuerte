@@ -230,7 +230,7 @@ public class PoemListFragment extends ListFragment { // NO_UCD (use default)
                 mAdapter = Poems.getPoemListAdapter(activity, activity.getIntent());
                 setListAdapter(mAdapter);
             }
-            mAdapter.changeCursor(new PoemCursor(cursor));
+            mAdapter.swapCursor(new PoemCursor(cursor));
         }
 
         @Override
