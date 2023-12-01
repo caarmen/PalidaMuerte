@@ -90,7 +90,7 @@ public class CategoriesFragment extends Fragment { // NO_UCD (unused code)
                     gridView.setAdapter(mAdapter);
                 }
             }
-            mAdapter.changeCursor(new CategoryCursor(cursor));
+            mAdapter.swapCursor(new CategoryCursor(cursor));
             mProgressBar.setVisibility(View.GONE);
         }
 
